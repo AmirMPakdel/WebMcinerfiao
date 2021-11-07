@@ -1,0 +1,1 @@
+alert(window.env.ENVIRONMENT_MODE);

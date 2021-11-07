@@ -1,0 +1,34 @@
+.cpnt{
+    font-size: 0.875rem;
+}
+
+.bdyt{
+    font-size: 1rem;
+}
+
+.tilt{
+    font-size: 1.125rem;
+}
+
+.hrot{
+    font-size: 1.25rem;
+}
+
+@media(max-width:768px){
+
+    .cpnt{
+        font-size: 0.75rem;
+    }
+    
+    .bdyt{
+        font-size: 0.875rem;
+    }
+    
+    .tilt{
+        font-size: 1rem;
+    }
+    
+    .hrot{
+        font-size: 1.125rem;
+    }
+}
