@@ -1,0 +1,15 @@
+.sec1{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 0rem;
+    padding-right: 1.6rem;
+}
+
+.sec2{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 2rem;
+    padding-right: 1.6rem;
+}
