@@ -1,0 +1,70 @@
+.con{
+    display: flex;
+    width: calc(100% - 4rem);
+    margin: 1rem 2rem;
+    flex-direction: column;
+    
+}
+
+.line_con{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.edln_input{
+    display: flex;
+    width: calc(100% - 13.5rem);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    background-color: white;
+}
+
+.edln_edit,
+.edln_submit,
+.edln_cancel,
+.edln_delete{
+    height: 2.5rem;
+    width: 4rem;
+    margin-right: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    font-size: 0.84rem;
+    background-color: #F5DF4D;
+}
+
+.edln_edit{
+    opacity: 0.5;
+}
+
+.edln_edit:hover{
+    opacity: 1;
+}
+
+.edln_submit{
+    color: white;
+    background-color: #32CD32;
+}
+
+.edln_cancel,
+.edln_delete{
+    color: white;
+    background-color: #e62e6b;
+}
+
+.add_btn{
+    height: 2.5rem;
+    width: 8rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    font-size: 0.84rem;
+    color: white;
+    background-color: #32CD32;
+}

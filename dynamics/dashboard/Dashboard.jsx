@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DashboardCard from "../../components/card/DashboardCard";
-import IncomeChart from "../../components/educatorDashboard/IncomeChart";
-import IncomesChestCard from "../../components/educatorDashboard/IncomesChestCard";
+import IncomeChart from "../../components/chart/IncomeChart";
+import IncomesChestCard from "../../components/card/IncomesChestCard";
 import EducatorDashboardLayout from "../../layouts/EducatorDashboardLayout";
 import styles from "./Dashboard.module.css";
 

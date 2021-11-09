@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import MainButton from "../../components/mainPage/MainButton";
+import MainButton from "../../components/global/MainButton";
 import EducatorDashboardLayout from "../../layouts/EducatorDashboardLayout";
 import styles from "./MyCourses.module.css";
 
@@ -75,10 +75,10 @@ class CourseCard extends Component{
 
                 <div className={styles.cc_sec3}>
 
-                    {/* <MainButton className={styles.cc_btn} border_mode title={"تالار گفتگو"}/>
+                    <MainButton className={styles.cc_btn} border_mode title={"مقالات"}/>
 
                     <MainButton className={styles.cc_btn}title={"ویرایش دوره"}
-                    onClick={()=>{window.location.href+="/edit"}}/> */}
+                    onClick={()=>{window.location.href+="/edit"}}/>
 
                 </div>
 

@@ -35,7 +35,11 @@ export default class SideMenu extends Component {
     hideBackdrop = ()=>{this.setState({showBackdrop:false})}
 
     onSelect = (name)=>{
-        window.location.href = "/edu/"+name
+        let prefix = "/dashboard/";
+        if(name === "dashboard"){
+            prefix = "/";
+        }
+        window.location.href = prefix + name;
     }
 
     render() {

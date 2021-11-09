@@ -1,0 +1,63 @@
+.con{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: calc(100% - 2rem);
+    margin: 1rem;
+    margin-right: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.image{
+    border-radius: 1rem;
+    background-color: white;
+    height: 15rem;
+    width: 15rem;
+    direction: rtl;
+    resize: none;
+    font-size: 1rem;
+    padding: 0.8rem 1.4rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.edit_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    border-radius: 1rem;
+    width: 6rem;
+    height: 2.4rem;
+    opacity: 0.4;
+    background-color: #F5DF4D;
+}
+
+.edit_btn:hover{
+    opacity: 1;
+}
+
+.submit_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    border-radius: 1rem;
+    width: 6rem;
+    height: 2.4rem;
+    color: white;
+    background-color:#32CD32;
+}
+
+.cancel_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    border-radius: 1rem;
+    width: 6rem;
+    height: 2.4rem;
+    color: white;
+    background-color: #e62e6b;
+}
