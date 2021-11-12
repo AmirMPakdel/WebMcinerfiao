@@ -6,7 +6,7 @@ import TextInput from "../global/TextInput";
 export default class PriceCategoryPage extends Component {
 
     onChangeText = (key, value)=>{
-
+        
     }
     
     render(){
@@ -18,14 +18,14 @@ export default class PriceCategoryPage extends Component {
                     
                     <div className={styles.sec_title}>{"عنوان و قیمت دوره"}</div>
 
-                    <div className={styles.info_sec1}>{text1}</div>
+                    <div className={styles.info_sec1+" cpnt"}>{text1}</div>
 
                     <input className={styles.txinput1} placeholder={"عنوان دوره"}
                     onChange={this.onChangeText}/>
 
                     <div className={styles.info_sec2}>{text2}</div>
 
-                    <input className={styles.txinput1} placeholder={"قیمت دوره"}
+                    <input className={styles.txinput1+" cpnt"} placeholder={"قیمت دوره"}
                     onChange={this.onChangeText}/>
 
                 </div>

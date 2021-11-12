@@ -13,8 +13,6 @@ export default class EducatorDashboardLayout extends Component {
     componentDidMount(){
         
     }
-
-    
     
     render(){
         return(

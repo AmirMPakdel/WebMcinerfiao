@@ -58,7 +58,15 @@
     background-color: #F5DF4D;
 }
 
-@media(max-width:768px){
+@media(max-width: 1024px){
+
+    .wrapper{
+        max-width: 25rem;
+        background-color: red;
+    }
+}
+
+@media(max-width:767px){
 
     .wrapper{
         width: 80%;
@@ -67,7 +75,7 @@
     }
 
     .prg_line{
-        width: 20vw;
+        width: 50%;
         min-width: 4.5rem;
     }
 

@@ -5,6 +5,7 @@ import NewCourseSteps from '../../components/course/NewCourseSteps';
 import PriceCategoryPage from "../../components/course/PriceCategoryPage";
 import PlayModeSelectPage from "../../components/course/PlayModeSelectPage";
 import ConclusionPage from "../../components/course/ConclusionPage";
+import WrapperT1 from "../../layouts/WrapperT1";
 
 export default class NewCourses extends Component {
     
@@ -23,25 +24,27 @@ export default class NewCourses extends Component {
     render(){
         return(
             <EducatorDashboardLayout>
+                <WrapperT1>
                 
-                <NewCourseSteps step={this.state.step} onStep={this.onStep}/>
+                    <NewCourseSteps step={this.state.step} onStep={this.onStep}/>
 
-                {
-                    this.state.step===1?
-                    <PriceCategoryPage/>
-                    :null
-                }
-                {
-                    this.state.step===2?
-                    <PlayModeSelectPage/>
-                    :null
-                }
-                {
-                    this.state.step===3?
-                    <ConclusionPage/>
-                    :null
-                }
+                    {
+                        this.state.step===1?
+                        <PriceCategoryPage/>
+                        :null
+                    }
+                    {
+                        this.state.step===2?
+                        <PlayModeSelectPage/>
+                        :null
+                    }
+                    {
+                        this.state.step===3?
+                        <ConclusionPage/>
+                        :null
+                    }
 
+                </WrapperT1>
             </EducatorDashboardLayout>
         )
     }

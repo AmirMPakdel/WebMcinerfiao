@@ -6,7 +6,7 @@
 }
 
 .sec_con{
-    width: calc(50% - 3rem);
+    width: 29.25rem;
     height: 18.75rem;
     display: flex;
     justify-content: center;
@@ -41,6 +41,7 @@
     width: 74%;
     font-size: 0.82rem;
     text-align: center;
+    margin-top: 0.5rem;
 }
 
 .txinput1{
@@ -121,4 +122,21 @@
     width: 15.625rem;
     height: 2.5rem;
     margin: 0;
+}
+
+
+@media(max-width:1024px){
+
+    .sec_con{
+        width: 29.25rem;
+        height: 18.75rem;
+    }
+}
+
+@media(max-width:767px){
+
+    .sec_con{
+        width: 20.5rem;
+        height: 18.75rem;
+    }
 }

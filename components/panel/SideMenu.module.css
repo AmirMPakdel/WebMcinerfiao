@@ -51,7 +51,7 @@
     align-items: flex-start;
 }
 
-@media(max-width:768px){
+@media(max-width:1024px){
     .sidemenu_con{
         transform: translateX(10rem);
         padding-top: 3.2rem;
