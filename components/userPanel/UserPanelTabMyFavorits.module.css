@@ -1,0 +1,42 @@
+.mfav_con{
+    display: flex;
+    width: 96%;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    direction: rtl;
+}
+
+.favcard_con{
+    width: calc(50% - 4rem);
+    height: 6rem;
+    margin-left: 5rem;
+    margin-top: 2rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border-radius: 1rem;
+}
+
+.favcard_img{
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin-right: 1rem;
+}
+
+.favcard_title{
+    margin-right: 1rem;
+    width: calc(100% - 10rem);
+    font-size: 0.86rem;
+}
+
+.favcard_btn{
+    position: absolute;
+    left: -1.5rem;
+    width: 3rem;
+    top: calc(50% - 1.5rem);
+}
+
+.even_cards{
+    margin-left: 0;
+}

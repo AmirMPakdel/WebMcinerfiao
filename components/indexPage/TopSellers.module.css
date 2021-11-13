@@ -1,0 +1,34 @@
+.tsell_con{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    flex-direction: column;
+}
+
+.tsell_1lv_con{
+    z-index: 1;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.backshape{
+    width: 120%;
+    position: absolute;
+    transform: rotateZ(180deg) translateX(5%);
+}
+
+.more_con{
+    display: flex;
+    height: 20rem;
+    width: 16rem;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.more_img{
+    width: 10rem;
+    margin-bottom: 1rem;
+}

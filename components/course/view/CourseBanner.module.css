@@ -1,0 +1,85 @@
+.back_img{
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 0.5rem 1rem 0.1rem rgb(0, 0, 0, 0.15);
+    filter: brightness(0.2) blur(1px);
+    position: absolute;
+    right: 0;
+    left: 0;
+}
+
+.title{
+    display: flex;
+    width: fit-content;
+    padding: 0.5rem 2rem;
+    border-radius: 1rem;
+    border: solid #F5DF4D 0.15rem;
+    z-index: 2;
+    color: #F5DF4D;
+    margin-top: 1.5rem;
+    user-select: none;
+}
+
+.row1{
+    margin-top: 0.5rem;
+    width: calc(100% - 20rem);
+    display: flex;
+    padding: 0.2rem 0;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+    font-size: 0.86rem;
+}
+
+.row1 div{
+    margin: 0 0.5rem;
+    white-space: nowrap;
+}
+
+.rating{
+    padding-top: 0;
+    padding-bottom: 0.2rem;
+}
+
+.dashed{
+    width: calc(100% - 20rem);
+    height: 0.3rem;
+}
+
+.row2{
+    color: white;
+    direction: rtl;
+    width: calc(100% - 20rem);
+    padding: 0.8rem 0.8rem;
+    font-size: 0.92rem;
+}
+
+.bricbtn_con{
+    height: 3rem;
+    border-radius: 1rem;
+    border: solid white 0.13rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    padding: 0.5rem 1.8rem;
+}
+
+.row3{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.bricbtn_icon{
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: 0.8rem;
+}
+
+.bricbtn_title{
+    color: white;
+}

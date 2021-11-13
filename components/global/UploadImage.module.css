@@ -1,0 +1,53 @@
+.tput_con{
+    width: calc(50% - 3rem);
+    margin-left: 2.5rem;
+    margin-top: 1rem;
+}
+
+.tput_title{
+    font-size: 0.86rem;
+    color: #666666;
+    margin-right: 0.2rem;
+}
+
+.upload_sec{
+    height: 3.1rem;
+    display: flex;
+    direction: rtl;
+    justify-content: flex-end;
+    margin-top: 0.7rem;
+    border-radius: 1rem;
+    direction: rtl;
+    color: rgb(63, 63, 63);
+    width: 100%;
+    background-color: white;
+}
+
+.btn_sec{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4.5rem;
+    height: 100%;
+    border-radius: 1rem 0 0 1rem;
+    background-color: #F5DF4D;
+    box-shadow: 0.2rem 0rem 0.5rem 0rem rgb(0, 0, 0, 0.15);
+}
+
+.btn_img{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.title{
+    position: absolute;
+    right: 1rem;
+    top: 0.8rem;
+    color: black;
+    font-size: 0.94rem;
+    opacity: 0.6;
+}
+
+.upload_input{
+    display: none;
+}

@@ -1,0 +1,57 @@
+.confirm_con{
+    height: 25rem;
+    width: 22rem;
+    background-color: white;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0.5rem 1rem 0.1rem rgb(0, 0, 0, 0.15);
+}
+
+.confirm_title{
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.confirm_input{
+    margin-top: 2rem;
+    width: 80% !important;
+    text-align: center;
+}
+
+.btn{
+    margin-top: 2.5rem;
+    padding-right: 5rem;
+    padding-left: 5rem;
+}
+
+.link1{
+    color: #0080FF;
+}
+
+.sec1{
+    display: flex;
+    margin-top: 1.2rem;
+    width: 80%;
+    padding: 0 0.2rem;
+    color: #939597;
+    justify-content: space-between;
+}
+
+.close_btn{
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+.txt1{
+    direction: rtl;
+    font-size: 0.9rem;
+    color: #939597;
+    width: 80%;
+}

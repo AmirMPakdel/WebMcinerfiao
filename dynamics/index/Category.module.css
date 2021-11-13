@@ -1,0 +1,56 @@
+.list_con{
+    display: flex;
+    width: 100%;
+}
+
+.left_sec{
+    width: calc(100% - 20rem);
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+    margin-top: 1.5rem;
+}
+
+.right_sec{
+    width: calc(18rem - 2%);
+    display: flex;
+    flex-direction: column;
+    margin-right: 2%;
+    margin-left: 2rem;
+    margin-top: 2rem;
+}
+
+.crscrd_con{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-left: 2vw;
+    padding-bottom: 4rem;
+}
+
+.crs_crd{
+    margin-left: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 0rem;
+}
+
+.tree_con{
+    min-height: 16rem;
+    width: 100%;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 0.5rem 1rem 0.1rem rgb(0, 0, 0, 0.15);
+}
+
+.search_con{
+    height: 10rem;
+    margin-top: 2rem;
+    width: 100%;
+    border-radius: 1rem;
+    background-color: white;
+    box-shadow: 0 0.5rem 1rem 0.1rem rgb(0, 0, 0, 0.15);
+}

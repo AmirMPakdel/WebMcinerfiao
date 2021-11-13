@@ -1,0 +1,12 @@
+.rating{
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.star{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0.06rem;
+}

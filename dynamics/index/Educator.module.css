@@ -1,0 +1,60 @@
+.educator_con{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    direction: rtl;
+}
+
+.edc_sec1{
+    align-self: center;
+    width: 96%;
+    height: 24rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 0 0 1rem 1rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 3rem;
+    background-image: url(../public/img/profile_back.jpg);
+}
+
+.img{
+    height: 14rem;
+    width: 14rem;
+    border-radius: 1rem;
+    border: solid 0.1rem #F5DF4D;
+    margin-top: 2rem;
+}
+
+.name{
+    color: #F5DF4D;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 0.8rem;
+    border: solid 0.1rem #F5DF4D;
+    padding: 0.5rem 1.4rem;
+    margin-top: 1rem;
+}
+
+.bio{
+    color: white;
+    font-size: 0.86rem;
+    margin-top: 1rem;
+}
+
+.crs_row{
+
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    justify-content: space-around;
+}
+
+.yellowbar{
+    position: absolute;
+    width: 120%;
+    height: 5rem;
+    top: calc(50% - 2.5rem);
+}

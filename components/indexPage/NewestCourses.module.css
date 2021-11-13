@@ -1,0 +1,37 @@
+.slide_sec_con{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.slider_nav_sec{
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.dash{
+    height: 0.18rem;
+    width: 0.9rem;
+    border-radius: 0.5rem;
+    margin: 0.15rem;
+    background-color: rgb(136, 136, 136);
+}
+
+.dash_yellow{
+    width: 1.5rem;
+    background-color: #F5DF4D;
+}
+
+.slide_right_arrow{
+    margin-right: 1rem;
+}
+
+.slide_left_arrow{
+    margin-left: 1rem;
+}

@@ -1,0 +1,38 @@
+.TabHeader_con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    width: 100%;
+    height: 3.8rem;
+}
+
+.tab{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    height: calc(100% - 0.2rem);
+    min-width: 7rem;
+    padding: 0 0.8rem;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.tab_line_on{
+    height: 0.2rem;
+    width: 90%;
+    border-radius: 1rem;
+    background-color: white;
+}
+.tab_line{
+    height: 0.2rem;
+    width: 90%;
+}

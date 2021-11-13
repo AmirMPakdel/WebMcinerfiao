@@ -4,6 +4,10 @@ import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icon
 
 let controller = {
     
+    UserPanel:{
+
+        userChangeTab: (jsx)=>{},
+    }
 }
 
 export class ControllerComponent extends Component{

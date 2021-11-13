@@ -1,0 +1,8 @@
+.con{
+    display: flex;
+}
+
+.con div{
+    margin: 0.5rem 0.2rem;
+    color: rgb(131, 131, 131);
+}

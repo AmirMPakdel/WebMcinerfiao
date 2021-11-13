@@ -1,0 +1,157 @@
+.con{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sec1{
+    display: flex;
+    width: 100%;
+    padding: 2rem 1rem;
+}
+
+.sec_price{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 16rem;
+    width: 28rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    background-color: white;
+    box-shadow: 0 0.5rem 1rem 0.1rem rgb(0, 0, 0, 0.15);
+}
+
+.sec_price_title{
+    position: absolute;
+    top: -1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    color: rgb(110, 110, 110);
+    font-size: 0.94rem;
+    width: 10rem;
+    height: 3rem;
+    font-weight: 700;
+    background-color: white;
+    box-shadow: 0 0.5rem 0.6rem 0.1rem rgb(0, 0, 0, 0.1);
+}
+
+.price_text1{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.85;
+    margin-top: 2rem;
+}
+
+.price_text2{
+    height: 2.5rem;
+    display: flex;
+    align-items: flex-end;
+}
+
+.price_input{
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    text-align: center;
+    width: 17rem;
+    border: solid rgb(197, 197, 197) 1px;
+}
+
+.sec_select{
+    display: flex;
+    flex-direction: column;
+    margin-right: 4rem;
+}
+
+.useFrom_con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 10rem;
+    width: 28rem;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    background-color: white;
+    box-shadow: 0 0.5rem 1rem 0.1rem rgb(0, 0, 0, 0.15);
+}
+
+.useFrom_wrapper{
+    display: flex;
+    width: 100%;
+    margin-top: 1rem;
+    justify-content: space-evenly;
+}
+
+.portals_con,
+.income_sec{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 9rem;
+    width: 28rem;
+    margin-top: 3rem;
+    border-radius: 1rem;
+    background-color: white;
+    box-shadow: 0 0.5rem 1rem 0.1rem rgb(0, 0, 0, 0.15);
+}
+
+.portals_con{
+    margin-bottom: 2rem;
+}
+
+.portal_select{
+    width: 80%;
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+
+.income_sec{
+    height: 11rem;
+    margin-top: 3rem;
+}
+
+.income_amount{
+    display: flex;
+    font-size: 1.1rem;
+    margin-top: 1.4rem;
+    font-weight: 700;
+    align-items: flex-end;
+    border: solid #FBAD16 1px;
+    border-radius: 1rem;
+    padding: 1rem 1.8rem;
+    color: rgb(94, 94, 94);
+}
+
+.price_tag{
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-right: 0.4rem;
+    color: rgb(167, 167, 167);
+}
+
+.income_text1{
+    width: 100%;
+    text-align: center;
+    color: rgb(99, 99, 99);
+    margin-top: 1.4rem;
+    font-size: 0.86rem;
+}
+
+.buy_btn{
+    width: 24rem;
+    margin-top: 0.5rem;
+    margin-left: calc(50% - 25rem);
+    margin-bottom: 2rem;
+}

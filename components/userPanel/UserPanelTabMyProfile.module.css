@@ -1,0 +1,47 @@
+.mprf_con{
+    display: flex;
+    width: 96%;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    direction: rtl;
+}
+
+.infocrd_con{
+    width: calc(50% - 2rem);
+    height: 4.4rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 0rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border-radius: 1rem;
+}
+
+.infocrd_text{
+    margin-right: 8rem;
+    width: calc(100% - 10rem);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.infocrd_title{
+    position: absolute;
+    top: 0.5rem;
+    right: 1.5rem;
+    opacity: 0.5;
+    font-size: 0.9rem;
+}
+
+.even_cards{
+    margin-right: 2rem;
+    margin-left: 0;
+}
+
+.sec1{
+    display: flex;
+    width: 96%;
+    margin-top: 3rem;
+    justify-content: center;
+    align-items: center;
+}
