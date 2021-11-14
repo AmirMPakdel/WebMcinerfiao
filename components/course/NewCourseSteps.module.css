@@ -34,7 +34,6 @@
 .step_con_active{
     width: 3.2rem;
     height: 3.2rem;
-    background-color: #F5DF4D;
     border-radius: 1rem;
     font-weight: 700;
     font-size: 0.9rem;
@@ -54,15 +53,12 @@
     right: 50%;
 }
 
-.prg_line_active{
-    background-color: #F5DF4D;
-}
+
 
 @media(max-width: 1024px){
 
     .wrapper{
         max-width: 25rem;
-        background-color: red;
     }
 }
 

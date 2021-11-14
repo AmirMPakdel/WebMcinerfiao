@@ -7,9 +7,11 @@
 }
 
 .w1{
-    min-width: 62rem;
-    width: 86%;
-    max-width: 74rem;
+
+    /*64rem == 1024px and 1024px - 10rem(side menu width) == 54rem == 864px*/
+    min-width: 54rem;
+    width: calc(100% - 5rem);
+    max-width: 96rem;
 
     min-height: calc(100vh - 70px);
     border: 0.01rem rgba(0, 132, 0, 0.2) solid;
@@ -17,10 +19,6 @@
 
 @media(max-width:1024px){
     
-    .con{
-
-    }
-
     .w1{
         min-width: 48rem;
         width: 86%;
@@ -32,10 +30,6 @@
 }
 
 @media(max-width:767px){
-
-    .con{
-
-    }
 
     .w1{
         min-width: 22.5rem;

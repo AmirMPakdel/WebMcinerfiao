@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MainButton from "../../components/global/MainButton";
 import EducatorDashboardLayout from "../../layouts/EducatorDashboardLayout";
+import WrapperT1 from "../../layouts/WrapperT1";
 import styles from "./MyCourses.module.css";
 
 export default class MyCourses extends Component {
@@ -13,22 +14,26 @@ export default class MyCourses extends Component {
         return(
             <EducatorDashboardLayout>
 
-                <div className={styles.mcrs_con}>
+                <WrapperT1>
 
-                    <CourseCard/>
-                    <CourseCard/>
-                    <CourseCard/>
-                    <CourseCard/>
-                    <CourseCard/>
-                    <CourseCard/>
-                    <CourseCard/>
-                    <CourseCard/>
-                    <CourseCard/>
-                    <CourseCard/>
-                    <CourseCard/>
-                    <CourseCard/>
+                    <div className={styles.mcrs_con}>
 
-                </div>
+                        <CourseCard/>
+                        <CourseCard/>
+                        <CourseCard/>
+                        <CourseCard/>
+                        <CourseCard/>
+                        <CourseCard/>
+                        <CourseCard/>
+                        <CourseCard/>
+                        <CourseCard/>
+                        <CourseCard/>
+                        <CourseCard/>
+                        <CourseCard/>
+
+                    </div>
+                    
+                </WrapperT1>
 
             </EducatorDashboardLayout>
         )

@@ -57,17 +57,8 @@
 }
 
 .select{
-    height: 2.5rem;
-    width: 2.5rem;
+    transform: scale(1.5) !important;
     margin-top: 0.8rem;
-}
-
-.unselected{
-    border: solid 0.2rem #FBAD16;
-    border-radius: 0.6rem;
-    height: 2.1rem;
-    width: 2.1rem;
-    margin-top: 0.98rem;
 }
 
 .wrapper2{

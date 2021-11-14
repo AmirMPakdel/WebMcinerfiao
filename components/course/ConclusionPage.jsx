@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MainButton from "../global/MainButton";
 import styles from "./ConclusionPage.module.css";
 import NewCourseSelect from "../course/NewCourseSelect";
+import { Checkbox } from "antd";
 
 export default class ConclusionPage extends Component {
 
@@ -31,12 +32,16 @@ export default class ConclusionPage extends Component {
                     ))
                 }
                 </ul>
-                <NewCourseSelect className={styles.checkbox} onClick={this.onCheckBox} seclected={this.state.accepted} 
+                {/* <NewCourseSelect className={styles.checkbox} onClick={this.onCheckBox} seclected={this.state.accepted} 
                 title={"متن بالا را با دقت مطالعه نمودم و شرایط ذکر شده را قبول میکنم."}/>
+                <Checkbox className={styles.checkbox} checked={this.state.accepted}/> */}
+
             </div>
         </div>
         <div className={styles.wrapper2}>
-            <MainButton className={styles.next_btn} title={"ایجاد دوره"} onClick={this.onCreate}/>
+            <MainButton className={styles.next_btn} 
+            title={"ایجاد دوره"} 
+            onClick={this.onCreate}/>
         </div>
         </>
         )

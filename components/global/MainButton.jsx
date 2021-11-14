@@ -5,7 +5,6 @@ export default class MainButton extends Component {
     
     render(){
 
-
         let add_class = "";
 
         if(this.props.className){
@@ -25,8 +24,12 @@ export default class MainButton extends Component {
             add_class += styles.more_padding+" ";
         }
 
+        if(this.props.disabled){
+            add_class += " bgdc2 "
+        }
+
         return(
-            <div className={styles.mbtn_con+" "+add_class+" amp_btn"} onClick={this.props.onClick}>
+            <div className={"bgtc1 "+styles.mbtn_con+" "+add_class+" amp_btn"} onClick={this.props.onClick}>
                 
                 {
                     this.props.right_arrow?

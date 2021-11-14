@@ -1,9 +1,22 @@
+
+.con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .sec1{
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-around;
     width: 100%;
     margin-top: 0rem;
-    padding-right: 1.6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.dash_card:last-child{
+    margin-left: 0 !important;
 }
 
 .sec2{
@@ -11,5 +24,7 @@
     flex-wrap: wrap;
     width: 100%;
     margin-top: 2rem;
-    padding-right: 1.6rem;
+    justify-content: space-around;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }

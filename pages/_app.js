@@ -3,8 +3,10 @@ import '../styles/global.css';
 import '../styles/colors.css';
 import '../styles/fontSizes.css';
 import 'antd/dist/antd.css';
+import '../styles/forcedColors.css';
 import {ControllerComponent} from '../utils/controller';
 import Head from 'next/head';
+
 
 function MyApp({ Component, pageProps }) {
   return(

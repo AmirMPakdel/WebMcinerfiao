@@ -10,7 +10,11 @@ import WrapperT1 from "../../layouts/WrapperT1";
 export default class NewCourses extends Component {
     
     state={
+
         step:1,
+
+        title: "",
+        price: "",
     }
 
     componentDidMount(){
@@ -30,17 +34,20 @@ export default class NewCourses extends Component {
 
                     {
                         this.state.step===1?
-                        <PriceCategoryPage/>
+                        <PriceCategoryPage
+                        parent={this}/>
                         :null
                     }
                     {
                         this.state.step===2?
-                        <PlayModeSelectPage/>
+                        <PlayModeSelectPage
+                        parent={this}/>
                         :null
                     }
                     {
                         this.state.step===3?
-                        <ConclusionPage/>
+                        <ConclusionPage
+                        parent={this}/>
                         :null
                     }
 

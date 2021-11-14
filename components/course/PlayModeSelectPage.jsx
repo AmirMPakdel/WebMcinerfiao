@@ -1,3 +1,4 @@
+import { Checkbox } from "antd";
 import React, { Component } from "react";
 import MainButton from "../global/MainButton";
 import styles from "./PlayModeSelectPage.module.css";
@@ -16,6 +17,12 @@ export default class PlayModeSelectPage extends Component {
         this.setState({selected:"insecure"})
     }
 
+    onNext=()=>{
+        this.props.parent.setState({
+            step: 3
+        })
+    }
+
     render(){
         return(
         <>
@@ -28,11 +35,9 @@ export default class PlayModeSelectPage extends Component {
                 <div className={styles.info_con}>
                     {t}
                 </div>
-                {
-                    this.state.selected==="secure"?
-                    <img className={styles.select} src={"/svg/select_selected.svg"}/>:
-                    <div className={styles.unselected}/>
-                }
+
+                <Checkbox className={styles.select} checked={this.state.selected==="secure"}/>
+                
             </div>
 
             <div className={styles.not_secure_sec} onClick={this.onInsecure}>
@@ -42,16 +47,16 @@ export default class PlayModeSelectPage extends Component {
                 <div className={styles.info_con}>
                     {t}
                 </div>
-                {
-                    this.state.selected==="insecure"?
-                    <img className={styles.select} src={"/svg/select_selected.svg"}/>:
-                    <div className={styles.unselected}/>
-                }
+                
+                <Checkbox className={styles.select} checked={this.state.selected==="insecure"}/>
+                
             </div>
             
         </div>
         <div className={styles.wrapper2}>
-            <MainButton className={styles.next_btn} title={"تایید و ادامه"}/>
+            <MainButton className={styles.next_btn} 
+            title={"تایید و ادامه"}
+            onClick={this.onNext}/>
         </div>
         </>
         )

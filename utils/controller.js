@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { notification } from 'antd';
 import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { getCookie } from "./cookie";
 
 let controller = {
     
@@ -19,10 +20,14 @@ export class ControllerComponent extends Component{
         controller.enableAllAntDTooltips = this.enableAllAntDTooltips;
         controller.openNotification = this.openNotification;
 
+
+
         this.onResize();
         window.addEventListener("resize", this.onResize);
 
         this.enableAllAntDTooltips();
+
+        setColors();
     }
 
     componentWillUnmount(){
@@ -93,6 +98,15 @@ export class ControllerComponent extends Component{
     render(){
         return null;
     }
+}
+
+function setColors(){
+
+    // let tc1 = getCookie("tc1");
+
+    // let sheet = document.createElement('style')
+    // sheet.innerHTML = `.bgtc1 {background-color: ${tc1};}`;
+    // document.body.appendChild(sheet);
 }
 
 export default controller;

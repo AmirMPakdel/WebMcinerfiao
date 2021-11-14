@@ -5,7 +5,7 @@ export default class DashboardCard extends Component {
     
     render(){
         return(
-            <div className={styles.con}>
+            <div className={styles.con+" "+this.props.className}>
                 
                 <div className={styles.right_sec}>
                     <div className={styles.number}>

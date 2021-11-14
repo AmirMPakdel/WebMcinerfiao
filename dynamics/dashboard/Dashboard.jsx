@@ -4,32 +4,45 @@ import IncomeChart from "../../components/chart/IncomeChart";
 import IncomesChestCard from "../../components/card/IncomesChestCard";
 import EducatorDashboardLayout from "../../layouts/EducatorDashboardLayout";
 import styles from "./Dashboard.module.css";
+import WrapperT1 from "../../layouts/WrapperT1";
 
 export default class Dashboard extends Component {
     
     render(){
         return(
             <EducatorDashboardLayout>
-                
-                <div className={styles.sec1}>
 
-                    <DashboardCard number={"32,605"} number_title={"عدد"} title={"دوره فروخته شده"}/>
+                <WrapperT1>
 
-                    <DashboardCard number={"15"} number_title={"عدد"} title={"دوره ارائه شده"}/>
+                    <div className={styles.con}>
+                    
+                        <div className={styles.sec1}>
 
-                    <DashboardCard number={"15,325"} number_title={"تومان"} title={"هزینه روزانه"}/>
+                            <DashboardCard className={styles.dash_card}
+                            number={"32,605"} number_title={"عدد"} title={"دوره فروخته شده"}/>
 
-                    <DashboardCard number={"165"} number_title={"روز"} title={"باقی مانده تا اتمام اعتبار"}/>
+                            <DashboardCard  className={styles.dash_card} 
+                            number={"15"} number_title={"عدد"} title={"دوره ارائه شده"}/>
 
-                </div>
+                            <DashboardCard  className={styles.dash_card} 
+                            number={"15,325"} number_title={"تومان"} title={"هزینه روزانه"}/>
 
-                <div className={styles.sec2}>
+                            <DashboardCard  className={styles.dash_card} 
+                            number={"165"} number_title={"روز"} title={"باقی مانده تا اتمام اعتبار"}/>
 
-                    <IncomesChestCard/>
+                        </div>
 
-                    <IncomeChart/>
+                        <div className={styles.sec2}>
 
-                </div>
+                            <IncomesChestCard/>
+
+                            <IncomeChart/>
+
+                        </div>
+
+                    </div>
+
+                </WrapperT1>
 
             </EducatorDashboardLayout>
         )
