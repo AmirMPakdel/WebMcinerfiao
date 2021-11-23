@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import SecTitle from "../../components/global/SecTitle";
-import TextArea from "../../components/global/TextArea";
-import TextInput from "../../components/global/TextInput";
-import UploadImage from "../../components/global/UploadImage";
-import MainButton from "../../components/global/MainButton";
+import SecTitle from "../../../components/global/SecTitle";
+import TextArea from "../../../components/global/TextArea";
+import TextInput from "../../../components/global/TextInput";
+import UploadImage from "../../../components/global/UploadImage";
+import MainButton from "../../../components/global/MainButton";
 import EducatorDashboardLayout from "../../layouts/EducatorDashboardLayout";
 import styles from "./Profile.module.css";
 

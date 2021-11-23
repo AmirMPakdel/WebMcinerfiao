@@ -1,10 +1,5 @@
-import "../utils/poly";
-import '../styles/global.css';
-import '../styles/colors.css';
-import '../styles/fontSizes.css';
 import 'antd/dist/antd.css';
-import '../styles/forcedColors.css';
-import {ControllerComponent} from '../utils/controller';
+import {ChestComponent} from '../utils/chest';
 import Head from 'next/head';
 
 
@@ -12,7 +7,15 @@ function MyApp({ Component, pageProps }) {
   return(
   <>
     <Head>
-      <script src="/env.js"></script>
+
+      <link rel="stylesheet" href="/styles/global.css"/>
+      <link rel="stylesheet" href="/styles/colors.css"/>
+      <link rel="stylesheet" href="/styles/fonts.css"/>
+      <link rel="stylesheet" href="/styles/forced.css"/>
+
+      <script src="/js/env.js"/>
+      <script src="/js/poly.js"/>
+
       {/* <link rel="apple-touch-icon" sizes="57x57" href="/statics/root/apple-icon-57x57.png"/>
       <link rel="apple-touch-icon" sizes="60x60" href="/statics/root/apple-icon-60x60.png"/>
       <link rel="apple-touch-icon" sizes="72x72" href="/statics/root/apple-icon-72x72.png"/>
@@ -40,7 +43,7 @@ function MyApp({ Component, pageProps }) {
       <meta name="theme-color" content="#ffffff"/> */}
 
     </Head>
-    <ControllerComponent/>
+    <ChestComponent/>
     <Component {...pageProps}/>
   </>
   )

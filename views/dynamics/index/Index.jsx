@@ -12,7 +12,7 @@ import Aboutus from '../../components/indexPage/Aboutus';
 export default class Index extends Component {
 
     componentDidMount(){
-        document.title="سایت فروش آموزش آنلاین مینفو"
+        document.title="سایت فروش آموزش آنلاین مینفو";
     }
     
     render(){

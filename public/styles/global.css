@@ -40,31 +40,6 @@
 	background: #555; 
 }
 
-@font-face{
-	font-family: IranSansEng;
-	font-style: normal;
-	font-weight: 400;
-	src: url(../assets/fonts/IRANSansWeb.woff2);
-}
-@font-face {
-	font-family: IranSans;
-	font-style: normal;
-	font-weight: 400;
-	src: url("../assets/fonts/IRANSansWeb\(FaNum\).woff") format("woff");
-}
-@font-face {
-	font-family: IranSans;
-	font-style: normal;
-	font-weight: 500;
-	src: url("../assets/fonts/IRANSansWeb\(FaNum\)_Medium.woff") format("woff");
-}
-@font-face {
-	font-family: IranSans;
-	font-style: normal;
-	font-weight: 700;
-	src: url("../assets/fonts/IRANSansWeb\(FaNum\)_Bold.woff") format("woff");
-}
-
 *{
 	position: relative;
     font-family: IranSans;

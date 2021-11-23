@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import styles from "./SideMenu.module.css";
-import Controller from '../../utils/Controller';
+import chest from '../../../utils/chest';
 
 
 export default class SideMenu extends Component {
@@ -16,10 +16,10 @@ export default class SideMenu extends Component {
 
     componentDidMount(){
         this.setState({active_page:window.location.pathname.split("/")[2]});
-        Controller.openSideMenu = this.openSideMenu;
-        Controller.closeSideMenu = this.closeSideMenu;
-        Controller.showBackdrop = this.showBackdrop;
-        Controller.hideBackdrop = this.hideBackdrop;
+        chest.openSideMenu = this.openSideMenu;
+        chest.closeSideMenu = this.closeSideMenu;
+        chest.showBackdrop = this.showBackdrop;
+        chest.hideBackdrop = this.hideBackdrop;
     }
 
     openSideMenu = ()=>{
@@ -79,7 +79,7 @@ export default class SideMenu extends Component {
 
                 </div>
                 
-                {/* <Backdrop show={this.state.showBackdrop} onClick={Controller.onBackdropClicked}/> */}
+                {/* <Backdrop show={this.state.showBackdrop} onClick={chest.onBackdropClicked}/> */}
 
             </div>
         )

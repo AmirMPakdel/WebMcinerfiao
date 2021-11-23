@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import dynamic from 'next/dynamic'
 
-const NewCourse = dynamic(() => import("../../dynamics/dashboard/NewCourse"), { ssr: false });
+const NewCourse = dynamic(() => import("../../views/dynamics/dashboard/NewCourse"), { ssr: false });
 
 export default class newCourse extends Component {
 

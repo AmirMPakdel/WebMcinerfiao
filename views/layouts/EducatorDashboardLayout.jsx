@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 // import NotificationsMenu from "../components/educatorDashboard/NotificationsMenu";
 import SideMenu from "../components/panel/SideMenu";
-import Controller, {ControllerComponent} from "../utils/Controller";
+import chest from "../../utils/chest";
 import styles from "./EducatorDashboardLayout.module.css";
 
 export default class EducatorDashboardLayout extends Component {
 
     onNitifications = ()=>{
-        Controller.NotificationsMenu_toggle();
+        chest.NotificationsMenu_toggle();
     }
 
     componentDidMount(){
@@ -17,8 +17,6 @@ export default class EducatorDashboardLayout extends Component {
     render(){
         return(
             <div className={styles.layout}>
-
-                <ControllerComponent/>
                 
                 <SideMenu/>
 

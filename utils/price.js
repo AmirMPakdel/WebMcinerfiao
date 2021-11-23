@@ -1,4 +1,12 @@
-export default function price(string){
+const price = {
+    priceFormat,
+    priceWithCurrency,
+    rangePrice,
+}
+
+export default price;
+
+export function priceFormat(string){
 
     let number = Number(string);
 
@@ -34,7 +42,7 @@ export default function price(string){
     return new_str2;
 }
 
-export function price_type1(str){
+export function priceWithCurrency(str){
 
     let num = Number(str);
 
@@ -56,7 +64,7 @@ export function price_type1(str){
     return num+" تومن";
 }
 
-export function price_type2(min, max){
+export function rangePrice(min, max){
     
     let unit = "میلیون";
     let startPrice = min/1000000;
@@ -71,3 +79,4 @@ export function price_type2(min, max){
     }
     return " "+startPrice+" "+" تا "+endPrice+" "+unit;
 }
+

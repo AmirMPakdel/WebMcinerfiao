@@ -1,7 +1,14 @@
+const helpers = {
+    existsInArray,
+    toggleMultiSelect,
+    getUrlPart,
+    getParamByName,
+}
 
-const moment = require("jalali-moment");
+export default helpers;
 
-/** for multiselect fields
+/** 
+ * for multiselect fields
  * @param {string} value 
  * @param {Array} array
  * @returns {Boolean}
@@ -26,7 +33,8 @@ export function existsInArray(value, array){
     }
 }
 
-/** for multiselect fields
+/** 
+ * for multiselect fields
  * @param {string} value 
  * @param {Array} array
  * @returns {Array}
@@ -42,36 +50,22 @@ export function toggleMultiSelect(value, array){
     }
 }
 
-export function getCurrentMiladiDate() {
-    
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    let yyyy = today.getFullYear();
-    today = yyyy+"/"+mm+"/"+dd;
-    return moment.from(today,"YYYY/MM/DD").locale('fa').format('YYYY/MM/DD')
-}
-
-export function shamsi2Miladi(shamsi, seperator){
-
-    let res =  moment.from(shamsi, 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD');
-
-    if(seperator){
-        res = res.split("/").join(seperator);
-    }
-
-    if(res === "Invalid date"){
-        return false;
-    }
-
-    return res;
-}
-
-export function getUrlPart(order){
+/**
+ * get one part of a url, part==1 returns the domain
+ * @param {String} part
+ * @returns {String}
+ */
+export function getUrlPart(part){
     let array = window.location.href.split("/");
-    return(array[order+2]);
+    return(array[part+2]);
 }
 
+/**
+ * get url-parameter by name
+ * @param {String} name 
+ * @param {String} url 
+ * @returns {String}
+ */
 export function getParamByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
     var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),

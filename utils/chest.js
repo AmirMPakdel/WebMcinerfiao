@@ -1,9 +1,8 @@
 import { Component } from "react";
 import { notification } from 'antd';
 import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { getCookie } from "./cookie";
 
-let controller = {
+let chest = {
     
     UserPanel:{
 
@@ -11,18 +10,17 @@ let controller = {
     }
 }
 
-export class ControllerComponent extends Component{
+export class ChestComponent extends Component{
     
     componentDidMount(){
-        controller.disableBodyVerticalScroll = this.disableBodyVerticalScroll;
-        controller.enableBodyVerticalScroll = this.enableBodyVerticalScroll;
-        controller.disableAllAntDTooltips = this.disableAllAntDTooltips;
-        controller.enableAllAntDTooltips = this.enableAllAntDTooltips;
-        controller.openNotification = this.openNotification;
-
-
+        chest.disableBodyVerticalScroll = this.disableBodyVerticalScroll;
+        chest.enableBodyVerticalScroll = this.enableBodyVerticalScroll;
+        chest.disableAllAntDTooltips = this.disableAllAntDTooltips;
+        chest.enableAllAntDTooltips = this.enableAllAntDTooltips;
+        chest.openNotification = this.openNotification;
 
         this.onResize();
+
         window.addEventListener("resize", this.onResize);
 
         this.enableAllAntDTooltips();
@@ -31,11 +29,11 @@ export class ControllerComponent extends Component{
     }
 
     componentWillUnmount(){
-        controller.disableBodyVerticalScroll = ()=>{};
-        controller.enableBodyVerticalScroll = ()=>{};
-        controller.disableAllAntDTooltips = ()=>{};
-        controller.enableAllAntDTooltips = ()=>{};
-        controller.openNotification = ()=>{};
+        chest.disableBodyVerticalScroll = ()=>{};
+        chest.enableBodyVerticalScroll = ()=>{};
+        chest.disableAllAntDTooltips = ()=>{};
+        chest.enableAllAntDTooltips = ()=>{};
+        chest.openNotification = ()=>{};
     }
 
     onResize=()=>{
@@ -109,4 +107,4 @@ function setColors(){
     // document.body.appendChild(sheet);
 }
 
-export default controller;
+export default chest;

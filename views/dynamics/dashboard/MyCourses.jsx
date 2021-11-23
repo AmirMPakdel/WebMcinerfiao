@@ -1,13 +1,26 @@
 import React, { Component } from "react";
+import MyCoursesController from "../../../controllers/dashboard/myCoursesController";
 import MainButton from "../../components/global/MainButton";
+import Svg from "../../components/global/Svg";
 import EducatorDashboardLayout from "../../layouts/EducatorDashboardLayout";
 import WrapperT1 from "../../layouts/WrapperT1";
+import BackShape1 from "../../svgs/BackShape1";
 import styles from "./MyCourses.module.css";
 
 export default class MyCourses extends Component {
+
+    constructor(props){
+        super(props);
+        this.controller = new MyCoursesController(this);
+        this.state = {
+            loading:true,
+            myCourseList:[]
+        }
+    }
     
     componentDidMount(){
-        document.title="دوره های من"
+        document.title="دوره های من";
+        this.controller.loadMyCourses();
     }
 
     render(){
@@ -18,18 +31,13 @@ export default class MyCourses extends Component {
 
                     <div className={styles.mcrs_con}>
 
-                        <CourseCard/>
-                        <CourseCard/>
-                        <CourseCard/>
-                        <CourseCard/>
-                        <CourseCard/>
-                        <CourseCard/>
-                        <CourseCard/>
-                        <CourseCard/>
-                        <CourseCard/>
-                        <CourseCard/>
-                        <CourseCard/>
-                        <CourseCard/>
+                        <BackShape1 fill="#6600AA"/>
+
+                        {
+                            this.state.myCourseList.map((v,i)=>(
+                                <CourseCard data={v} key={i}/>
+                            ))
+                        }
 
                     </div>
                     

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./IncomeChart.module.css";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import price from "../../utils/price";
+import price from "../../../utils/price";
 
 
 export default class IncomeChart extends Component {

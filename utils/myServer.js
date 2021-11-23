@@ -1,14 +1,14 @@
-const domain = "https://next.ekomelk.com";
 import axios from "axios";
-import env from "../env";
-import controller from "./controller";
+import chest from "./chest";
 import { getCookie } from "./cookie";
+
+const domain = env.DOMAIN;
 
 const myServer = {
 
     urls:{
         DOMAIN:domain,
-        MEDIA_PREFIX:"https://next.ekomelk.com",
+        MEDIA_PREFIX:env.MEDIA_PREFIX,
 
         //global
         GET_PROVINCES:domain+"/api/v1/provinces",
@@ -54,10 +54,10 @@ function Get(url, config, cb){
                     let error_array = Object.keys(error);
                     error_array.forEach((key)=>{
                         if(typeof error[key] === "string"){
-                            controller.openNotification(error[key], null, "error");
+                            chest.openNotification(error[key], null, "error");
                         }else if(typeof error[key].forEach === 'function'){
                             error[key].forEach((v)=>{
-                                controller.openNotification(v, null, "error");
+                                chest.openNotification(v, null, "error");
                             });
                         }
                     })
@@ -111,10 +111,10 @@ function Post(url, data, config={}, cb){
                     let error_array = Object.keys(error);
                     error_array.forEach((key)=>{
                         if(typeof error[key] === "string"){
-                            controller.openNotification(error[key], null, "error");
+                            chest.openNotification(error[key], null, "error");
                         }else if(typeof error[key].forEach === 'function'){
                             error[key].forEach((v)=>{
-                                controller.openNotification(v, null, "error");
+                                chest.openNotification(v, null, "error");
                             });
                         }
                     })

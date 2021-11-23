@@ -1,17 +1,19 @@
-import env from "./env";
+const cookie = {
+  setCookie, 
+  getCookie, 
+  deleteCookie,
+};
 
-const setCookie = (cname, cvalue, exdays) => {
+export default cookie;
+
+export function setCookie(cname, cvalue, exdays){
   var d = new Date();
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
   var expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-const getCookie = (cname) => {
-
-  if(env.ENVIRONMENT_MODE==="dev"){
-    return env.CURRENT_DEV_USER_TOKEN;
-  }
+export function getCookie(cname){
 
   var name = cname + "=";
   var ca = document.cookie.split(";");
@@ -27,10 +29,7 @@ const getCookie = (cname) => {
   return "";
 }
 
-function deleteCookie(cname){
+export function deleteCookie(cname){
 
   setCookie(cname, "", -5);
 }
-
-
-export {setCookie, getCookie, deleteCookie};
