@@ -1,6 +1,20 @@
 import React, { Component } from "react";
 import styles from "./MainButton.module.css";
 
+/**
+ * Props of MainButton Component
+ * @typedef Props
+ * @property {string} className
+ * @property {string} title
+ * @property {boolean} disabled
+ * @property {boolean} borderMode
+ * @property {boolean} whiteBorder
+ * @property {boolean} rightArrow
+ * @property {boolean} leftArrow
+ * @property {function} onClick
+ * 
+ * @extends {Component<Props>}
+ */
 export default class MainButton extends Component {
     
     render(){
@@ -11,16 +25,20 @@ export default class MainButton extends Component {
             add_class += this.props.className+" ";
         }
 
-        if(this.props.border_mode){
+        if(this.props.borderMode){
 
-            add_class += styles.border_mode+" ";
+            add_class += styles.border_mode+" btc1 ";
 
-        }else if(this.props.white_border){
+        }else if(this.props.whiteBorder){
 
-            add_class += styles.white_border+" ";
+            add_class += styles.white_border+" blc1 ";
+        
+        }else{
+
+            add_class += "bgtc1 ";
         }
 
-        if(!this.props.right_arrow && !this.props.left_arrow){
+        if(!this.props.rightArrow && !this.props.leftArrow){
             add_class += styles.more_padding+" ";
         }
 
@@ -29,23 +47,21 @@ export default class MainButton extends Component {
         }
 
         return(
-            <div className={"bgtc1 "+styles.mbtn_con+" "+add_class+" amp_btn"} onClick={this.props.onClick}>
+            <div className={styles.mbtn_con+" bdyt "+add_class+" amp_btn"} onClick={this.props.onClick}>
                 
                 {
-                    this.props.right_arrow?
-                    <img className={styles.right_arrow} src="./svg/btn_right_arrow.svg"/>:
+                    this.props.rightArrow?
+                    <img className={styles.rightArrow} src="/svg/btn_rightArrow.svg"/>:
                     null
                 }
-
                 {
-                    this.props.white_border?
-                    <div className={styles.title_white}>{this.props.title}</div>:
-                    <div className={styles.title}>{this.props.title}</div>
+                    this.props.whiteBorder?
+                    <div className={styles.title+" flc1"}>{this.props.title}</div>:
+                    <div className={styles.title+" fdc1"}>{this.props.title}</div>
                 }
-
                 {
-                    this.props.left_arrow?
-                    <img className={styles.left_arrow} src="./svg/btn_left_arrow.svg"/>:
+                    this.props.leftArrow?
+                    <img className={styles.leftArrow} src="/svg/btn_leftArrow.svg"/>:
                     null
                 }
                 

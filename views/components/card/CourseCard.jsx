@@ -17,7 +17,7 @@ export default class CourseCard extends Component {
 
                 <div className={styles.title}>{'جامع ترین دوره دوره دوره دوره آموزش گرافیک'}</div>
                 
-                <img className={styles.dash} src={"./svg/dash_line.svg"}/>
+                <img className={styles.dash} src={"/svg/dash_line.svg"}/>
 
                 <div className={styles.price_con}>
                     {"تومان"}

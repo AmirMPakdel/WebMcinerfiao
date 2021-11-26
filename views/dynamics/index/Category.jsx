@@ -23,15 +23,15 @@ export default class Category extends Component {
 
                         <div className={styles.crscrd_con}>
 
-                            <CourseCard className={styles.crs_crd} image={"./fake_img/11.jpg"}/>
+                            <CourseCard className={styles.crs_crd} image={"/fake_img/11.jpg"}/>
 
-                            <CourseCard className={styles.crs_crd} image={"./fake_img/12.jpg"}/>
+                            <CourseCard className={styles.crs_crd} image={"/fake_img/12.jpg"}/>
 
-                            <CourseCard className={styles.crs_crd} image={"./fake_img/13.jpg"}/>
+                            <CourseCard className={styles.crs_crd} image={"/fake_img/13.jpg"}/>
 
-                            <CourseCard className={styles.crs_crd} image={"./fake_img/14.jpg"}/>
+                            <CourseCard className={styles.crs_crd} image={"/fake_img/14.jpg"}/>
 
-                            <CourseCard className={styles.crs_crd} image={"./fake_img/15.jpg"}/>
+                            <CourseCard className={styles.crs_crd} image={"/fake_img/15.jpg"}/>
 
                         </div>
 

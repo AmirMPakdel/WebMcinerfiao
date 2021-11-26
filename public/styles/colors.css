@@ -58,17 +58,17 @@
 .bglc1{
     background-color: #F9F9F9;
 }
-.bglc2{
+.flc1{
     color: #F9F9F9;
 }
-.blc2{
+.blc1{
     border-color: #F9F9F9;
 }
 
 /**
     secondary light color
 **/
-.bglc1{
+.bglc2{
     background-color: #EAEAEA;
 }
 .bglc2{
@@ -84,7 +84,7 @@
 .bgec{
     background-color: #F54D4D;
 }
-.bgec{
+.fec{
     color: #F54D4D;
 }
 .bec{
@@ -97,7 +97,7 @@
 .bgsc{
     background-color: #ACF54D;
 }
-.bgsc{
+.fsc{
     color: #ACF54D;
 }
 .bsc{
@@ -168,20 +168,20 @@
 .bglc1i{
     background-color: #F9F9F9 !important;
 }
-.bglc2i{
+.flc1i{
     color: #F9F9F9 !important;
 }
-.blc2i{
+.blc1i{
     border-color: #F9F9F9 !important;
 }
 
 /**
     secondary light color
 **/
-.bglc1i{
+.bglc2i{
     background-color: #EAEAEA !important;
 }
-.bglc2i{
+.flc2i{
     color: #EAEAEA !important;
 }
 .blc2i{
@@ -194,7 +194,7 @@
 .bgeci{
     background-color: #F54D4D !important;
 }
-.bgeci{
+.feci{
     color: #F54D4D !important;
 }
 .beci{
@@ -207,7 +207,7 @@
 .bgsci{
     background-color: #ACF54D !important;
 }
-.bgsci{
+.fsci{
     color: #ACF54D !important;
 }
 .bsci{

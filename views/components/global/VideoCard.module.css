@@ -1,0 +1,13 @@
+.con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    border-radius: 1rem;
+}
+
+.play_btn{
+    width: 5rem;
+    height: 5rem;
+    cursor: pointer;
+}

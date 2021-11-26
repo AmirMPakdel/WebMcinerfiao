@@ -5,7 +5,7 @@
     align-items: flex-end;
     direction: ltr;
     height: 22.5rem;
-    width: 96%;
+    width: 100%;
     padding-right: 2rem;
 }
 
@@ -61,4 +61,13 @@
     height: 1rem;
     width: 1rem;
     margin-left: 1rem;
+}
+
+@media(max-width:1024px){
+
+    .sec1{
+        align-items: center;
+        height: auto;
+        padding-right: 0;
+    }
 }

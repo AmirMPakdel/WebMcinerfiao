@@ -10,7 +10,7 @@ export default class UserPanelTabMyCourses extends Component {
                 
                 {
                     arr.map((v, i)=>(
-                        <CourseCard key={i} index={i} img={"./fake_img/21.jpg"} title={"جامع ترین دوره آموزش فیگما"}/>
+                        <CourseCard key={i} index={i} img={"/fake_img/21.jpg"} title={"جامع ترین دوره آموزش فیگما"}/>
                     ))
                 }
 

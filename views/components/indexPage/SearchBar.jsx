@@ -8,7 +8,7 @@ export default class SearchBar extends Component {
         return(
             <div className={styles.searchbar_con}>
 
-                <img src={"./svg/search_img.svg"} className={styles.searchbar_img+" amp_btn"}/>
+                <img src={"/svg/search_img.svg"} className={styles.searchbar_img+" amp_btn"}/>
                 
                 <input className={styles.searchbar_input} placeholder="دوست داری چی یاد بگیری؟"/>
 

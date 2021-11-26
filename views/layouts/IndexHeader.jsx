@@ -6,13 +6,13 @@ export default class IndexHeader extends Component {
     
     render(){
         return(
-            <div className={styles.header_con}>
+            <div className={styles.header_con+" bglc1i"}>
 
                 <MainButton title={"ثبت نام"}/>
                 
                 <div className={styles.space1}/>
 
-                <MainButton title={"ورود"} white_border/>
+                <MainButton title={"ورود"}/>
                 
             </div>
         )

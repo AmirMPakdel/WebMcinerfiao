@@ -14,9 +14,9 @@ export default class UserPanelHeader extends Component {
                         {"علیرضا رمضانی"}
                     </div>
 
-                    <BorderIconButton icon={"./svg/password.svg"} title="تغییر گذرواژه"/>
+                    <BorderIconButton icon={"/svg/password.svg"} title="تغییر گذرواژه"/>
 
-                    <BorderIconButton icon={"./svg/logout.svg"} title="خروج"/>
+                    <BorderIconButton icon={"/svg/logout.svg"} title="خروج"/>
 
                 </div>
 
@@ -28,7 +28,7 @@ export default class UserPanelHeader extends Component {
 
                 </div>
                 
-                <img className={styles.dashed} src={"./svg/user_long_dashed.svg"}/>
+                <img className={styles.dashed} src={"/svg/user_long_dashed.svg"}/>
 
                 <TabHeader/>
 

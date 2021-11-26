@@ -23,10 +23,6 @@
     border: rgb(104, 104, 104) solid 0.14rem;
 }
 
-.title_white{
-    color: white;
-}
-
 .white_border{
     background-color: transparent;
     opacity: 0.9;
@@ -36,4 +32,8 @@
 .more_padding{
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+}
+
+.title{
+    font-weight: 500;
 }

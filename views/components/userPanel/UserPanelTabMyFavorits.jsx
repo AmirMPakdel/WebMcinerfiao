@@ -9,7 +9,7 @@ export default class UserPanelTabMyFavorits extends Component {
 
                 {
                     arr.map((v, i)=>(
-                        <CourseCard key={i} index={i} img={"./fake_img/21.jpg"} title={"جامع ترین دوره آموزش فیگما"}/>
+                        <CourseCard key={i} index={i} img={"/fake_img/21.jpg"} title={"جامع ترین دوره آموزش فیگما"}/>
                     ))
                 }
                 
@@ -33,7 +33,7 @@ class CourseCard extends Component{
 
                 <div className={styles.favcard_title}>{this.props.title}</div>
 
-                <img className={styles.favcard_btn+" amp_btn"} src={"./svg/fav_card_heart.svg"}/>
+                <img className={styles.favcard_btn+" amp_btn"} src={"/svg/fav_card_heart.svg"}/>
 
             </div>
         )

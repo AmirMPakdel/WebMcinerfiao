@@ -13,7 +13,7 @@ export default class Educator extends Component {
 
                     <div className={styles.edc_sec1}>
 
-                        <img className={styles.img} src={"./fake_img/22.jpg"}/>
+                        <img className={styles.img} src={"/fake_img/22.jpg"}/>
 
                         <div className={styles.name}>{"اکبر عبدی کردمحله ای"}</div>
 
@@ -40,11 +40,11 @@ export default class Educator extends Component {
 function CourseRow(props){
     return(
         <div className={styles.crs_row}>
-            <img className={styles.yellowbar} src={"./svg/prf_course_yellowbar.svg"}/>
-            <CourseCard image={"./fake_img/8.jpg"}/>
-            <CourseCard image={"./fake_img/8.jpg"}/>
-            <CourseCard image={"./fake_img/8.jpg"}/>
-            <CourseCard image={"./fake_img/8.jpg"}/>
+            <img className={styles.yellowbar} src={"/svg/prf_course_yellowbar.svg"}/>
+            <CourseCard image={"/fake_img/8.jpg"}/>
+            <CourseCard image={"/fake_img/8.jpg"}/>
+            <CourseCard image={"/fake_img/8.jpg"}/>
+            <CourseCard image={"/fake_img/8.jpg"}/>
         </div>
     )
 }

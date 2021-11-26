@@ -25,7 +25,7 @@ export default class LoginModal extends Component {
 
                 </div>
 
-                <img className={styles.close_btn+" amp_btn"} src={"./svg/modal_close.svg"}/>
+                <img className={styles.close_btn+" amp_btn"} src={"/svg/modal_close.svg"}/>
                 
             </div>
         )

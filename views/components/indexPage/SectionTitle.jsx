@@ -15,8 +15,8 @@ export default class SectionTitle extends Component {
                 
                 {
                     this.props.black_mode?
-                    <img className={styles.left_dashes} src={"./svg/sec_title_dashed_black.svg"}/>:
-                    <img className={styles.left_dashes} src={"./svg/sec_title_dashed.svg"}/>
+                    <img className={styles.left_dashes} src={"/svg/sec_title_dashed_black.svg"}/>:
+                    <img className={styles.left_dashes} src={"/svg/sec_title_dashed.svg"}/>
                 }
 
                 <div className={styles.title_txt+" "+add_class}>
@@ -25,8 +25,8 @@ export default class SectionTitle extends Component {
 
                 {
                     this.props.black_mode?
-                    <img className={styles.right_dashes} src={"./svg/sec_title_dashed_black.svg"}/>:
-                    <img className={styles.right_dashes} src={"./svg/sec_title_dashed.svg"}/>
+                    <img className={styles.right_dashes} src={"/svg/sec_title_dashed_black.svg"}/>:
+                    <img className={styles.right_dashes} src={"/svg/sec_title_dashed.svg"}/>
                 }
                 
             </div>

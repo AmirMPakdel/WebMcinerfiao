@@ -53,7 +53,7 @@ class Comment extends CommentsSec{
 
                 </div>
 
-                <img src={"./svg/dashed_vertical.svg"}/>
+                <img src={"/svg/dashed_vertical.svg"}/>
 
                 <div className={styles.comnt_sec2}>
 

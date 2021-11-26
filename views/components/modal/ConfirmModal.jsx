@@ -27,7 +27,7 @@ export default class ConfirmModal extends Component {
 
                 <MainButton className={styles.btn} title={"تایید"}/>
 
-                <img className={styles.close_btn+" amp_btn"} src={"./svg/modal_close.svg"}/>
+                <img className={styles.close_btn+" amp_btn"} src={"/svg/modal_close.svg"}/>
                 
             </div>
         )

@@ -21,7 +21,7 @@ export default class CourseInfo extends Component {
         return(
             <div className={styles.crs_info_con}>
 
-                <img className={styles.crs_info_icn+" amp_btn"} src={"./svg/closed_ccard_icn.svg"}
+                <img className={styles.crs_info_icn+" amp_btn"} src={"/svg/closed_ccard_icn.svg"}
                 onClick={this.toggle}/>
                 
                 <Collapse isOpened={this.state.open} style={{minHeight:"10rem"}}>

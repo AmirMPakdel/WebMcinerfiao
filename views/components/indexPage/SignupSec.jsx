@@ -24,7 +24,7 @@ export default class SignupSec extends Component {
 
                 </div>
 
-                <img className={styles.sgnupsec_img} src={"./svg/signup_intro_img.svg"}/>
+                <img className={styles.sgnupsec_img} src={"/svg/signup_intro_img.svg"}/>
                 
             </div>
         )

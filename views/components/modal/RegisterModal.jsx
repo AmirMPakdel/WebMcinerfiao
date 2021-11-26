@@ -25,7 +25,7 @@ export default class RegisterModal extends Component {
 
                 <div className={styles.link1+" amp_btn"}>{"ورود به حساب کاربری"}</div>
 
-                <img className={styles.close_btn+" amp_btn"} src={"./svg/modal_close.svg"}/>
+                <img className={styles.close_btn+" amp_btn"} src={"/svg/modal_close.svg"}/>
                 
             </div>
         )

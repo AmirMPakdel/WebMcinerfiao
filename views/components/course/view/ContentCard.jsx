@@ -13,8 +13,8 @@ export default class ContentCard extends Component {
 
     render(){
 
-        let src="./svg/closed_ccard_icn.svg";
-        if(this.state.open){src="./svg/opened_ccard_icn.svg"}
+        let src="/svg/closed_ccard_icn.svg";
+        if(this.state.open){src="/svg/opened_ccard_icn.svg"}
 
         return(
             <div className={styles.ccard_con}>
@@ -33,10 +33,10 @@ export default class ContentCard extends Component {
 
                 <Collapse className={styles.Collapse} isOpened={this.state.open}>
                     <div style={{height:"0.5rem"}}/>
-                    <IconLine icon="./svg/crs_play_icn.svg" text={"عرض سلام و خسته نباشید"}/>
-                    <IconLine icon="./svg/crs_document_icn.svg" text={"عرض سلام و خسته نباشید"}/>
-                    <IconLine icon="./svg/crs_document_icn.svg" text={"عرض سلام و خسته نباشید"}/>
-                    <IconLine icon="./svg/crs_play_icn.svg" text={"عرض سلام و خسته نباشید"}/>
+                    <IconLine icon="/svg/crs_play_icn.svg" text={"عرض سلام و خسته نباشید"}/>
+                    <IconLine icon="/svg/crs_document_icn.svg" text={"عرض سلام و خسته نباشید"}/>
+                    <IconLine icon="/svg/crs_document_icn.svg" text={"عرض سلام و خسته نباشید"}/>
+                    <IconLine icon="/svg/crs_play_icn.svg" text={"عرض سلام و خسته نباشید"}/>
                 </Collapse>
             </div>
         )
