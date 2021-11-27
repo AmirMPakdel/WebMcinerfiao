@@ -11,13 +11,18 @@ import Aboutus from '../../components/indexPage/Aboutus';
 
 export default class Index extends Component {
 
-    componentDidMount(){
+    constructor(props){
+        super(props);
         document.title="سایت فروش آموزش آنلاین مینفو";
+    }
+
+    componentDidMount(){
+        
     }
     
     render(){
         return(
-            <HomeLayout>
+            <HomeLayout accessLevel={"1"}>
 
                 <div className={styles.search_section_con}>
 

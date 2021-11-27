@@ -58,12 +58,8 @@ input{
     border: none;
 }
 
-.ReactCollapse--collapse {
-    transition: height 500ms;
-}
-
 textarea{
 	outline: none;
-	resize: none;
+	resize: none !important;
 	border: none;
 }

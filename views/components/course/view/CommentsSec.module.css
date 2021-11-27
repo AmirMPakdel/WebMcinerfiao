@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: calc(100% - 20rem);
+    width: calc(86% - 14rem);
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .cmt_input_con{
@@ -35,9 +36,10 @@
 
 .cmt_rating_con{
     position: absolute;
-    top: -1.5rem;
+    top: -1rem;
     right: calc(50% - 6rem);
-    width: 12rem;
+    padding: 0.5rem 3rem;
+    padding-top: 0.8rem;
     border-radius: 1rem;
     background-color: #F9F9F9;
     z-index: 0;
@@ -50,12 +52,13 @@
     width: calc(100% - 8rem);
     margin-top: 2rem;
     background-color: #F9F9F9;
-    box-shadow: 0 0.5rem 1rem 0.1rem rgb(0, 0, 0, 0.15);
+    box-shadow: 0 0.3rem 0.6rem 0.1rem rgb(0, 0, 0, 0.15);
     border-radius: 1rem;
 }
 
 .comnt_sec1{
-    width: calc(75% - 0.5rem);   
+    /* width: calc(75% - 0.5rem);    */
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -79,4 +82,31 @@
     font-size: 0.92rem;
     margin-top: 0.7rem;
     margin-bottom: 0.7rem;
+}
+
+@media(max-width:1024px){
+
+    .cmt_rating_con{
+        padding: 0.5rem 2rem;
+    }
+
+    .cmt_sec{
+        width: 100%;
+        padding: none;
+    }
+
+    .cmt_send_btn{
+        left: -2.5rem;
+    }
+}
+
+@media(max-width:767px){
+
+    .cmt_sec{
+        width: 100%;
+    }
+
+    .cmt_send_btn{
+        left: -1.5rem;
+    }
 }

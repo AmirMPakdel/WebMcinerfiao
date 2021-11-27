@@ -2,10 +2,10 @@
     display: flex;
     margin-top: 1rem;
     font-size: 0.9rem;
-    width: calc(100% - 20rem);
+    width: calc(86% - 14rem);
     color: #7a7a7a;
     padding-top: 1rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     padding-right: 4rem;
     padding-left: 2.5rem;
     border-radius: 1rem 0 0 1rem;
@@ -30,11 +30,33 @@
 .crs_txt_icn2{
     position: absolute;
     direction: rtl;
-    right: 6.5rem;
-
     height: 7rem;
     padding-left: 2.5rem;
     overflow: hidden;
     transition: linear 500ms;
     pointer-events: none;
+}
+
+@media(max-width:1024px){
+
+    .crs_info_con{
+        width: calc(100% - 2rem);
+        padding-right: 5vw;
+    }
+
+    .crs_txt_icn2{
+        width: calc(100% - 2rem);
+        padding-right: 5vw;
+    }
+}
+
+@media(max-width:767px){
+
+    .crs_info_con{
+        width: 96%;
+    }
+
+    .crs_txt_icn2{
+        width: 96%;
+    }
 }

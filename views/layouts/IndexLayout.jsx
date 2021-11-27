@@ -1,21 +1,30 @@
 import React, { Component } from "react";
+import AccessLayout from "./AccessLayout";
 import IndexHeader from "./IndexHeader";
 import styles from "./IndexLayout.module.css";
 import ModalLayout from "./ModalLayout";
 
+/**
+ * @typedef Props 
+ * @property {AccessLevel} accessLevel
+ * 
+ * @extends {Component<Props>}
+ */
 export default class IndexLayout extends Component {
     
     render(){
         return(
-            <ModalLayout>
-                <div className={styles.con}>
+            <AccessLayout accessLevel={this.props.accessLevel}>
+                <ModalLayout>
+                    <div className={styles.con+" bglc1i"}>
 
-                    <IndexHeader/>
-                
-                    {this.props.children}
+                        <IndexHeader/>
+                    
+                        {this.props.children}
 
-                </div>
-            </ModalLayout>
+                    </div>
+                </ModalLayout>
+            </AccessLayout>
         )
     }
 }

@@ -5,6 +5,8 @@ import CourseBanner from "../../components/course/view/CourseBanner";
 import CourseInfo from "../../components/course/view/CourseInfo";
 import FloatingCard from "../../components/course/view/FloatingCard";
 import IconLine from "../../components/course/view/IconLine";
+import RecommandedArticles from "../../components/course/view/RecommandedArticles";
+import RecommandedCourses from "../../components/course/view/RecommandedCourses";
 import SectionTitle from "../../components/course/view/SectionTitle";
 import IndexLayout from "../../layouts/IndexLayout";
 import WrapperT1 from "../../layouts/WrapperT1";
@@ -83,6 +85,15 @@ export default class Course extends Component {
 
                     <CommentsSec/>
 
+                    <SectionTitle title="دوره های پیشنهادی"/>
+
+                    <RecommandedCourses/>
+
+                    <SectionTitle title="مقالات پیشنهادی"/>
+
+                    <RecommandedArticles/>
+
+
                 </div>
 
                 
@@ -96,7 +107,7 @@ export default class Course extends Component {
 
 const arr1 = [
     "استادی در فیزیک کوانتوم در حد تنت",
-    "پیش بینی در حد نوستراداموس",
+    "پیش بینی در حد پیش بینی در حد پیش بینی در حد پیش بینی در حد پیش بینی در حد پیش بینی در حد پیش بینی در حد پیش بینی در حد پیش بینی در حد پیش بینی در حد پیش بینی در حد پیش بینی در حد پیش بینی در حد پیش بینی در حد نوستراداموس",
     "ساخت مدل های قوی ماشین زمان",
     "از ماشین زمان برای اهداف شخصی خودتان استفاده کنید",
     "از تکنیک‌های پیشرفته مانند افزایش یا کاهش ابعاد چهارگانه استفاده کنید",

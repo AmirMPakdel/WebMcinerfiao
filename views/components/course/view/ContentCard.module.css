@@ -1,9 +1,8 @@
 .ccard_con{
     margin-top: 1rem;
-    font-size: 0.9rem;
-    width: calc(100% - 20rem);
-    color: #7a7a7a;
+    width: calc(86% - 14rem);
     padding: 1rem;
+    font-weight: 700;
     padding-right: 4rem;
     padding-left: 2.5rem;
     border-radius: 1rem 0 0 1rem;
@@ -24,4 +23,25 @@
 .iclne_txt{
     font-size: 1.1rem;
     font-size: 700;
+}
+
+.icon_line{
+    margin-top: 0.3rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+@media(max-width:1024px){
+
+    .ccard_con{
+        width: calc(100% - 2rem);
+        padding-right: 5vw;
+    }
+}
+
+@media(max-width:767px){
+
+    .ccard_con{
+        width: 96%;
+    }
 }

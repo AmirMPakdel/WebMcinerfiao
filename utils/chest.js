@@ -1,8 +1,12 @@
 import { Component } from "react";
 import { notification } from 'antd';
 import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import "../models/jsdoc/User"
 
 let chest = {
+
+    /**@type {User} */
+    user : null,
     
     UserPanel:{
 

@@ -7,3 +7,7 @@
 .ant-checkbox-wrapper:hover .ant-checkbox-inner{
     border-color: #FBAD16 !important;
 }
+
+.ReactCollapse--collapse {
+    transition: height 500ms;
+}

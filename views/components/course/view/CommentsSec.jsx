@@ -32,7 +32,7 @@ export default class CommentsSec extends Component {
                 
                 <div style={{height:"2rem"}}/>
 
-                <MainButton border_mode title={"مشاهده همه"}/>
+                <MainButton borderMode title={"مشاهده همه"}/>
                 
             </div>
         )
@@ -53,15 +53,15 @@ class Comment extends CommentsSec{
 
                 </div>
 
-                <img src={"/svg/dashed_vertical.svg"}/>
+                {/* <img src={"/svg/dashed_vertical.svg"}/> */}
 
-                <div className={styles.comnt_sec2}>
+                {/* <div className={styles.comnt_sec2}>
 
                     <Rating/>
 
                     <div>{"12 مهر 1400"}</div>
 
-                </div>
+                </div> */}
 
             </div>
         )

@@ -24,7 +24,7 @@ export default class ContentCard extends Component {
                     <img className={styles.iclne_img+" amp_btn"} src={src}
                     onClick={this.toggle}/>
 
-                    <div className={styles.iclne_txt+" amp_btn"}
+                    <div className={styles.iclne_txt+" bdyt fdc2 amp_btn"}
                     onClick={this.toggle}>
                         {this.props.text}
                     </div>
@@ -32,11 +32,21 @@ export default class ContentCard extends Component {
                 </div>
 
                 <Collapse className={styles.Collapse} isOpened={this.state.open}>
+
                     <div style={{height:"0.5rem"}}/>
-                    <IconLine icon="/svg/crs_play_icn.svg" text={"عرض سلام و خسته نباشید"}/>
-                    <IconLine icon="/svg/crs_document_icn.svg" text={"عرض سلام و خسته نباشید"}/>
-                    <IconLine icon="/svg/crs_document_icn.svg" text={"عرض سلام و خسته نباشید"}/>
-                    <IconLine icon="/svg/crs_play_icn.svg" text={"عرض سلام و خسته نباشید"}/>
+
+                    <IconLine className={styles.icon_line}
+                    icon="/svg/crs_play_icn.svg" 
+                    text={"عرض سلام و خسته نباشید"}/>
+
+                    <IconLine className={styles.icon_line}
+                    icon="/svg/crs_play_icn.svg" 
+                    text={"عرض سلام و خسته نباشید"}/>
+
+                    <IconLine className={styles.icon_line}
+                    icon="/svg/crs_play_icn.svg" 
+                    text={"عرض سلام و خسته نباشید"}/>
+
                 </Collapse>
             </div>
         )

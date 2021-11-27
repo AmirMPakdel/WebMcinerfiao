@@ -5,7 +5,7 @@ export default class SectionTitle extends Component {
     
     render(){
         return(
-            <div className={styles.sectitle_con}>
+            <div className={styles.sectitle_con+" tilt fdc2"}>
                 {this.props.title}
             </div>
         )
