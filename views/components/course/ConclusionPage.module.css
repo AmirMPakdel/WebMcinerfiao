@@ -1,37 +1,47 @@
 .con{
     display: flex;
     width: 100%;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 2.5rem;
+    direction: rtl;
+    justify-content: center;
 }
 
-.info{
+.sec_con{
+    width: 29.25rem;
+    height: 18.75rem;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    min-height: 21.5rem;
-    width: 80%;
-    min-width: 40rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-top: 2.2rem;
     border-radius: 1rem;
-    padding: 1.5rem;
-    background-color: #F9F9F9;
+    background-color: white;
     box-shadow: 0 0.5rem 1rem 0.1rem rgb(0, 0, 0, 0.15);
 }
 
-.ul{
-    margin-top: 0.8rem;
-    color: rgb(88, 88, 88);
-    font-size: 0.86rem;
-    margin-right: 1.2rem;
-    margin-left: 0.5rem;
+.sec_title{
+    position: absolute;
+    top: -1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    color: rgb(110, 110, 110);
+    font-size: 0.94rem;
+    width: 10rem;
+    height: 3rem;
+    font-weight: 700;
+    background-color: white;
+    box-shadow: 0 0.5rem 0.6rem 0.1rem rgb(0, 0, 0, 0.1);
 }
 
-.checkbox{
-    border: unset !important;
-    width: 28rem;
-    font-weight: 700;
-    font-size: 0.86rem;
-    padding-right: 0;
+.info_sec1{
+    width: 74%;
+    font-size: 0.82rem;
+    text-align: center;
+    margin-top: 0.5rem;
 }
 
 .wrapper2{
@@ -40,6 +50,7 @@
     align-items: center;
     margin-top: 1.8rem;
     width: 100%;
+    margin-bottom: 2rem;
 }
 
 .next_btn{
@@ -47,4 +58,26 @@
     height: 2.6rem;
     margin: 0;
     margin-bottom: 1.8rem;
+}
+
+.select_box{
+    width: calc(100% - 3rem);
+    margin-top: 1rem;
+    height: 11rem;
+}
+
+@media(max-width:1024px){
+
+    .sec_con{
+        width: 29.25rem;
+        height: 18.75rem;
+    }
+}
+
+@media(max-width:767px){
+
+    .sec_con{
+        width: 20.5rem;
+        height: 18.75rem;
+    }
 }

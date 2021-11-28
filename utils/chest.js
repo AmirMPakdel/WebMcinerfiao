@@ -11,7 +11,18 @@ let chest = {
     UserPanel:{
 
         userChangeTab: (jsx)=>{},
-    }
+    },
+
+    ModalLayout:{
+
+        controlModal: (visible, jsx, options)=>{},
+    },
+
+    disableBodyVerticalScroll : ()=>{},
+    enableBodyVerticalScroll : ()=>{},
+    disableAllAntDTooltips : ()=>{},
+    enableAllAntDTooltips : ()=>{},
+    openNotification : ()=>{},
 }
 
 export class ChestComponent extends Component{

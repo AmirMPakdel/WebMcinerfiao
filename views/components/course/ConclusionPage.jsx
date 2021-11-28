@@ -3,60 +3,100 @@ import MainButton from "../global/MainButton";
 import styles from "./ConclusionPage.module.css";
 import NewCourseSelect from "../course/NewCourseSelect";
 import { Checkbox } from "antd";
+import SelectBox from "../global/SelectBox";
+import chest from "../../../utils/chest";
+import EducatorsSelectModal from "../modal/EducatorsSelectModal";
 
 export default class ConclusionPage extends Component {
 
     state={
-        accepted:false,
+        educators:[
+            {
+                key:"1",
+                title:"اکبر مبرا"
+            },
+            {
+                key:"2",
+                title:"محسن اژه ای"
+            },
+            {
+                key:"3",
+                title:"میلاد مهری"
+            },
+            {
+                key:"4",
+                title:"جواد اکبر پور"
+            },
+            {
+                key:"5",
+                title:"اکبر مبرا"
+            },
+            {
+                key:"6",
+                title:"محسن اژه ای"
+            },
+            {
+                key:"7",
+                title:"میلاد مهری"
+            },
+            {
+                key:"8",
+                title:"جواد اکبر پور"
+            },
+        ]
     }
 
-    onCheckBox=()=>{
-        this.setState({accepted:!this.state.accepted})
+    onCancelAddEducatorModal=()=>{
+        chest.ModalLayout.controlModal(false);
+    }
+
+    onConfirmAddEducatorModal=()=>{
+        
+    }
+
+    onAddEducator=()=>{
+        this.EducatorsSelectModal = <EducatorsSelectModal onCancel={this.onCancelAddEducatorModal} onConfirm={this.onConfirmAddEducatorModal}/>;
+        chest.ModalLayout.controlModal(true, this.EducatorsSelectModal, {});
+    }
+
+    onRemoveEducator=(obj)=>{
+
     }
 
     onCreate=()=>{
-        window.location.href = "/edu/myCourses/edit"
+        window.location.href = "/edu/myCourses/edit";
     }
     
     render(){
         return(
         <>
         <div className={styles.con}>
-            <div className={styles.info}>
-                <ul>
-                {
-                    t.map((v,i)=>(
-                        <li key={i} className={styles.ul}>
-                            {v}
-                        </li>
-                    ))
-                }
-                </ul>
-                {/* <NewCourseSelect className={styles.checkbox} onClick={this.onCheckBox} seclected={this.state.accepted} 
-                title={"متن بالا را با دقت مطالعه نمودم و شرایط ذکر شده را قبول میکنم."}/>
-                <Checkbox className={styles.checkbox} checked={this.state.accepted}/> */}
+
+            <div className={styles.sec_con}>
+            
+                <div className={styles.sec_title}>{"انتخاب دبیر"}</div>
+
+                <div className={styles.info_sec1+" cpnt"}>{text1}</div>
+
+                <SelectBox className={styles.select_box}
+                data={this.state.educators}
+                onAdd={this.onAddEducator}
+                onRemove={this.onRemoveEducator}/>
 
             </div>
+
         </div>
+
         <div className={styles.wrapper2}>
+
             <MainButton className={styles.next_btn} 
             title={"ایجاد دوره"} 
             onClick={this.onCreate}/>
+
         </div>
         </>
         )
     }
 }
 
-const t = [
-    `لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است`,
-    `لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است`,
-    `لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از `,
-    `لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز`,
-    `لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با  طراحان گرافیک است`,
-    `لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است`,
-    `لورم ایپسوم متن ساختگی با تولید سادگی  از چاپ و با استفاده از طراحان گرافیک است`,
-    `لورم ایپسوم متن با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است`,
-    `لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد`,
-
-]
+const text1 = "در این قسمت مدرس(مدرسین) این دوره را مشخص کنید.";

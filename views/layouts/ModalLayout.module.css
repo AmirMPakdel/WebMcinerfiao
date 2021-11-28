@@ -4,12 +4,14 @@
 }
 
 .backdrop{
+    top: 0;
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     width: 100%;
-    z-index: 2;
-    backdrop-filter: blur(3px);
+    z-index: 110;
+    background-color: rgba(0,0,0,0.4);
+    /* backdrop-filter: blur(3px); */
 }

@@ -4,6 +4,7 @@ import SideMenu from "../components/panel/SideMenu";
 import chest from "../../utils/chest";
 import styles from "./EducatorDashboardLayout.module.css";
 import AccessLayout from "./AccessLayout";
+import ModalLayout from "./ModalLayout";
 
 /**
  * @typedef Props 
@@ -23,30 +24,33 @@ export default class EducatorDashboardLayout extends Component {
     
     render(){
         return(
+
             <AccessLayout accessLevel={this.props.accessLevel}>
-                <div className={styles.layout+" bglc1i"}>
-                    
-                    <SideMenu/>
+                <ModalLayout>
+                    <div className={styles.layout+" bglc1i"}>
+                        
+                        <SideMenu/>
 
-                    <div className={styles.header_bar}>
+                        <div className={styles.header_bar}>
 
-                        <div>
-                            <img className={styles.notification_img+" amp_btn"} src={"/svg/edu_notification.svg"}
-                            onClick={this.onNitifications}/>
-                            <div className={styles.badge}>{"21"}</div>
+                            <div>
+                                <img className={styles.notification_img+" amp_btn"} src={"/svg/edu_notification.svg"}
+                                onClick={this.onNitifications}/>
+                                <div className={styles.badge}>{"21"}</div>
+                            </div>
+
+                            
+                            <img className={styles.logout_img+" amp_btn"} src={"/svg/edu_logout.svg"}/>
+                            
+                        </div>
+                        
+                        <div className={styles.wrapper}>
+                            {this.props.children}
+                            {/* <NotificationsMenu/> */}
                         </div>
 
-                        
-                        <img className={styles.logout_img+" amp_btn"} src={"/svg/edu_logout.svg"}/>
-                        
                     </div>
-                    
-                    <div className={styles.wrapper}>
-                        {this.props.children}
-                        {/* <NotificationsMenu/> */}
-                    </div>
-
-                </div>
+                </ModalLayout>
             </AccessLayout>
         )
     }
