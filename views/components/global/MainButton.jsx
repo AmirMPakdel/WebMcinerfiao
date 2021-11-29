@@ -5,6 +5,7 @@ import styles from "./MainButton.module.css";
  * Props of MainButton Component
  * @typedef Props
  * @property {string} className
+ * @property {React.CSSProperties} style
  * @property {string} title
  * @property {boolean} disabled
  * @property {boolean} borderMode
@@ -47,7 +48,7 @@ export default class MainButton extends Component {
         }
 
         return(
-            <div className={styles.mbtn_con+" bdyt "+add_class+" amp_btn"} onClick={this.props.onClick}>
+            <div className={styles.mbtn_con+" bdyt "+add_class+" amp_btn"} onClick={this.props.onClick} style={this.props.style}>
                 
                 {
                     this.props.rightArrow?

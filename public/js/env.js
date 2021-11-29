@@ -4,6 +4,8 @@ var env = {
 
     ENVIRONMENT_MODE: "dev",
 
+    SMS_TIMER: 120,
+
     TOKEN_KEY: "__mgnftk",
 
     DOMAIN: "http://tootifa.ir",

@@ -1,7 +1,4 @@
 .tput_con{
-    width: calc(50% - 3rem);
-    margin-left: 2.5rem;
-    margin-top: 1rem;
 }
 
 .tput_title{
@@ -13,7 +10,7 @@
 
 .tput_input{
     font-size: 1rem;
-    padding: 0.8rem 1rem;
+    padding: 0.5rem 1rem;
     margin-top: 0.7rem;
     border-radius: 1rem;
     direction: rtl;

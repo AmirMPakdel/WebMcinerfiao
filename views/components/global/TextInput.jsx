@@ -1,7 +1,31 @@
 import React, { Component } from "react";
 import styles from "./TextInput.module.css";
 
+/**
+* Props of TextInput Component
+* @typedef Props
+* @property {string} className
+* @property {React.CSSProperties} style
+* @property {React.CSSProperties} titleStyle
+* @property {string} title
+* @property {string} placeholder
+* 
+* @extends {Component<Props>}
+*/
 export default class TextInput extends Component {
+
+    onChange=(e)=>{
+
+        if(this.props.onChange){
+            this.props.onChange(e.target.value);
+        }
+
+        this.input.scrollIntoView({
+            behavior: 'auto',
+            block: 'center',
+            inline: 'center'
+        });
+    }
     
     render(){
 
@@ -24,12 +48,15 @@ export default class TextInput extends Component {
         }
 
         return(
-            <div className={styles.tput_con +" "+add_class}>
+            <div className={styles.tput_con +" "+add_class} style={this.props.style}>
                 
-                <div className={styles.tput_title} style={title_st}>{this.props.title}</div>
+                {
+                    this.props.title?
+                    <div className={styles.tput_title} style={{...title_st, ...this.props.titleStyle}}>{this.props.title}</div>:null
+                }
                 
-                <input className={styles.tput_input} placeholder={title} value={this.props.value}
-                onChange={(e)=>this.props.onChange(e.target.value)} style={input_st}/>
+                <input className={styles.tput_input} placeholder={this.props.placeholder} value={this.props.value}
+                onChange={this.onChange} style={input_st} ref={r=>this.input=r}/>
 
             </div>
         )

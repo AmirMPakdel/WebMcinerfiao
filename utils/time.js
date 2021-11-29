@@ -9,16 +9,16 @@ const time = {
 export default time;
 
 
-export function secondsToTime(sec){
+export function secondsToTime(seconds){
 
-    let sec = sec % 60;
-    let min = Math.floor((sec % 3600) / 60);
+    let sec = seconds % 60;
+    let min = Math.floor((seconds % 3600) / 60);
     let sec_t = sec>9?sec:`0${sec}`;
     let min_t = min>9?min:`0${min}`;
-    if(sec < 3600){
+    if(seconds < 3600){
         return min_t+":"+sec_t;
     }else{
-        let hour = Math.floor(sec / 3600);
+        let hour = Math.floor(seconds / 3600);
         let hour_t = hour>9?hour:`0${hour}`;
         return hour_t+":"+min_t+":"+sec_t;
     }
