@@ -47,6 +47,11 @@ export default class TextInput extends Component {
             title = this.props.title;
         }
 
+        if(this.props.error){
+
+            add_class += " beci ";
+        }
+
         return(
             <div className={styles.tput_con +" "+add_class} style={this.props.style}>
                 
@@ -55,8 +60,17 @@ export default class TextInput extends Component {
                     <div className={styles.tput_title} style={{...title_st, ...this.props.titleStyle}}>{this.props.title}</div>:null
                 }
                 
-                <input className={styles.tput_input} placeholder={this.props.placeholder} value={this.props.value}
-                onChange={this.onChange} style={input_st} ref={r=>this.input=r}/>
+                <input className={styles.tput_input+" bdyt "} 
+                placeholder={this.props.placeholder} 
+                value={this.props.value}
+                onChange={this.onChange} 
+                style={input_st}
+                ref={r=>this.input=r}/>
+
+                {
+                    this.props.error?
+                    <div className={styles.error+" fec"}>{this.props.error}</div>:null
+                }
 
             </div>
         )

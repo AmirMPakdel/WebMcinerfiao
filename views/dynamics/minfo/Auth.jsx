@@ -22,11 +22,12 @@ export default class Auth extends Component {
         this.controller = new AuthController(this);
 
         this.state={
-            page: "RegisterPage",
+            page: "MobilePage",
+            loading:false,
 
             mobile:"",
             password:"",
-            sms_code:"",
+            register_sms_code:"",
 
             first_name:"",
             last_name:"",
@@ -34,6 +35,9 @@ export default class Auth extends Component {
             register_password:"",
             password_confirm:"",
 
+            mobile_error:false,
+            password_error:false,
+            register_sms_code_error:false,
 
             timer:0,
             timer_text:"",
@@ -44,7 +48,7 @@ export default class Auth extends Component {
     }
 
     onMobileInput=(v)=>{
-        this.setState({mobile:v});
+        this.setState({mobile:v, mobile_error:false});
     }
 
     onMobileConfirm=()=>{
@@ -64,7 +68,7 @@ export default class Auth extends Component {
     }
 
     onSmsCodeInput=(v)=>{
-        this.setState({sms_code:v});
+        this.setState({register_sms_code:v});
     }
 
     startSmsCountdown=()=>{
@@ -160,17 +164,19 @@ class MobilePage extends Component{
             <TextInput placeholder={"شماره موبایل"}
             className={styles.btn+" blc2"}
             value={ps.mobile}
+            error={ps.mobile_error}
             onChange={p.onMobileInput}/>
 
             <MainButton  style={{marginTop:"2rem", width:"20rem"}} 
+            loading={ps.loading}
             title={"تایید"}
             onClick={p.onMobileConfirm}/>
 
             <p style={{direction:"rtl", width:"20rem", textAlign:"center", marginTop:"1rem", fontSize:"11px"}}>
                 با ورود و یا ثبت نام در مینفو شما 
-                <a> شرایط و قوانین </a>
+                <a href={env.PATHS.MINFO_TERMS}> شرایط و قوانین </a>
                 استفاده از سرویس های سایت مینفو و 
-                <a> قوانین حریم خصوصی </a>
+                <a href={env.PATHS.MINFO_PRIVACY}> قوانین حریم خصوصی </a>
                 آن را می‌پذیرید.
             </p>
 
@@ -201,10 +207,11 @@ class PasswordPage extends Component{
             <TextInput placeholder={"رمز عبور"}
             className={styles.btn+" blc2"}
             value={ps.password}
+            error={ps.password_error}
             onChange={p.onPasswordInput}/>
 
             <a onClick={p.onForgotLink} 
-            style={{direction:"rtl", textAlign:"center", marginTop:"0.5rem", fontSize:"13px"}}>
+            style={{direction:"rtl", textAlign:"center", marginTop:"1rem", fontSize:"13px"}}>
                 {"فراموشی رمزعبور"}
             </a>
 

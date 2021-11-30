@@ -4,18 +4,18 @@ import { getCookie } from "./cookie";
 
 const domain = env.DOMAIN;
 
-const myServer = {
+const urls = {
+    
+    DOMAIN:domain,
+    MEDIA_PREFIX:env.MEDIA_PREFIX,
 
-    urls:{
-        DOMAIN:domain,
-        MEDIA_PREFIX:env.MEDIA_PREFIX,
-
-        //global
-        GET_PROVINCES:domain+"/api/v1/provinces",
-    },
-
-    Get,
-    Post,
+    //minfo register
+    MINFO_REGISTER_CHECK_PHONE_NUMBER: domain+"/api/main/user/checkphonenumber",
+    MINFO_LOGIN_WITH_PASSWORD: domain+"/api/main/user/login",
+    MINFO_REGISTER_SEND_VERIFICATION_CODE: domain+"/api/main/user/verificationcode/send",
+    MINFO_REGISTER_CHECK_VERIFICATION_CODE: domain+"/api/main/user/verificationcode/check",
+    MINFO_REGISTER_COMPLELTE_REGISTRATION: domain+"/api/main/user/user/register",
+    
 }
 
 /**
@@ -126,6 +126,20 @@ function Post(url, data, config={}, cb){
             cb(e, {});
         }
     });
+}
+
+const ErrorHandler = {
+
+    type1:(error)=>{
+        console.log(error);
+    }
+}
+
+const myServer = {
+    urls,
+    Get,
+    Post,
+    ErrorHandler,
 }
 
 export default myServer;

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Loading from "./Loading";
 import styles from "./MainButton.module.css";
 
 /**
@@ -17,6 +18,13 @@ import styles from "./MainButton.module.css";
  * @extends {Component<Props>}
  */
 export default class MainButton extends Component {
+
+    onClick=(e)=>{
+
+        if(this.props.loading)return;
+
+        this.props.onClick(e);
+    }
     
     render(){
 
@@ -47,23 +55,34 @@ export default class MainButton extends Component {
             add_class += " bgdc2 "
         }
 
+        if(this.props.loading){
+
+            add_class += " bdc2 bglc1 "+styles.border_mode;
+
+        }
+
         return(
-            <div className={styles.mbtn_con+" bdyt "+add_class+" amp_btn"} onClick={this.props.onClick} style={this.props.style}>
-                
+            <div className={styles.mbtn_con+" bdyt "+add_class+" amp_btn"} onClick={this.onClick} style={this.props.style}>
                 {
-                    this.props.rightArrow?
-                    <img className={styles.rightArrow} src="/svg/btn_rightArrow.svg"/>:
-                    null
-                }
-                {
-                    this.props.whiteBorder?
-                    <div className={styles.title+" flc1"}>{this.props.title}</div>:
-                    <div className={styles.title+" fdc1"}>{this.props.title}</div>
-                }
-                {
-                    this.props.leftArrow?
-                    <img className={styles.leftArrow} src="/svg/btn_leftArrow.svg"/>:
-                    null
+                    this.props.loading?
+                    <Loading scale={0.4}/>:
+                    <>
+                        {
+                            this.props.rightArrow?
+                            <img className={styles.rightArrow} src="/svg/btn_rightArrow.svg"/>:
+                            null
+                        }
+                        {
+                            this.props.whiteBorder?
+                            <div className={styles.title+" flc1"}>{this.props.title}</div>:
+                            <div className={styles.title+" fdc1"}>{this.props.title}</div>
+                        }
+                        {
+                            this.props.leftArrow?
+                            <img className={styles.leftArrow} src="/svg/btn_leftArrow.svg"/>:
+                            null
+                        }
+                    </>
                 }
                 
             </div>

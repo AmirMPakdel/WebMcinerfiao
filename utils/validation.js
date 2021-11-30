@@ -1,5 +1,78 @@
-import { perisanNum2eng } from "./PersianNum";
+import { perisanNum2eng } from "./persian";
 
+export class IsValid {
+
+    static phoneNumberIsValid(str, options={}){
+        
+        if(typeof str !== "string"){
+            return false;
+        }
+        if(str.length != 11){
+            return false;
+        }
+        if(str[0] !== "0" && str[1] !== "9"){
+            return false;
+        }
+        return true;
+    }
+
+    static passwordIsValid(str, options={}){
+
+        if(typeof str !== "string"){
+            return false;
+        }
+        if(str.length < 8 || str.length > 64){
+            return false;
+        }
+        return true;
+    }
+}
+
+export class InputFilter {
+
+    static phoneNumberInputFilter(str, options={}){
+
+        if(typeof str !== "string") return "";
+
+        let new_t = str.match(/^[0-9]+$/);
+        
+        if(new_t && new_t.join){
+            return new_t.join("");
+        }
+     
+        return false;
+    }
+
+    static passwordInputFilter(str, options={}){
+
+        return str;
+    }
+}
+
+export default class Validation{
+
+    static phoneNumber(str, options={}){
+
+        let res = IsValid.phoneNumberIsValid(str, options);
+
+        if(res){
+            return {valid:true, message:""}
+        }else{
+            return {valid:false, message:"شماره موبایل وارد شده نامعتبر است."}
+        }
+    }
+
+    static password(str, options={}){
+
+        let res = IsValid.passwordIsValid(str, options);
+
+        if(res){
+            return {valid:true, message:""}
+        }else{
+            return {valid:false, message:"رمزعبور وارد شده نامعتبر است."}
+        }
+    }
+}
 
 export function onlyPersianChar(str){
 
@@ -62,19 +135,6 @@ export function checkCodeMeli(code)
    s=s%11;
    return (s<2 && c==s) || (s>=2 && c==(11-s));
    return true;
-}
-
-export const mobile_input_filter = function(t){
-
-   if(typeof t !== "string") return "";
-
-   let new_t = t.match(/^[0-9]+$/);
-   
-   if(new_t && new_t.join){
-       return new_t.join("");
-   }
-
-   return false;
 }
 
 export const persian_input_valid = function(t){
