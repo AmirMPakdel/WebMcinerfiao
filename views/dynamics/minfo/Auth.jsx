@@ -27,7 +27,7 @@ export default class Auth extends Component {
 
             mobile:"",
             password:"",
-            sms_code:"",
+            register_sms_code:"",
 
             first_name:"",
             last_name:"",
@@ -37,7 +37,7 @@ export default class Auth extends Component {
 
             mobile_error:false,
             password_error:false,
-
+            register_sms_code_error:false,
 
             timer:0,
             timer_text:"",
@@ -68,7 +68,7 @@ export default class Auth extends Component {
     }
 
     onSmsCodeInput=(v)=>{
-        this.setState({sms_code:v});
+        this.setState({register_sms_code:v});
     }
 
     startSmsCountdown=()=>{
