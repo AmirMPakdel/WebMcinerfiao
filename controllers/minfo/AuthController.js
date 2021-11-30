@@ -1,5 +1,6 @@
 import AuthModel from "../../models/minfo/AuthModel";
 import { secondsToTime } from "../../utils/time";
+import Validation from "../../utils/validation";
 import Auth from "../../views/dynamics/minfo/Auth";
 
 export default class AuthController{
@@ -13,11 +14,100 @@ export default class AuthController{
     }
 
     mobileConfirm(){
-        this.view.setState({page:"PasswordPage"})
+
+        let res = this.mobilePageInputCheck();
+
+        if(res){
+
+            let params = {
+                phone_numbers : this.view.state.mobile
+            }
+
+            this.model.getPhoneNumberCheck(params, (err, data)=>{
+
+                if(data.result_code === env.SC.SUCCESS){
+
+                    this.view.setState({page:"VerificationPage"});
+
+                }else if(data.result_code === env.SC.REPETITIVE_PHONE_NUMBER){
+
+                    this.view.setState({page:"PasswordPage"});
+                }
+            });
+        }
+    }
+
+    mobilePageInputCheck(){
+
+        let mobile_res = Validation.phoneNumber(this.view.state.mobile);
+
+        if(mobile_res.valid){
+
+            this.view.setState({
+                mobile_error:false,
+            });
+
+            return true;
+
+        }else{
+
+            this.view.setState({
+                mobile_error:mobile_res.message,
+            });
+
+            return false;
+        }
     }
 
     passwordConfirm(){
+
+        let res = this.passwordPageInputCheck();
+
+        if(res){
+
+            let vs = this.view.state;
+            let params={
+                phone_number: vs.mobile,
+                password: vs.password
+            }
+
+            this.model.getLoginWithPassword(params, (err, data)=>{
+
+                if(data.request_code === env.SC.SUCCESS){
+
+                    window.location.href = env.PATHS.USER_DASHBOARD;
+
+                }else{
+
+                    this.view.setState({
+                        password_error : "رمزعبور وارد شده اشتباه است."
+                    });
+                }
+            });
+        }
+
+    }
+
+    passwordPageInputCheck(){
         
+        let password_res = Validation.password(this.view.state.password);
+
+        if(password_res.valid){
+
+            this.view.setState({
+                password_error:false,
+            });
+
+            return true;
+
+        }else{
+
+            this.view.setState({
+                password_error:password_res.message,
+            });
+
+            return false;
+        }
     }
 
     startSmsCountdown(){
