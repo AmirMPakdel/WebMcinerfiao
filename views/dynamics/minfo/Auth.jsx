@@ -89,49 +89,51 @@ export default class Auth extends Component {
     
     render(){
         return(
-            <div style={{width:"100vw", display:"flex", flexDirection:"column", alignItems:"center"}}>
+            <IndexLayout>
+                <div style={{width:"100vw", display:"flex", flexDirection:"column", alignItems:"center"}}>
 
-                <h1 style={{marginTop:"4rem"}}>Authentication Page</h1>
+                    <h1 style={{marginTop:"4rem"}}>Authentication Page</h1>
 
-                {
-                    this.state.page === "Loading"?
-                    <Loading style={{minHeight:"50vh"}}/>:null
-                }
-                {
-                    this.state.page === "MobilePage"?
-                    <MobilePage parent={this}/>:null
-                }
-                {
-                    this.state.page === "PasswordPage"?
-                    <PasswordPage parent={this}/>:null
-                }
-                {
-                    this.state.page === "VerificationPage"?
-                    <VerificationPage parent={this}/>:null
-                }
-                {
-                    this.state.page === "RegisterPage"?
-                    <RegisterPage parent={this}/>:null
-                }
-                {
-                    this.state.page === "RegisterSuccessPage"?
-                    <RegisterSuccessPage parent={this}/>:null
-                }
-                {
-                    this.state.page === "ForgotPasswordVerificationPage"?
-                    <ForgotPasswordVerificationPage parent={this}/>:null
-                }
-                {
-                    this.state.page === "NewPasswordPage"?
-                    <NewPasswordPage parent={this}/>:null
+                    {
+                        this.state.page === "Loading"?
+                        <Loading style={{minHeight:"50vh"}}/>:null
+                    }
+                    {
+                        this.state.page === "MobilePage"?
+                        <MobilePage parent={this}/>:null
+                    }
+                    {
+                        this.state.page === "PasswordPage"?
+                        <PasswordPage parent={this}/>:null
+                    }
+                    {
+                        this.state.page === "VerificationPage"?
+                        <VerificationPage parent={this}/>:null
+                    }
+                    {
+                        this.state.page === "RegisterPage"?
+                        <RegisterPage parent={this}/>:null
+                    }
+                    {
+                        this.state.page === "RegisterSuccessPage"?
+                        <RegisterSuccessPage parent={this}/>:null
+                    }
+                    {
+                        this.state.page === "ForgotPasswordVerificationPage"?
+                        <ForgotPasswordVerificationPage parent={this}/>:null
+                    }
+                    {
+                        this.state.page === "NewPasswordPage"?
+                        <NewPasswordPage parent={this}/>:null
 
-                }
-                {
-                    this.state.page === "NewPasswordSuccessPage"?
-                    <NewPasswordSuccessPage parent={this}/>:null
-                }
-                
-            </div>
+                    }
+                    {
+                        this.state.page === "NewPasswordSuccessPage"?
+                        <NewPasswordSuccessPage parent={this}/>:null
+                    }
+                    
+                </div>
+            </IndexLayout>
         )
     }
 }
