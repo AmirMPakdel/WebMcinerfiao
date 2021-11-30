@@ -1,20 +1,21 @@
 import React, { Component } from "react";
-import styles from "./TextInput.module.css";
+import Loading from "./Loading";
+import styles from "./ReactiveTextInput.module.css";
 
 /**
-* Props of TextInput Component
+* Props of ReactiveTextInput Component
 * @typedef Props
 * @property {string} className
 * @property {React.CSSProperties} style
 * @property {React.CSSProperties} titleStyle
 * @property {string} title
 * @property {string} placeholder
-* @property {string | boolean} error
+* @property {"loading" | "error" | "success"} status 
 * 
 * @extends {Component<Props>}
 */
-export default class TextInput extends Component {
-
+export default class ReactiveTextInput extends Component {
+    
     onChange=(e)=>{
 
         if(this.props.onChange){
@@ -34,6 +35,7 @@ export default class TextInput extends Component {
         let title_st = {};
         let input_st = {};
         let add_class = "";
+        let message_add_class = " ";
 
         if(this.props.className){
             add_class += this.props.className+" ";
@@ -48,10 +50,14 @@ export default class TextInput extends Component {
             title = this.props.title;
         }
 
-        if(this.props.error){
-
+        if(this.props.status=="error"){
             add_class += " beci ";
+            message_add_class += " feci ";
+        }else if(this.props.status=="success"){
+            add_class += " bsci ";
+            message_add_class += " fsci ";
         }
+
 
         return(
             <div className={styles.tput_con +" "+add_class} style={this.props.style}>
@@ -69,8 +75,21 @@ export default class TextInput extends Component {
                 ref={r=>this.input=r}/>
 
                 {
-                    this.props.error?
-                    <div className={styles.error+" fec"}>{this.props.error}</div>:null
+                    this.props.status==="loading"?
+                    <Loading className={styles.loading_status} scale={0.3}/>:null
+                }
+                {
+                    this.props.status==="success"?
+                    <img className={styles.success_status} src={"/svg2/success_green.svg"}/>:null
+                }
+                {
+                    this.props.status==="error"?
+                    <img className={styles.success_status} src={"/svg2/error_red.svg"}/>:null
+                }
+
+                {
+                    this.props.message?
+                    <div className={styles.message + message_add_class}>{this.props.message}</div>:null
                 }
 
             </div>

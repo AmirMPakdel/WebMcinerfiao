@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AuthController from "../../../controllers/minfo/AuthController";
 import Loading from "../../components/global/Loading";
 import MainButton from "../../components/global/MainButton";
+import ReactiveTextInput from "../../components/global/ReactiveTextInput";
 import TextInput from "../../components/global/TextInput";
 import styles from "./Auth.module.css";
 
@@ -22,13 +23,14 @@ export default class Auth extends Component {
         this.controller = new AuthController(this);
 
         this.state={
-            page: "MobilePage",
+            page: "RegisterPage",
             loading:false,
 
             mobile:"",
             password:"",
-            register_sms_code:"",
+            verification_code:"",
 
+            subdomain:"",
             first_name:"",
             last_name:"",
             national_code:"",
@@ -37,10 +39,14 @@ export default class Auth extends Component {
 
             mobile_error:false,
             password_error:false,
-            register_sms_code_error:false,
+            verification_code_error:false,
+
+            subdomain_status: "",
+            subdomain_message: "",
 
             timer:0,
             timer_text:"",
+            can_send_sms_again:false,
         }
     }
 
@@ -64,11 +70,11 @@ export default class Auth extends Component {
     }
 
     onForgotLink=()=>{
-        this.setState({page:"ForgotPasswordVerificationPage"});
+        //TODO: save mobile in localstorage and go to changePassword Page
     }
 
-    onSmsCodeInput=(v)=>{
-        this.setState({register_sms_code:v});
+    onVerificationCodeInput=(v)=>{
+        this.setState({verification_code:v,  verification_code_error:false});
     }
 
     startSmsCountdown=()=>{
@@ -76,11 +82,15 @@ export default class Auth extends Component {
     }
 
     onSendSmsAgain=()=>{
-        this.startSmsCountdown();
+        this.controller.sendVerificationCode();
     }
 
     onSmsCodeConfirm=()=>{
-        this.controller.smsCodeConfirm();
+        this.controller.verificationConfirm();
+    }
+
+    onSubdomain=(v)=>{
+        this.setState({subdomain:v}, this.controller.subdomainInputCheck);
     }
 
     onInput=(key,v)=>{
@@ -93,8 +103,8 @@ export default class Auth extends Component {
     
     render(){
         return(
-            <IndexLayout>
-                <div style={{width:"100vw", display:"flex", flexDirection:"column", alignItems:"center"}}>
+                <div style={{width:"100%", display:"flex", flexDirection:"column", 
+                alignItems:"center", paddingBottom:"4rem"}}>
 
                     <h1 style={{marginTop:"4rem"}}>Authentication Page</h1>
 
@@ -122,22 +132,8 @@ export default class Auth extends Component {
                         this.state.page === "RegisterSuccessPage"?
                         <RegisterSuccessPage parent={this}/>:null
                     }
-                    {
-                        this.state.page === "ForgotPasswordVerificationPage"?
-                        <ForgotPasswordVerificationPage parent={this}/>:null
-                    }
-                    {
-                        this.state.page === "NewPasswordPage"?
-                        <NewPasswordPage parent={this}/>:null
-
-                    }
-                    {
-                        this.state.page === "NewPasswordSuccessPage"?
-                        <NewPasswordSuccessPage parent={this}/>:null
-                    }
                     
                 </div>
-            </IndexLayout>
         )
     }
 }
@@ -233,8 +229,14 @@ class PasswordPage extends Component{
 */
 class VerificationPage extends Component{
 
+    state={
+        show_timer_bar:false,
+    }
+
     componentDidMount(){
-        this.props.parent.startSmsCountdown();
+        this.props.parent.controller.sendVerificationCode(()=>{
+            this.setState({show_timer_bar:true});
+        });
     }
 
     render(){
@@ -251,25 +253,33 @@ class VerificationPage extends Component{
 
             <TextInput placeholder={"کد تایید"}
             className={styles.btn+" blc2"}
+            style={{marginBottom:"0.5rem"}}
             value={ps.sms_code}
-            onChange={p.onSmsCodeInput}/>
+            error={ps.verification_code_error}
+            onChange={p.onVerificationCodeInput}/>
 
             {
-                ps.can_send_sms_again?
-
-                <a style={{marginTop:"0.8rem"}}
-                onClick={p.onSendSmsAgain}>
-                    {"ارسال مجدد"}
-                </a>
-                :
-                <div className={"cpnts"} style={{marginTop:"0.8rem", display:"flex", direction:"rtl"}}>
-                    {"ارسال مجدد کد تا "}
-                    <div style={{minWidth:"2.6rem", textAlign:"center", fontWeight:700}}>{ps.timer_text}</div>
-                    {" دیگر"}
+                this.state.show_timer_bar?
+                <div style={{height:"3rem", display:"flex", alignItems:"center"}}>
+                {
+                    ps.can_send_sms_again?
+    
+                    <a  onClick={p.onSendSmsAgain}>
+                        {"ارسال مجدد"}
+                    </a>
+                    :
+                    <div className={"cpnts"} style={{display:"flex", direction:"rtl"}}>
+                        {"ارسال مجدد کد تا "}
+                        <div style={{minWidth:"2.6rem", textAlign:"center", fontWeight:700}}>{ps.timer_text}</div>
+                        {" دیگر"}
+                    </div>
+                }
                 </div>
+                :
+                <div style={{height:"3rem"}}/>
             }
 
-            <MainButton  style={{marginTop:"1rem", width:"20rem"}} 
+            <MainButton  style={{marginTop:"0.5rem", width:"20rem"}} 
             title={"تایید"}
             onClick={p.onSmsCodeConfirm}/>
 
@@ -297,33 +307,41 @@ class RegisterPage extends Component{
                 {"ثبت نام در مینفو"}
             </div>
 
+            <ReactiveTextInput placeholder={"نام سایت"}
+            className={styles.btn+" blc2"}
+            value={ps.subdomain}
+            status={ps.subdomain_status}
+            message={ps.subdomain_message}
+            onChange={p.onSubdomain}/>
+
             <TextInput placeholder={"نام"}
             className={styles.btn+" blc2"}
             value={ps.first_name}
+            style={{marginTop:"0rem"}}
             onChange={(v)=>p.onInput("first_name",v)}/>
 
             <TextInput placeholder={"نام خانوادگی"}
             className={styles.btn+" blc2"}
             value={ps.last_name}
-            style={{marginTop:"0.8rem"}}
+            style={{marginTop:"0rem"}}
             onChange={(v)=>p.onInput("last_name",v)}/>
 
             <TextInput placeholder={"کدملی"}
             className={styles.btn+" blc2"}
             value={ps.national_code}
-            style={{marginTop:"0.8rem"}}
+            style={{marginTop:"0rem"}}
             onChange={(v)=>p.onInput("national_code",v)}/>
 
             <TextInput placeholder={"رمزعبور"}
             className={styles.btn+" blc2"}
             value={ps.register_password}
-            style={{marginTop:"0.8rem"}}
+            style={{marginTop:"0rem"}}
             onChange={(v)=>p.onInput("register_password",v)}/>
 
             <TextInput placeholder={"تکرار رمزعبور"}
             className={styles.btn+" blc2"}
             value={ps.password_confirm}
-            style={{marginTop:"0.8rem"}}
+            style={{marginTop:"0rem"}}
             onChange={(v)=>p.onInput("password_confirm",v)}/>
 
             <MainButton  style={{marginTop:"0.8rem", width:"20rem"}} 
@@ -357,122 +375,6 @@ class RegisterSuccessPage extends Component{
             
             <MainButton  style={{marginTop:"4rem", width:"20rem"}} 
             title={"ورود"}
-            onClick={this.onSmsCodeConfirm}/>
-
-            </>
-        )
-    }
-}
-
-/**
-* Props of ForgotPasswordVerificationPage Component
-* @typedef Props
-* @property {Auth} parent
-* 
-* @extends {Component<Props>}
-*/
-class ForgotPasswordVerificationPage extends Component{
-
-    render(){
-        let p = this.props.parent;
-        let ps = p.state;
-        return(
-            <>
-                    
-            <div className={styles.info}>
-                {"برای تغییر رمزعبور ابتدا کد ارسالی به شماره موبایل خود را وارد نمایید."}
-            </div>
-
-            <TextInput placeholder={"کد تایید"}
-            className={styles.btn+" blc2"}
-            value={this.state.sms_code}
-            onChange={this.onSmsCodeInput}/>
-
-            {
-                this.state.can_send_sms_again?
-
-                <a style={{marginTop:"0.8rem"}}
-                onClick={this.onSendSmsAgain}>
-                    {"ارسال مجدد"}
-                </a>
-                :
-                <div className={"cpnts"} style={{marginTop:"0.8rem", display:"flex", direction:"rtl"}}>
-                    {"ارسال مجدد کد تا "}
-                    <div style={{minWidth:"2.6rem", textAlign:"center", fontWeight:700}}>{this.state.timer_text}</div>
-                    {" دیگر"}
-                </div>
-            }
-
-            <MainButton  style={{marginTop:"1rem", width:"20rem"}} 
-            title={"تایید"}
-            onClick={this.onSmsCodeConfirm}/>
-
-            </>
-        )
-    }
-}
-
-/**
-* Props of NewPasswordPage Component
-* @typedef Props
-* @property {Auth} parent
-* 
-* @extends {Component<Props>}
-*/
-class NewPasswordPage extends Component{
-
-    render(){
-        let p = this.props.parent;
-        let ps = p.state;
-        return(
-            <>
-
-            <div className={styles.info}>
-                {"رمزعبور جدید حساب کاربری خود را وارد نمایید."}
-            </div>
-
-            <TextInput placeholder={"رمزعبور جدید"}
-            className={styles.btn+" blc2"}
-            value={this.state.sms_code}
-            onChange={this.onSmsCodeInput}/>
-
-            <TextInput placeholder={"تکرار رمزعبور جدید"}
-            className={styles.btn+" blc2"}
-            value={this.state.sms_code}
-            style={{marginTop:"0.8rem"}}
-            onChange={this.onSmsCodeInput}/>
-
-            <MainButton  style={{marginTop:"2rem", width:"20rem"}} 
-            title={"تایید"}
-            onClick={this.onSmsCodeConfirm}/>
-
-            </>
-        )
-    }
-}
-
-/**
-* Props of NewPasswordSuccessPage Component
-* @typedef Props
-* @property {Auth} parent
-* 
-* @extends {Component<Props>}
-*/
-class NewPasswordSuccessPage extends Component{
-
-    render(){
-        let p = this.props.parent;
-        let ps = p.state;
-        return(
-            <>
-
-            <div className={styles.info}>
-                <img style={{width:"4rem", marginBottom:"2rem"}} src={"/svg2/success_green.svg"}/>
-                {"رمزعبور حساب کاربری شما با موفقیت تغییر کرد."}
-            </div>
-
-            <MainButton  style={{marginTop:"4rem", width:"20rem"}} 
-            title={"ادامه"}
             onClick={this.onSmsCodeConfirm}/>
 
             </>

@@ -12,7 +12,7 @@ var env = {
 
     MEDIA_PREFIX: "http://dltest.tootifa.ir",
 
-
+    VERIFICATION_CODE_LENGTH : 4,
 
     LIMITS:{
         TOTAL_EDUCATOR_LIMIT: 100,
@@ -21,6 +21,10 @@ var env = {
     SC:{
         SUCCESS:1000,
         REPETITIVE_PHONE_NUMBER: 2005,
+        USER_ALREADY_VERIFIED: 2006,
+        INVALID_VERIFICATION_CODE : 2007,
+        REPETITIVE_USERNAME : 2008,
+
     },
 
     PATHS:{

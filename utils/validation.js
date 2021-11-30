@@ -26,6 +26,18 @@ export class IsValid {
         }
         return true;
     }
+
+    static verificationCodeIsValid(str, options={}){
+
+        if(!str || isNaN(Number(str))){
+            return false;
+        }
+        if(str.length !== env.VERIFICATION_CODE_LENGTH){
+            return false;
+        }
+
+        return true;
+    }
 }
 
 export class InputFilter {
@@ -45,6 +57,13 @@ export class InputFilter {
 
     static passwordInputFilter(str, options={}){
 
+        //TODO: later
+        return str;
+    }
+
+    static verificationCodeInputFilter(str, options={}){
+
+        //TODO: later
         return str;
     }
 }
@@ -70,6 +89,17 @@ export default class Validation{
             return {valid:true, message:""}
         }else{
             return {valid:false, message:"رمزعبور وارد شده نامعتبر است."}
+        }
+    }
+
+    static verificationCode(str, options){
+
+        let res = IsValid.verificationCodeIsValid(str, options);
+
+        if(res){
+            return {valid:true, message:""}
+        }else{
+            return {valid:false, message:"کد تایید اشتباه است."}
         }
     }
 }

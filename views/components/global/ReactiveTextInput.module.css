@@ -20,11 +20,26 @@
     direction: rtl;
 }
 
-.error{
+
+.message{
     position: absolute;
-    bottom: -1.5rem;
+    bottom: -1.3rem;
     font-size: 11px;
     right: 0.5rem;
     font-weight: 500;
     direction: rtl;
+}
+
+.loading_status{
+    position: absolute;
+    left: 0rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+.success_status{
+    position: absolute;
+    left: 0.5rem;
+    width: 2rem;
+    height: 1.8rem;
 }

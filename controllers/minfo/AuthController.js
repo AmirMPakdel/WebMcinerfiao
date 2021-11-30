@@ -73,7 +73,7 @@ export default class AuthController{
 
             this.model.getLoginWithPassword(params, (err, data)=>{
 
-                if(data.request_code === env.SC.SUCCESS){
+                if(data.result_code === env.SC.SUCCESS){
 
                     window.location.href = env.PATHS.USER_DASHBOARD;
 
@@ -110,12 +110,43 @@ export default class AuthController{
         }
     }
 
-    startSmsCountdown(){
+    sendVerificationCode(cb){
+
+        let params = {
+            phone_number : this.view.state.mobile
+        }
+
+        this.model.getSendVerificationCode(params, (err, data)=>{
+
+            if(typeof cb === "function")cb();
+
+            if(data.result_code === env.SC.SUCCESS){
+
+                this.startCountdown();
+
+            }else if(data.result_code === env.SC.USER_ALREADY_VERIFIED){
+
+                //TODO: what to do?
+
+            }else{
+
+                //TODO: what about other stuff?
+            }
+        });
+    }
+
+    startCountdown(){
 
         this.clearSmsCountdown();
         this.view.state.can_send_sms_again = false;
         this.view.state.timer = env.SMS_TIMER;
         this.view.state.timer_text = secondsToTime(this.view.state.timer);
+        
+        this.view.setState({
+            timer : this.view.state.timer,
+            timer_text: secondsToTime(this.view.state.timer),
+        });
+
         this.view.sms_interval = setInterval(()=>{
 
             if(this.view.state.timer){
@@ -137,14 +168,91 @@ export default class AuthController{
         clearInterval(this.view.sms_interval);
     }
 
-    smsCodeConfirm(){
-        this.clearSmsCountdown();
-        this.view.setState({page:"RegisterPage"})
+    verificationConfirm(){
+
+        let res = this.verificationPageInputCheck();
+
+        if(res){
+
+            let params = {
+                code: this.view.state.verification_code,
+            }
+
+            this.model.getCheckVerificationCode(params, (err, data)=>{
+
+                if(data.result_code === env.SC.SUCCESS){
+                    
+                    this.clearSmsCountdown();
+
+                    this.view.setState({page:"RegisterPage"});
+
+                }else if(data.result_code === env.SC.INVALID_VERIFICATION_CODE){
+
+                    this.view.setState({
+                        verification_code_error: "کد تایید وارد شده اشتباه است."
+                    });
+                }
+
+            });
+        }
+    }
+
+    verificationPageInputCheck(){
+
+        let res = Validation.verificationCode(this.view.state.verification_code);
+
+        if(res.valid){
+
+            this.view.setState({
+                verification_code_error:false,
+            });
+
+            return true;
+
+        }else{
+
+            this.view.setState({
+                verification_code_error:res.message,
+            });
+
+            return false;
+        }
     }
 
     onInput(key, v){
         this.view.state[key] = v;
         this.view.setState(this.view.state);
+    }
+
+    subdomainInputCheck=()=>{
+
+        clearTimeout(this.subdomain_input_timeout);
+
+        this.subdomain_input_timeout = setTimeout(()=>{
+
+            this.view.setState({subdomain_status:"loading", subdomain_message:""});
+
+            let params = {username:this.view.state.subdomain};
+
+            this.model.getCheckUsername(params, (err, data)=>{
+
+                console.log(data);
+                if(data.result_code===env.SC.SUCCESS){
+
+                    this.view.setState({subdomain_status:"success", subdomain_message:"این نام قابل رزرو است"});
+
+                }else if(data.result_code===env.SC.REPETITIVE_USERNAME){
+
+                    this.view.setState({subdomain_status:"error", subdomain_message:"این نام قبلا ثبت شده است"});
+                }
+            })
+
+        }, 1000);
+    }
+
+    RegisterPageInputCheck(){
+
+
     }
 
     registerConfirm(){
