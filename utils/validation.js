@@ -38,6 +38,43 @@ export class IsValid {
 
         return true;
     }
+
+    static tenantIsValid(str, options={}){
+
+        if(!str){
+            return false;
+        }
+        if(str.length < 2 || str.length > 32){
+            return false;
+        }
+        return true;
+    }
+
+    static persianNameIsValid(str, options={}){
+
+        if(!str){
+            return false;
+        }
+        if(str.length < 2 || str.length > 32){
+            return false;
+        }
+        return true;
+    }
+
+    static nationalCodeIsValid(str, options={}){
+
+        let L=str.length;
+        if(L<8 || parseInt(str,10)==0) return false;
+        str=('0000'+str).substr(L+4-10);
+        if(parseInt(str.substr(3,6),10)==0) return false;
+        let c=parseInt(str.substr(9,1),10);
+        let s=0;
+        for(let i=0;i<9;i++)
+            s+=parseInt(str.substr(i,1),10)*(10-i);
+        s=s%11;
+        return (s<2 && c==s) || (s>=2 && c==(11-s));
+        return true;
+    }
 }
 
 export class InputFilter {
@@ -62,6 +99,24 @@ export class InputFilter {
     }
 
     static verificationCodeInputFilter(str, options={}){
+
+        //TODO: later
+        return str;
+    }
+
+    static tenantInputFilter(str, options={}){
+
+        //TODO: later
+        return str;
+    }
+
+    static persianNameInputFilter(str, options={}){
+
+        //TODO: later
+        return str;
+    }
+
+    static nationalCodeInputFilter(str, options={}){
 
         //TODO: later
         return str;
@@ -92,7 +147,7 @@ export default class Validation{
         }
     }
 
-    static verificationCode(str, options){
+    static verificationCode(str, options={}){
 
         let res = IsValid.verificationCodeIsValid(str, options);
 
@@ -102,6 +157,40 @@ export default class Validation{
             return {valid:false, message:"کد تایید اشتباه است."}
         }
     }
+
+    static tenant(str, options={}){
+
+        let res = IsValid.tenantIsValid(str, options)
+
+        if(res){
+            return {valid:true, message:""}
+        }else{
+            return {valid:false, message:"نام سایت وارد شده نامعتبر است."}
+        }
+    }
+
+    static persianName(str, options={}){
+
+        let res = IsValid.persianNameIsValid(str, options)
+
+        if(res){
+            return {valid:true, message:""}
+        }else{
+            return {valid:false, message:"نام وارد شده نامعتبر است."}
+        }
+    }
+
+    static nationalCode(str, options={}){
+
+        let res = IsValid.nationalCodeIsValid(str, options)
+
+        if(res){
+            return {valid:true, message:""}
+        }else{
+            return {valid:false, message:"کدملی وارد شده نامعتبر است."}
+        }
+    }
+
 }
 
 export function onlyPersianChar(str){
@@ -151,22 +240,6 @@ export function persianWithNum(str){
 }
 
 
-export function checkCodeMeli(code)
-{
-   var L=code.length;
- 
-   if(L<8 || parseInt(code,10)==0) return false;
-   code=('0000'+code).substr(L+4-10);
-   if(parseInt(code.substr(3,6),10)==0) return false;
-   var c=parseInt(code.substr(9,1),10);
-   var s=0;
-   for(var i=0;i<9;i++)
-      s+=parseInt(code.substr(i,1),10)*(10-i);
-   s=s%11;
-   return (s<2 && c==s) || (s>=2 && c==(11-s));
-   return true;
-}
-
 export const persian_input_valid = function(t){
 
    let p = /^[\u0600-\u06FF\s]+$/;
@@ -175,22 +248,4 @@ export const persian_input_valid = function(t){
    }else{
        return true;
    }
-}
-
-export const mobile_validation = function(t){
-
-   if(typeof t !== "string") return false;
-
-   if(t.length >= 100) return false;
-
-   if(t.length>=11 && t.length<=13) return true;
-}
-
-export const password_validation = function(t){
-
-   if(typeof t !== "string") return false;
-
-   if(t.length >= 100) return false;
-
-   if(t.length >= 8) return true;
 }

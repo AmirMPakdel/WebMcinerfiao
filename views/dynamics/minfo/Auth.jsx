@@ -43,6 +43,11 @@ export default class Auth extends Component {
 
             subdomain_status: "",
             subdomain_message: "",
+            first_name_error:"",
+            last_name_error:"",
+            national_code_error:"",
+            register_password_error:"",
+            password_confirm_error:"",
 
             timer:0,
             timer_text:"",

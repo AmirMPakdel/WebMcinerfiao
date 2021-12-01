@@ -250,12 +250,64 @@ export default class AuthController{
         }, 1000);
     }
 
-    RegisterPageInputCheck(){
-
-
-    }
+    
 
     registerConfirm(){
+
+        let res = registerPageInputCheck();
+
+        if(res){
+            //start form here
+        }
         this.view.setState({page:"RegisterSuccessPage"})
+    }
+
+    registerPageInputCheck(){
+
+        let vs = this.view.state;
+        let fn = Validation.persianName(vs.first_name);
+        let ln = Validation.persianName(vs.last_name);
+        let nc = Validation.nationalCode(vs.national_code);
+        let pw = Validation.password(vs.password);
+
+        let newState = {};
+        let can = true;
+
+        if(fn.valid){
+            newState.first_name_error = false;
+        }else{
+            newState.first_name_error = fn.message;
+            can = false;
+        }
+
+        if(ln.valid){
+            newState.last_name_error = false;
+        }else{
+            newState.last_name_error = ln.message;
+            can = false;
+        }
+
+        if(nc.valid){
+            newState.national_code_error = false;
+        }else{
+            newState.national_code_error = nc.message;
+            can = false;
+        }
+
+        if(pw.valid){
+            newState.password_error = false;
+        }else{
+            newState.password_error = pw.message;
+            can = false;
+        }
+
+        if(pw.valid && vs.password_error === vs.password_confirm){
+            newState.password_confirm_error = false;
+        }else if(pw.valid && vs.password_error !== vs.password_confirm){
+            newState.password_confirm_error = "تکرار رمزعبور اشتباه است.";
+            can = false;
+        }
+
+        return can;
     }
 }

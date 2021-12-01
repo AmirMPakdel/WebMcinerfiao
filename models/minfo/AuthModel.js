@@ -149,4 +149,33 @@ export default class AuthModel{
 
         });
     }
+
+    getCompeleteRegisteration(params, cb){
+
+        setTimeout(()=>{
+
+            cb(null, {
+                result_code:env.SC.SUCCESS,
+                data:{
+                    token:"93yt93j3yt4j45j2440923j4092f0j4f0934",
+                }
+            });
+            
+        }, 1200);
+
+        return;
+
+        myServer.Post(myServer.urls.MINFO_REGISTER_COMPLELTE_REGISTRATION, params, {}, (err,data)=>{
+
+            if(!err){
+
+                cb(null, data);
+            
+            }else{
+
+                myServer.ErrorHandler.type1(err);
+            }
+
+        })
+    }
 }
