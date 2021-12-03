@@ -58,6 +58,10 @@ input{
     border: none;
 }
 
+input::placeholder{
+    user-select: none;
+}
+
 textarea{
 	outline: none;
 	resize: none !important;

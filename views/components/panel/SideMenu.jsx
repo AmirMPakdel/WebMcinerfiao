@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import styles from "./SideMenu.module.css";
 import chest from '../../../utils/chest';
+import Observer from '../../../utils/observer';
 
 
 export default class SideMenu extends Component {
@@ -18,21 +19,47 @@ export default class SideMenu extends Component {
         this.setState({active_page:window.location.pathname.split("/")[2]});
         chest.openSideMenu = this.openSideMenu;
         chest.closeSideMenu = this.closeSideMenu;
-        chest.showBackdrop = this.showBackdrop;
-        chest.hideBackdrop = this.hideBackdrop;
+        // chest.showBackdrop = this.showBackdrop;
+        // chest.hideBackdrop = this.hideBackdrop;
+        Observer.add("onResize", this.onResize);
+        Observer.add("onSideMenuToggle", this.onSideMenuToggle);
+    }
+
+    componentWillUnmount(){
+        Observer.remove("onResize", this.onResize);
+        Observer.remove("onSideMenuToggle", this.onSideMenuToggle);
+    }
+
+    onResize=()=>{
+
+        if(window.innerWidth > 1024 && !chest.SideMenu.menu_is_open){
+            Observer.execute("onSideMenuToggle", !chest.SideMenu.menu_is_open);
+        }else if(window.innerWidth <= 1024 && chest.SideMenu.menu_is_open){
+            Observer.execute("onSideMenuToggle", !chest.SideMenu.menu_is_open);
+        }   
+    }
+
+    onSideMenuToggle=(menu_is_open)=>{
+        if(menu_is_open){
+            this.openSideMenu();
+        }else{
+            this.closeSideMenu();
+        }
     }
 
     openSideMenu = ()=>{
         this.SideMenu.style.transform = "translateX(0)";
+        this.setState({showBackdrop:true})
     }
 
     closeSideMenu = ()=>{
         this.SideMenu.style.transform = "translateX(10rem)";
+        this.setState({showBackdrop:false})
     }
 
-    showBackdrop = ()=>{this.setState({showBackdrop:true})}
+    // showBackdrop = ()=>{}
 
-    hideBackdrop = ()=>{this.setState({showBackdrop:false})}
+    // hideBackdrop = ()=>{}
 
     onSelect = (name)=>{
         let prefix = "/dashboard/";
@@ -63,8 +90,8 @@ export default class SideMenu extends Component {
                 {/* <SideMenuBtn title="تالار گفتگو" icon={"/svg/ed_dbrd_forum.svg"}
                 onClick={this.onSelect} active_page={this.state.active_page} name="forum"/> */}
 
-                <SideMenuBtn title="خدمات" icon={"/svg/ed_dbrd_services.svg"}
-                onClick={this.onSelect} active_page={this.state.active_page} name="services"/>
+                <SideMenuBtn title="تنظیمات" icon={"/svg/ed_dbrd_services.svg"}
+                onClick={this.onSelect} active_page={this.state.active_page} name="settings"/>
 
                 <SideMenuBtn title="گزارش‌های مالی" icon={"/svg/ed_dbrd_finance.svg"}
                 onClick={this.onSelect} active_page={this.state.active_page} name="finances"/>

@@ -5,6 +5,7 @@ import chest from "../../utils/chest";
 import styles from "./EducatorDashboardLayout.module.css";
 import AccessLayout from "./AccessLayout";
 import ModalLayout from "./ModalLayout";
+import Observer from "../../utils/observer";
 
 /**
  * @typedef Props 
@@ -14,12 +15,29 @@ import ModalLayout from "./ModalLayout";
  */
 export default class EducatorDashboardLayout extends Component {
 
+    state={
+        menu_is_open : false,
+    }
+
+    componentDidMount(){
+        Observer.add("onSideMenuToggle", this.onSideMenuToggle);
+    }
+
+    componentWillUnmount(){
+        Observer.remove("onSideMenuToggle", this.onSideMenuToggle);
+    }
+
     onNitifications = ()=>{
         chest.NotificationsMenu_toggle();
     }
 
-    componentDidMount(){
-        
+    onSideMenuToggle=(menu_is_open)=>{
+        chest.SideMenu.menu_is_open = menu_is_open;
+        this.setState({menu_is_open});
+    }
+
+    onToggleMenu=()=>{
+        Observer.execute("onSideMenuToggle", !this.state.menu_is_open);
     }
     
     render(){
@@ -29,18 +47,36 @@ export default class EducatorDashboardLayout extends Component {
                 <ModalLayout>
                     <div className={styles.layout+" bglc1i"}>
                         
-                        <SideMenu/>
-
                         <div className={styles.header_bar}>
 
-                            <div>
-                                <img className={styles.notification_img+" amp_btn"} src={"/svg/edu_notification.svg"}
-                                onClick={this.onNitifications}/>
-                                <div className={styles.badge}>{"21"}</div>
+                            <SideMenu/>
+
+                                <div className={styles.header_right_sec}>
+
+                                {
+                                    this.state.menu_is_open?
+                                    <img className={styles.menu_btn+" amp_btn"} 
+                                    src={"/svg/dashboard/menu_close.svg"}
+                                    onClick={this.onToggleMenu}/>:
+                                    <img className={styles.menu_btn+" amp_btn"} 
+                                    src={"/svg/dashboard/menu_open.svg"}
+                                    onClick={this.onToggleMenu}/>
+                                }
+
                             </div>
 
-                            
-                            <img className={styles.logout_img+" amp_btn"} src={"/svg/edu_logout.svg"}/>
+                            <div className={styles.header_left_sec}>
+
+                                <div>
+                                    <img className={styles.notification_img+" amp_btn"} src={"/svg/edu_notification.svg"}
+                                    onClick={this.onNitifications}/>
+                                    <div className={styles.badge}>{"21"}</div>
+                                </div>
+
+                                
+                                <img className={styles.logout_img+" amp_btn"} src={"/svg/edu_logout.svg"}/>
+
+                            </div>
                             
                         </div>
                         

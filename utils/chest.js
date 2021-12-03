@@ -2,6 +2,7 @@ import { Component } from "react";
 import { notification } from 'antd';
 import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import "../models/jsdoc/User"
+import Observer from "./observer";
 
 let chest = {
 
@@ -9,13 +10,17 @@ let chest = {
     user : null,
     
     UserPanel:{
-
         userChangeTab: (jsx)=>{},
     },
 
     ModalLayout:{
-
         controlModal: (visible, jsx, options)=>{},
+    },
+
+    SideMenu:{
+        menu_is_open:false,
+        openSideMenu:()=>{},
+        closeSideMenu:()=>{},
     },
 
     disableBodyVerticalScroll : ()=>{},
@@ -35,8 +40,8 @@ export class ChestComponent extends Component{
         chest.openNotification = this.openNotification;
 
         this.onResize();
-
-        window.addEventListener("resize", this.onResize);
+        window.addEventListener("resize", this.ResizeObserver);
+        Observer.add("onResize", this.onResize);
 
         this.enableAllAntDTooltips();
 
@@ -49,6 +54,10 @@ export class ChestComponent extends Component{
         chest.disableAllAntDTooltips = ()=>{};
         chest.enableAllAntDTooltips = ()=>{};
         chest.openNotification = ()=>{};
+    }
+
+    ResizeObserver=(window, event)=>{
+        Observer.execute("onResize", window, event);
     }
 
     onResize=()=>{

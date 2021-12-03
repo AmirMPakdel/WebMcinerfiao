@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import AuthController from "../../../controllers/minfo/AuthController";
+import Storage from "../../../utils/storage";
+import { InputFilter } from "../../../utils/validation";
 import Loading from "../../components/global/Loading";
 import MainButton from "../../components/global/MainButton";
 import ReactiveTextInput from "../../components/global/ReactiveTextInput";
@@ -23,13 +25,14 @@ export default class Auth extends Component {
         this.controller = new AuthController(this);
 
         this.state={
-            page: "RegisterPage",
+            page: "MobilePage",
             loading:false,
 
             mobile:"",
             password:"",
             verification_code:"",
 
+            user_id:"",// will be set by server
             subdomain:"",
             first_name:"",
             last_name:"",
@@ -75,7 +78,8 @@ export default class Auth extends Component {
     }
 
     onForgotLink=()=>{
-        //TODO: save mobile in localstorage and go to changePassword Page
+        Storage.store(env.STORAGE_KEYS.PHONE_NUMBER, this.state.mobile);
+        window.location.href = env.PATHS.CHANGE_PASSWORD_PAGE;
     }
 
     onVerificationCodeInput=(v)=>{
@@ -104,6 +108,10 @@ export default class Auth extends Component {
 
     onRegisterConfirm=()=>{
         this.controller.registerConfirm();
+    }
+
+    onRegisterSuccessConfirm=()=>{
+        window.location.href = env.PATHS.USER_DASHBOARD;
     }
     
     render(){
@@ -166,6 +174,8 @@ class MobilePage extends Component{
             className={styles.btn+" blc2"}
             value={ps.mobile}
             error={ps.mobile_error}
+            maxLength={11}
+            inputFilter={InputFilter.phoneNumberInputFilter}
             onChange={p.onMobileInput}/>
 
             <MainButton  style={{marginTop:"2rem", width:"20rem"}} 
@@ -209,15 +219,18 @@ class PasswordPage extends Component{
             className={styles.btn+" blc2"}
             value={ps.password}
             error={ps.password_error}
+            type={"password"}
+            inputFilter={InputFilter.passwordInputFilter}
             onChange={p.onPasswordInput}/>
 
-            <a onClick={p.onForgotLink} 
+            <a onClick={p.onForgotLink}
             style={{direction:"rtl", textAlign:"center", marginTop:"1rem", fontSize:"13px"}}>
                 {"فراموشی رمزعبور"}
             </a>
 
             <MainButton  style={{marginTop:"1rem", width:"20rem"}} 
             title={"تایید"}
+            loading={ps.loading}
             onClick={p.onPasswordConfirm}/>
 
             </>
@@ -252,15 +265,17 @@ class VerificationPage extends Component{
                         
             <div className={styles.info} style={{display:"inline"}}>
                 {"حساب کاربری با این شماره موبایل وجود ندارد. برای ثبت نام کد ارسالی به شماره موبایل "}
-                <span className={"ftc2"}>{"09118015081"}</span>
+                <span className={"ftc2"}>{ps.mobile}</span>
                 {" را وارد نمایید."}
             </div>
 
             <TextInput placeholder={"کد تایید"}
             className={styles.btn+" blc2"}
             style={{marginBottom:"0.5rem"}}
+            inputStyle={{textAlign:"center", direction:"ltr"}}
             value={ps.sms_code}
             error={ps.verification_code_error}
+            inputFilter={InputFilter.verificationCodeInputFilter}
             onChange={p.onVerificationCodeInput}/>
 
             {
@@ -286,6 +301,7 @@ class VerificationPage extends Component{
 
             <MainButton  style={{marginTop:"0.5rem", width:"20rem"}} 
             title={"تایید"}
+            loading={ps.loading}
             onClick={p.onSmsCodeConfirm}/>
 
             </>
@@ -317,40 +333,55 @@ class RegisterPage extends Component{
             value={ps.subdomain}
             status={ps.subdomain_status}
             message={ps.subdomain_message}
+            inputFilter={InputFilter.tenantInputFilter}
             onChange={p.onSubdomain}/>
 
             <TextInput placeholder={"نام"}
             className={styles.btn+" blc2"}
             value={ps.first_name}
             style={{marginTop:"0rem"}}
+            error={ps.first_name_error}
+            inputFilter={InputFilter.persianNameInputFilter}
             onChange={(v)=>p.onInput("first_name",v)}/>
 
             <TextInput placeholder={"نام خانوادگی"}
             className={styles.btn+" blc2"}
             value={ps.last_name}
             style={{marginTop:"0rem"}}
+            error={ps.last_name_error}
+            inputFilter={InputFilter.persianNameInputFilter}
             onChange={(v)=>p.onInput("last_name",v)}/>
 
             <TextInput placeholder={"کدملی"}
             className={styles.btn+" blc2"}
             value={ps.national_code}
             style={{marginTop:"0rem"}}
+            error={ps.national_code_error}
+            inputFilter={InputFilter.nationalCodeInputFilter}
             onChange={(v)=>p.onInput("national_code",v)}/>
 
             <TextInput placeholder={"رمزعبور"}
             className={styles.btn+" blc2"}
             value={ps.register_password}
             style={{marginTop:"0rem"}}
+            type={"password"}
+            autocomplete={"new-password"}
+            error={ps.register_password_error}
+            inputFilter={InputFilter.passwordInputFilter}
             onChange={(v)=>p.onInput("register_password",v)}/>
 
             <TextInput placeholder={"تکرار رمزعبور"}
             className={styles.btn+" blc2"}
             value={ps.password_confirm}
             style={{marginTop:"0rem"}}
+            type={"password"}
+            error={ps.password_confirm_error}
+            inputFilter={InputFilter.passwordInputFilter}
             onChange={(v)=>p.onInput("password_confirm",v)}/>
 
             <MainButton  style={{marginTop:"0.8rem", width:"20rem"}} 
             title={"ثبت نام"}
+            loading={ps.loading}
             onClick={p.onRegisterConfirm}/>
 
             </>
@@ -380,7 +411,7 @@ class RegisterSuccessPage extends Component{
             
             <MainButton  style={{marginTop:"4rem", width:"20rem"}} 
             title={"ورود"}
-            onClick={this.onSmsCodeConfirm}/>
+            onClick={p.onRegisterSuccessConfirm}/>
 
             </>
         )

@@ -1,6 +1,8 @@
 import AuthModel from "../../models/minfo/AuthModel";
+import chest from "../../utils/chest";
+import { setCookie } from "../../utils/cookie";
 import { secondsToTime } from "../../utils/time";
-import Validation from "../../utils/validation";
+import Validation, { IsValid } from "../../utils/validation";
 import Auth from "../../views/dynamics/minfo/Auth";
 
 export default class AuthController{
@@ -15,9 +17,15 @@ export default class AuthController{
 
     mobileConfirm(){
 
+        if(this.lock)return;
+
         let res = this.mobilePageInputCheck();
 
         if(res){
+
+            this.lock = true;
+
+            this.view.setState({loading:true});
 
             let params = {
                 phone_numbers : this.view.state.mobile
@@ -25,13 +33,15 @@ export default class AuthController{
 
             this.model.getPhoneNumberCheck(params, (err, data)=>{
 
+                this.lock = false;
+
                 if(data.result_code === env.SC.SUCCESS){
 
-                    this.view.setState({page:"VerificationPage"});
+                    this.view.setState({page:"VerificationPage", loading:false});
 
                 }else if(data.result_code === env.SC.REPETITIVE_PHONE_NUMBER){
 
-                    this.view.setState({page:"PasswordPage"});
+                    this.view.setState({page:"PasswordPage", loading:false});
                 }
             });
         }
@@ -61,11 +71,18 @@ export default class AuthController{
 
     passwordConfirm(){
 
+        if(this.lock)return;
+
         let res = this.passwordPageInputCheck();
 
         if(res){
 
+            this.lock = true;
+
+            this.view.setState({loading:true});
+
             let vs = this.view.state;
+
             let params={
                 phone_number: vs.mobile,
                 password: vs.password
@@ -75,14 +92,19 @@ export default class AuthController{
 
                 if(data.result_code === env.SC.SUCCESS){
 
+                    this.view.setState({loading:false});
+
                     window.location.href = env.PATHS.USER_DASHBOARD;
 
                 }else{
 
                     this.view.setState({
+                        loading:false,
                         password_error : "رمزعبور وارد شده اشتباه است."
                     });
                 }
+
+                this.lock = false;
             });
         }
 
@@ -112,6 +134,10 @@ export default class AuthController{
 
     sendVerificationCode(cb){
 
+        if(this.lock)return;
+
+        this.lock = true;
+
         let params = {
             phone_number : this.view.state.mobile
         }
@@ -132,6 +158,8 @@ export default class AuthController{
 
                 //TODO: what about other stuff?
             }
+
+            this.lock = false;
         });
     }
 
@@ -170,9 +198,15 @@ export default class AuthController{
 
     verificationConfirm(){
 
+        if(this.lock)return;
+
         let res = this.verificationPageInputCheck();
 
         if(res){
+
+            this.lock = true;
+
+            this.view.setState({loading:true});
 
             let params = {
                 code: this.view.state.verification_code,
@@ -184,15 +218,23 @@ export default class AuthController{
                     
                     this.clearSmsCountdown();
 
-                    this.view.setState({page:"RegisterPage"});
+                    let user_id = data.data.user_id;
+
+                    this.view.setState({
+                        loading:false,
+                        user_id,
+                        page:"RegisterPage"
+                    });
 
                 }else if(data.result_code === env.SC.INVALID_VERIFICATION_CODE){
 
                     this.view.setState({
+                        loading:false,
                         verification_code_error: "کد تایید وارد شده اشتباه است."
                     });
                 }
 
+                this.lock = false;
             });
         }
     }
@@ -221,12 +263,18 @@ export default class AuthController{
 
     onInput(key, v){
         this.view.state[key] = v;
+        this.view.state[key+"_error"] = false;
         this.view.setState(this.view.state);
     }
 
     subdomainInputCheck=()=>{
 
         clearTimeout(this.subdomain_input_timeout);
+
+        if(!IsValid.tenantIsValid(this.view.state.subdomain)){
+            this.view.setState({subdomain_status:"", subdomain_message:""});
+            return;
+        }
 
         this.subdomain_input_timeout = setTimeout(()=>{
 
@@ -254,12 +302,48 @@ export default class AuthController{
 
     registerConfirm(){
 
-        let res = registerPageInputCheck();
+        if(this.lock)return;
+
+        let res = this.registerPageInputCheck();
 
         if(res){
-            //start form here
+
+            let vs = this.view.state;
+
+            this.lock = true;
+
+            this.view.setState({loading:true});
+
+            let params = {
+                user_id:vs.user_id,
+                phone_number:vs.mobile,
+                username:vs.subdomain,
+                first_name:vs.first_name,
+                last_name:vs.last_name,
+                national_code:vs.national_code,
+                password:vs.register_password,
+            }
+            
+            this.model.getCompeleteRegisteration(params, (err, data)=>{
+
+                if(data.result_code===env.SC.SUCCESS){
+
+                    setCookie(env.TOKEN_KEY, data.data.token, 1);
+
+                    this.view.setState({page:"RegisterSuccessPage"});
+
+                }else if(data.result_code===env.SC.REPETITIVE_NATIONAL_CODE){
+
+                    chest.openNotification("کد ملی وارد شده قبلا ثبت شده است.");
+
+                }else if(data.result_code===env.SC.INVALID_ID){
+
+                    chest.openNotification("DEV::user_id was invalid!");
+                }
+
+                this.lock = false;
+            });
         }
-        this.view.setState({page:"RegisterSuccessPage"})
     }
 
     registerPageInputCheck(){
@@ -268,10 +352,16 @@ export default class AuthController{
         let fn = Validation.persianName(vs.first_name);
         let ln = Validation.persianName(vs.last_name);
         let nc = Validation.nationalCode(vs.national_code);
-        let pw = Validation.password(vs.password);
+        let pw = Validation.password(vs.register_password);
 
         let newState = {};
         let can = true;
+
+        if(vs.subdomain_status!=="success"){
+            newState.subdomain_status = "error";
+            newState.subdomain_message = "نام سایت نامعتبر است.";
+            can = false;
+        }
 
         if(fn.valid){
             newState.first_name_error = false;
@@ -295,18 +385,21 @@ export default class AuthController{
         }
 
         if(pw.valid){
-            newState.password_error = false;
+            newState.register_password_error = false;
         }else{
-            newState.password_error = pw.message;
+            newState.register_password_error = pw.message;
             can = false;
         }
 
-        if(pw.valid && vs.password_error === vs.password_confirm){
+        
+        if(pw.valid && vs.register_password === vs.password_confirm){
             newState.password_confirm_error = false;
-        }else if(pw.valid && vs.password_error !== vs.password_confirm){
+        }else if(pw.valid && vs.register_password !== vs.password_confirm){
             newState.password_confirm_error = "تکرار رمزعبور اشتباه است.";
             can = false;
         }
+
+        this.view.setState(newState);
 
         return can;
     }

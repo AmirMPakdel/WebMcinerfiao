@@ -29,7 +29,7 @@ export default class IncomeChart extends Component {
                     <XAxis dataKey="name" />
                     <YAxis width={70}/>
                     <Tooltip 
-                    formatter={(value, name, props) => price(value)+" تومان"}
+                    formatter={(value, name, props) => price.priceFormat(value)+" تومان"}
                     labelFormatter={(value, name, props) => "تاریخ : "+value}/>
                     {/* <Legend /> */}
                     <Line type="monotone" dataKey="درآمد" stroke="#FBAD16" activeDot={{ r: 8 }} strokeWidth={3} />

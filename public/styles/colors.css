@@ -95,13 +95,13 @@
     success color
 **/
 .bgsc{
-    background-color: #ACF54D;
+    background-color: #00C853;
 }
 .fsc{
-    color: #ACF54D;
+    color: #00C853;
 }
 .bsc{
-    border-color: #ACF54D;
+    border-color: #00C853;
 }
 
 /*******************************************************************************
@@ -205,11 +205,11 @@
     success color
 **/
 .bgsci{
-    background-color: #ACF54D !important;
+    background-color: #00C853 !important;
 }
 .fsci{
-    color: #ACF54D !important;
+    color: #00C853 !important;
 }
 .bsci{
-    border-color: #ACF54D !important;
+    border-color: #00C853 !important;
 }

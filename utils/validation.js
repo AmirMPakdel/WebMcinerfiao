@@ -1,4 +1,4 @@
-import { perisanNum2eng } from "./persian";
+import { perisanToEng } from "./persian";
 
 export class IsValid {
 
@@ -44,7 +44,7 @@ export class IsValid {
         if(!str){
             return false;
         }
-        if(str.length < 2 || str.length > 32){
+        if(str.length < 3 || str.length > 32){
             return false;
         }
         return true;
@@ -79,47 +79,91 @@ export class IsValid {
 
 export class InputFilter {
 
-    static phoneNumberInputFilter(str, options={}){
+    static phoneNumberInputFilter(old_val, new_val){
 
-        if(typeof str !== "string") return "";
+        let obj = {value:old_val, error:false};
 
-        let new_t = str.match(/^[0-9]+$/);
-        
-        if(new_t && new_t.join){
-            return new_t.join("");
+        new_val = perisanToEng(new_val);
+
+        if(onlyNumber(new_val)){
+            obj.value = new_val;
+        }else{
+            obj.error = "عدد وارد کنید";
         }
-     
-        return false;
+
+        return obj;
     }
 
-    static passwordInputFilter(str, options={}){
+    static passwordInputFilter(old_val, new_val){
 
-        //TODO: later
-        return str;
+        let obj = {value:old_val, error:false};
+
+        new_val = perisanToEng(new_val);
+
+        obj.value = new_val;
+
+        return obj;
     }
 
-    static verificationCodeInputFilter(str, options={}){
+    static verificationCodeInputFilter(old_val, new_val){
 
-        //TODO: later
-        return str;
+        let obj = {value:old_val, error:false};
+
+        new_val = perisanToEng(new_val);
+
+        obj.value = new_val;
+
+        return obj;
     }
 
-    static tenantInputFilter(str, options={}){
+    static tenantInputFilter(old_val, new_val){
 
         //TODO: later
-        return str;
+        let obj = {value:old_val, error:false};
+
+        new_val = perisanToEng(new_val).trim();
+
+        if(onlyEngWithNum(new_val)){
+
+            obj.value = new_val;
+
+        }else{
+
+            obj.error = "حروف انگلیسی و اعداد بدون فاصله وارد کنید";
+        }
+
+        return obj;
     }
 
-    static persianNameInputFilter(str, options={}){
+    static persianNameInputFilter(old_val, new_val){
 
-        //TODO: later
-        return str;
+        let obj = {
+            value:old_val,
+            error:false,
+        }
+
+        if(onlyPersianChar(new_val)){
+            obj.value = new_val;
+        }else{
+            obj.error = "حروف را فارسی و بدون اعداد وارد کنید";
+        }
+
+        return obj;
     }
 
-    static nationalCodeInputFilter(str, options={}){
+    static nationalCodeInputFilter(old_val, new_val){
 
-        //TODO: later
-        return str;
+        let obj = {value:old_val, error:false};
+
+        new_val = perisanToEng(new_val);
+
+        if(onlyNumber(new_val)){
+            obj.value = new_val;
+        }else{
+            obj.error = "عدد وارد کنید";
+        }
+
+        return obj;
     }
 }
 
@@ -193,6 +237,21 @@ export default class Validation{
 
 }
 
+export function onlyEngWithNum(str){
+
+    if(str==="" || str===null || str===undefined){
+        return true;
+    }
+
+    let p = /^[a-z A-Z 0-9]+$/;
+
+    if (!p.test(str)) {
+        return false;
+    }
+
+    return true;
+}
+
 export function onlyPersianChar(str){
 
     if(str==="" || str===null || str===undefined){
@@ -214,7 +273,7 @@ export function onlyNumber(str){
         return true;
     }
 
-    let num = perisanNum2eng(str); 
+    let num = perisanToEng(str); 
     num = Number(num);
 
     if(isNaN(num)){
@@ -238,7 +297,6 @@ export function persianWithNum(str){
 
     return true;
 }
-
 
 export const persian_input_valid = function(t){
 

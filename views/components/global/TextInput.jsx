@@ -7,19 +7,44 @@ import styles from "./TextInput.module.css";
 * @property {string} className
 * @property {React.CSSProperties} style
 * @property {React.CSSProperties} titleStyle
+* @property {React.CSSProperties} inputStyle
+* @property {string} value
 * @property {string} title
 * @property {string} placeholder
 * @property {string | boolean} error
+* @property {number} maxLength
+* @property {function} inputFilter
+* @property {"password"|"price"} type
+* @property {string} autocomplete
 * 
 * @extends {Component<Props>}
 */
 export default class TextInput extends Component {
 
+    state={
+        error:"",
+    }
+
     onChange=(e)=>{
 
-        if(this.props.onChange){
+        if(!this.props.onChange) return;
+
+        if(this.props.inputFilter){
+
+            let {value , error} = 
+            this.props.inputFilter(this.props.value, e.target.value);
+
+            this.props.onChange(value);
+
+            this.setState({error});
+
+        }else{
+
             this.props.onChange(e.target.value);
         }
+    }
+
+    centerize=()=>{
 
         this.input.scrollIntoView({
             behavior: 'auto',
@@ -32,7 +57,7 @@ export default class TextInput extends Component {
 
         let title = "";
         let title_st = {};
-        let input_st = {};
+        let input_st = {...this.props.inputStyle};
         let add_class = "";
 
         if(this.props.className){
@@ -53,6 +78,11 @@ export default class TextInput extends Component {
             add_class += " beci ";
         }
 
+        let m_input_type = "";
+        if(this.props.type==="password"){
+            m_input_type = "password";
+        }
+
         return(
             <div className={styles.tput_con +" "+add_class} style={this.props.style}>
                 
@@ -66,11 +96,14 @@ export default class TextInput extends Component {
                 value={this.props.value}
                 onChange={this.onChange} 
                 style={input_st}
+                maxLength={this.props.maxLength}
+                type={m_input_type}
+                autoComplete={this.props.autocomplete}
                 ref={r=>this.input=r}/>
 
                 {
-                    this.props.error?
-                    <div className={styles.error+" fec"}>{this.props.error}</div>:null
+                    this.props.error || this.state.error?
+                    <div className={styles.error+" fec"}>{this.props.error || this.state.error}</div>:null
                 }
 
             </div>

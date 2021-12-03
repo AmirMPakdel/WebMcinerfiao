@@ -14,6 +14,7 @@ import styles from "./MainButton.module.css";
  * @property {boolean} rightArrow
  * @property {boolean} leftArrow
  * @property {function} onClick
+ * @property {boolean} loading
  * 
  * @extends {Component<Props>}
  */

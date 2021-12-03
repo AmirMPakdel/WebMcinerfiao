@@ -15,13 +15,32 @@ import styles from "./ReactiveTextInput.module.css";
 * @extends {Component<Props>}
 */
 export default class ReactiveTextInput extends Component {
+
+    state={
+        error:"",
+    }
     
     onChange=(e)=>{
 
-        if(this.props.onChange){
+        if(!this.props.onChange) return;
+
+        if(this.props.inputFilter){
+
+            let {value , error} = 
+            this.props.inputFilter(this.props.value, e.target.value);
+
+            this.props.onChange(value);
+
+            this.setState({error});
+
+        }else{
+
             this.props.onChange(e.target.value);
         }
+    }
 
+    centerize=()=>{
+        
         this.input.scrollIntoView({
             behavior: 'auto',
             block: 'center',
@@ -88,8 +107,8 @@ export default class ReactiveTextInput extends Component {
                 }
 
                 {
-                    this.props.message?
-                    <div className={styles.message + message_add_class}>{this.props.message}</div>:null
+                    this.props.message || this.state.error?
+                    <div className={styles.message + message_add_class}>{this.props.message || this.state.error}</div>:null
                 }
 
             </div>

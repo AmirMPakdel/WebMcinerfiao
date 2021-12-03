@@ -14,7 +14,8 @@ const urls = {
     MINFO_LOGIN_WITH_PASSWORD: domain+"/api/main/user/login",
     MINFO_REGISTER_SEND_VERIFICATION_CODE: domain+"/api/main/user/verificationcode/send",
     MINFO_REGISTER_CHECK_VERIFICATION_CODE: domain+"/api/main/user/verificationcode/check",
-    MINFO_REGISTER_COMPLELTE_REGISTRATION: domain+"/api/main/user/user/register",
+    MINFO_REGISTER_CHECK_TENANT: domain+"/api/main/user/tenant/check",
+    MINFO_REGISTER_COMPLELTE_REGISTRATION: domain+"/api/main/user/register",
     
 }
 

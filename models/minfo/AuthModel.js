@@ -9,8 +9,12 @@ export default class AuthModel{
      */
     getPhoneNumberCheck(params, cb){
 
-        cb(null, {result_code:env.SC.SUCCESS});
-        return;
+        if(env.MOCKING_SERVER){
+            setTimeout(()=>{
+                cb(null, {result_code:env.SC.SUCCESS});
+            }, 2000, cb);
+            return;
+        }
 
         myServer.Post(myServer.urls.MINFO_REGISTER_CHECK_PHONE_NUMBER, params, {}, (err, data)=>{
 
@@ -33,15 +37,18 @@ export default class AuthModel{
      */
     getLoginWithPassword(params, cb){
 
-        cb(null, {
-            result_code:env.SC.SUCCESS, 
-            data:{
-                token : "j38j5j3409j4355034h6hh3t8hwdfho08",
-                username : "امیرمحمد پاکدل"
-            }
-        })
-
-        return;
+        if(env.MOCKING_SERVER){
+            setTimeout(()=>{
+                cb(null, {
+                    result_code:env.SC.SUCCESS, 
+                    data:{
+                        token : "j38j5j3409j4355034h6hh3t8hwdfho08",
+                        username : "امیرمحمد پاکدل"
+                    }
+                })
+            }, 2000, cb);
+            return;
+        }
 
         myServer.Post(myServer.urls.MINFO_LOGIN_WITH_PASSWORD, params, {}, (err, data)=>{
 
@@ -61,13 +68,16 @@ export default class AuthModel{
      * @param {object} params
      * @param {import("../jsdoc/RequestCallback").RequestCallback} cb 
      */
-    getSendVerificationCode(prarams, cb){
+    getSendVerificationCode(params, cb){
 
-        cb(null, {
-            result_code:env.SC.SUCCESS,
-        })
-
-        return;
+        if(env.MOCKING_SERVER){
+            setTimeout(()=>{
+                cb(null, {
+                    result_code:env.SC.SUCCESS,
+                })
+            }, 2000, cb);
+            return;
+        }
 
         myServer.Post(myServer.urls.MINFO_REGISTER_SEND_VERIFICATION_CODE, params, {}, (err, data)=>{
 
@@ -90,12 +100,15 @@ export default class AuthModel{
      */
     getCheckVerificationCode(params, cb){
 
-        cb(null, {
-            result_code:env.SC.SUCCESS,
-            data:{user_id:1},
-        })
-
-        return;
+        if(env.MOCKING_SERVER){
+            setTimeout(()=>{
+                cb(null, {
+                    result_code:env.SC.SUCCESS,
+                    data:{user_id:1},
+                })
+            }, 2000, cb);
+            return;
+        }
 
         myServer.Post(myServer.urls.MINFO_REGISTER_CHECK_VERIFICATION_CODE, params, {}, (err, data)=>{
 
@@ -117,26 +130,18 @@ export default class AuthModel{
      */
     getCheckUsername(params, cb){
 
-        setTimeout(()=>{
+        if(env.MOCKING_SERVER){
+            setTimeout(()=>{
+                if(Math.random() > 0.5){
+                    cb(null, {result_code:env.SC.SUCCESS});
+                }else{
+                    cb(null, {result_code:env.SC.REPETITIVE_USERNAME});
+                }
+            }, 2000, cb);
+            return;
+        }
 
-            if(Math.random() > 0.5){
-
-                cb(null, {
-                    result_code:env.SC.SUCCESS,
-                });
-
-            }else{
-
-                cb(null, {
-                    result_code:env.SC.REPETITIVE_USERNAME,
-                });
-            }
-            
-        }, 1200);
-
-        return;
-
-        myServer.Post("?", params, {}, (err, data)=>{
+        myServer.Get(myServer.urls.MINFO_REGISTER_CHECK_TENANT+"/"+params.username, {}, (err, data)=>{
 
             if(!err){
 
@@ -150,20 +155,24 @@ export default class AuthModel{
         });
     }
 
+    /**
+     * 
+     * @param {object} params
+     * @param {import("../jsdoc/RequestCallback").RequestCallback} cb 
+     */
     getCompeleteRegisteration(params, cb){
 
-        setTimeout(()=>{
-
-            cb(null, {
-                result_code:env.SC.SUCCESS,
-                data:{
-                    token:"93yt93j3yt4j45j2440923j4092f0j4f0934",
-                }
-            });
-            
-        }, 1200);
-
-        return;
+        if(env.MOCKING_SERVER){
+            setTimeout(()=>{
+                cb(null, {
+                    result_code:env.SC.SUCCESS,
+                    data:{
+                        token:"93yt93j3yt4j45j2440923j4092f0j4f0934",
+                    }
+                });
+            }, 2000, cb);
+            return;
+        }
 
         myServer.Post(myServer.urls.MINFO_REGISTER_COMPLELTE_REGISTRATION, params, {}, (err,data)=>{
 
