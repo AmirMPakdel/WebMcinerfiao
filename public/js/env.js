@@ -35,6 +35,15 @@ var env = {
         USER_DASHBOARD: "/dashboard",
     },
 
+    PRIFIXES:{
+        MA : "api/main",
+        UTA : "api/tenant/user",
+        PTA : "api/tenant/public",
+        PSTA : "api/tenant/student/public",
+        STA : "api/tenant/student",
+        AA : "api/app",
+    },
+
     SC:{
         SUCCESS : 1000,
         INVALID_PHONE_NUMBER : 1101,

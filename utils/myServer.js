@@ -3,6 +3,7 @@ import chest from "./chest";
 import { getCookie } from "./cookie";
 
 const domain = env.DOMAIN;
+const prifixes = env.PRIFIXES;
 
 const urls = {
     
@@ -10,12 +11,15 @@ const urls = {
     MEDIA_PREFIX:env.MEDIA_PREFIX,
 
     //minfo register
-    MINFO_REGISTER_CHECK_PHONE_NUMBER: domain+"/api/main/user/checkphonenumber",
-    MINFO_LOGIN_WITH_PASSWORD: domain+"/api/main/user/login",
-    MINFO_REGISTER_SEND_VERIFICATION_CODE: domain+"/api/main/user/verificationcode/send",
-    MINFO_REGISTER_CHECK_VERIFICATION_CODE: domain+"/api/main/user/verificationcode/check",
-    MINFO_REGISTER_CHECK_TENANT: domain+"/api/main/user/tenant/check",
-    MINFO_REGISTER_COMPLELTE_REGISTRATION: domain+"/api/main/user/register",
+    MINFO_REGISTER_CHECK_PHONE_NUMBER: domain+prifixes.MA+"/user/checkphonenumber",
+    MINFO_LOGIN_WITH_PASSWORD: domain+prifixes.MA+"/user/login",
+    MINFO_REGISTER_SEND_VERIFICATION_CODE: domain+prifixes.MA+"/user/verificationcode/send",
+    MINFO_REGISTER_CHECK_VERIFICATION_CODE: domain+prifixes.MA+"/user/verificationcode/check",
+    MINFO_REGISTER_CHECK_TENANT: domain+prifixes.MA+"/user/tenant/check",
+    MINFO_REGISTER_COMPLELTE_REGISTRATION: domain+prifixes.MA+"/user/register",
+
+    //minfo educators
+    DASH_CREATE_EDUCATOR: domain+prifixes.UTA+"/educators/create",
     
 }
 

@@ -28,7 +28,7 @@ export default class AuthController{
             this.view.setState({loading:true});
 
             let params = {
-                phone_numbers : this.view.state.mobile
+                phone_number : this.view.state.mobile
             }
 
             this.model.getPhoneNumberCheck(params, (err, data)=>{

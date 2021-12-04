@@ -8,6 +8,7 @@ import styles from "./TextInput.module.css";
 * @property {React.CSSProperties} style
 * @property {React.CSSProperties} titleStyle
 * @property {React.CSSProperties} inputStyle
+* @property {(text:string)=>{}} onChange
 * @property {string} value
 * @property {string} title
 * @property {string} placeholder
@@ -84,7 +85,7 @@ export default class TextInput extends Component {
         }
 
         return(
-            <div className={styles.tput_con +" "+add_class} style={this.props.style}>
+            <div className={styles.tput_con +" blc2 "+add_class} style={this.props.style}>
                 
                 {
                     this.props.title?

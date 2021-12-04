@@ -3,6 +3,10 @@
     align-items: center;
     margin-bottom: 1.5rem;
     height: 3.5rem;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1rem;
+    background-color: #FFF;
 }
 
 .tput_title{

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import chest from "../../../utils/chest";
+import EducatorsCrudModal from "../../components/modal/EducatorsCrudModal";
 import EducatorDashboardLayout from "../../layouts/EducatorDashboardLayout";
 import WrapperT1 from "../../layouts/WrapperT1";
 import styles from "./Settings.module.css";
@@ -15,7 +16,7 @@ import styles from "./Settings.module.css";
 export default class Settings extends Component {
 
     onEducators=()=>{
-        //start from here
+        let modal = <EducatorsCrudModal editable={true}/>
         chest.ModalLayout.controlModal(true, modal);
     }
     
@@ -29,7 +30,7 @@ export default class Settings extends Component {
                         <div className={styles.setting_card+" md_card_shd amp_btn bglc1"} onClick={this.onEducators}>
 
                             <img className={styles.setting_card_img} src={"/svg2/educators.svg"}/>
-                            <div className={styles.setting_card_t+" tilt"}>{"ویرایش مدرسین"}</div>
+                            <div className={styles.setting_card_t+" tilt"}>{"ویرایش دبیران"}</div>
 
                         </div>
 
