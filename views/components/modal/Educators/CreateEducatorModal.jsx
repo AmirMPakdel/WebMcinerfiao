@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import styles from "./CreateEducatorModal.module.css";
-import MainButton from "../global/MainButton";
-import TextInput from "../global/TextInput";
+import MainButton from "../../global/MainButton";
+import TextInput from "../../global/TextInput";
 import EducatorsCrudModal from "./EducatorsCrudModal";
-import chest from "../../../utils/chest";
-import TextArea from "../global/TextArea";
-import FileUpload from "../global/FileUpload";
-import CreateEducatorController from "../../../controllers/modals/CreateEducatorController";
-import { InputFilter } from "../../../utils/validation";
+import chest from "../../../../utils/chest";
+import TextArea from "../../global/TextArea";
+import FileUpload from "../../global/FileUpload";
+import CreateEducatorController from "../../../../controllers/modals/educators/CreateEducatorController";
+import { InputFilter } from "../../../../utils/validation";
 
 /**
  * Props of CreateEducatorModal Component

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import MainButton from "../global/MainButton";
-import TextInput from "../global/TextInput";
+import MainButton from "../../global/MainButton";
+import TextInput from "../../global/TextInput";
 import styles from "./ConfirmModal.module.css";
 
 export default class ConfirmModal extends Component {

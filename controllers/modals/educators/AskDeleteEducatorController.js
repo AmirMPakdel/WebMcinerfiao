@@ -1,6 +1,6 @@
 import AskDeleteEducatorModel from "../../../models/modals/educators/AskDeleteEducatorModel";
 import chest from "../../../utils/chest";
-import AskDeleteEducatorModal from "../../../views/components/modal/Educators/AskDeleteEducatorModal";
+import AskDeleteEducatorModal from "../../../views/components/modal/educators/AskDeleteEducatorModal";
 
 export default class AskDeleteEducatorController{
     

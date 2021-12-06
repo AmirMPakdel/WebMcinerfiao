@@ -1,7 +1,7 @@
-import CreateEducatorModel from "../../models/modals/CreateEducatorModel";
-import chest from "../../utils/chest";
-import Validation from "../../utils/validation";
-import CreateEducatorModal from "../../views/components/modal/CreateEducatorModal";
+import CreateEducatorModel from "../../../models/modals/educators/CreateEducatorModel";
+import chest from "../../../utils/chest";
+import Validation from "../../../utils/validation";
+import CreateEducatorModal from "../../../views/components/modal/educators/CreateEducatorModal";
 
 export default class CreateEducatorController{
     

@@ -1,5 +1,5 @@
-import EducatorsCrudModel from "../../models/modals/EducatorsCrudModel";
-import EducatorsCrudModal from "../../views/components/modal/EducatorsCrudModal";
+import EducatorsCrudModel from "../../../models/modals/educators/EducatorsCrudModel";
+import EducatorsCrudModal from "../../../views/components/modal/Educators/EducatorsCrudModal";
 
 export default class EducatorsCrudController{
     

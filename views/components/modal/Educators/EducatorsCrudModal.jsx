@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import styles from "./EducatorsCrudModal.module.css";
-import MainButton from "../global/MainButton";
-import TextInput from "../global/TextInput";
+import MainButton from "../../global/MainButton";
+import TextInput from "../../global/TextInput";
 import { Table, Input, Button, Space, ConfigProvider } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import CreateEducatorModal from "./CreateEducatorModal";
-import chest from "../../../utils/chest";
-import Loading from "../global/Loading";
-import EducatorsCrudController from "../../../controllers/modals/EducatorsCrudController";
-import YesNoModal from "./YesNoModal";
-import AskDeleteEducatorModal from "./Educators/AskDeleteEducatorModal";
-import EditEducatorModal from "./Educators/EditEducatorModal";
+import chest from "../../../../utils/chest";
+import Loading from "../../global/Loading";
+import EducatorsCrudController from "../../../../controllers/modals/educators/EducatorsCrudController";
+import AskDeleteEducatorModal from "./AskDeleteEducatorModal";
+import EditEducatorModal from "./EditEducatorModal";
 
 /**
  * Props of EducatorsCrudModal Component

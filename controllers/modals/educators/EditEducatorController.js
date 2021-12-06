@@ -1,6 +1,6 @@
 import EditEducatorModel from "../../../models/modals/educators/EditEducatorModel";
 import Validation from "../../../utils/validation";
-import EditEducatorModal from "../../../views/components/modal/Educators/EditEducatorModal";
+import EditEducatorModal from "../../../views/components/modal/educators/EditEducatorModal";
 
 export default class EditEducatorController{
     
@@ -29,6 +29,8 @@ export default class EditEducatorController{
                 last_name : vs.last_name,
                 bio : vs.bio,
             }
+
+            params.file_state = "ufs_no_change";
 
             if(vs.upload_key){
                 params.upload_key = vs.upload_key;

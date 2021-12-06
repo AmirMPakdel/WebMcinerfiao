@@ -6,7 +6,7 @@ import FileUpload from "../../global/FileUpload";
 import MainButton from "../../global/MainButton";
 import TextArea from "../../global/TextArea";
 import TextInput from "../../global/TextInput";
-import EducatorsCrudModal from "../EducatorsCrudModal";
+import EducatorsCrudModal from "../Educators/EducatorsCrudModal";
 import styles from "./EditEducatorModal.module.css";
 
 /**

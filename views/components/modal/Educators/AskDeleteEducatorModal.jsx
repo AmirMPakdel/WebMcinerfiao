@@ -3,7 +3,7 @@ import AskDeleteEducatorController from "../../../../controllers/modals/educator
 import chest from "../../../../utils/chest";
 import Loading from "../../global/Loading";
 import MainButton from "../../global/MainButton";
-import EducatorsCrudModal from "../EducatorsCrudModal";
+import EducatorsCrudModal from "../Educators/EducatorsCrudModal";
 import styles from "./AskDeleteEducatorModal.module.css";
 
 /**

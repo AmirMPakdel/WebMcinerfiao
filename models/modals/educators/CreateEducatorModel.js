@@ -1,11 +1,11 @@
-import myServer from "../../utils/myServer";
+import myServer from "../../../utils/myServer";
 
 export default class CreateEducatorModel{
 
     /**
      * 
      * @param {object} params
-     * @param {import("../jsdoc/RequestCallback").RequestCallback} cb 
+     * @param {import("../../jsdoc/RequestCallback").RequestCallback} cb 
      */
     creatingEducator(params, cb){
 
