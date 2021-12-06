@@ -13,6 +13,7 @@ import React, { Component } from "react";
 export default class FileUpload extends Component {
 
     state={
+        file:null,
         new_image_src:null,
         fileName:null,
         validText:"",
@@ -28,60 +29,22 @@ export default class FileUpload extends Component {
         let file = e.target.files[0];
         if(!file) return;
 
-        if(this.props.notImage){
-
-            if(file.size < ((maxSize)*1024*1024)){
-
-                this.state.errorText="";
-
-                this.setState({
-                    editable_mode : true,
-                    fileName:file.name,
-                }, ()=>{
-
-                    this.props.onFile && this.props.onFile(file, file.name);
-                });
-
-            }else{
+        if(file.size < ((maxSize)*1024*1024)){
                 
-                this.props.onFile && this.props.onFile(null, null, null);
-
-                this.setState({
-                    errorText:"اندازه فایل نباید بیشتر از "+maxSize+" مگابایت باشد.",
-                    editable_mode : false,
-                    fileName:""
-                });
-            }
+            this.state.errorText="";
+            this.setState(this.state);
 
         }else{
-            let url = URL.createObjectURL(file);
-            let img = new Image();
-            img.src = url;
-            img.onload = ()=>{
+            
+            this.setState({
+                errorText:"اندازه فایل نباید بیشتر از "+maxSize+" مگابایت باشد.",
+                image_style : null,
+                editable_mode : false,
+                fileName:""
+            })
 
-                if(file.size < ((maxSize)*1024*1024)){
-                    this.state.new_image_src = img.src;
-                    this.state.errorText="";
-                    this.setState({
-                        image_style : {backgroundImage:`url(${img.src})`},
-                        editable_mode : true,
-                        fileName:file.name,
-                    }, ()=>{
-                        this.props.onFile && this.props.onFile(file, file.name, img.src);
-                    });
-
-                }else{
-                    
-                    this.props.onFile && this.props.onFile(null, null, null);
-                    this.setState({
-                        errorText:"اندازه فایل نباید بیشتر از "+maxSize+" مگابایت باشد.",
-                        image_style : null,
-                        editable_mode : false,
-                        fileName:""
-                    });
-                }
-            };
         }
+        
     }
 
 

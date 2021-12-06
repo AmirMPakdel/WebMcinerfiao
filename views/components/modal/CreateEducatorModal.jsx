@@ -53,6 +53,7 @@ export default class CreateEducatorModal extends Component {
     }
 
     onImage=(file, file_name, img_src)=>{
+        
         this.setState({image_file:file, img_src});
     }
 

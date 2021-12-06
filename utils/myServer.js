@@ -1,9 +1,10 @@
 import axios from "axios";
 import chest from "./chest";
 import { getCookie } from "./cookie";
+import { Object2FormData } from "./helpers";
 
 const domain = env.DOMAIN;
-const prifixes = env.PRIFIXES;
+const prefixes = env.PREFIXES;
 
 const urls = {
     
@@ -11,16 +12,22 @@ const urls = {
     MEDIA_PREFIX:env.MEDIA_PREFIX,
 
     //minfo register
-    MINFO_REGISTER_CHECK_PHONE_NUMBER: domain+prifixes.MA+"/user/checkphonenumber",
-    MINFO_LOGIN_WITH_PASSWORD: domain+prifixes.MA+"/user/login",
-    MINFO_REGISTER_SEND_VERIFICATION_CODE: domain+prifixes.MA+"/user/verificationcode/send",
-    MINFO_REGISTER_CHECK_VERIFICATION_CODE: domain+prifixes.MA+"/user/verificationcode/check",
-    MINFO_REGISTER_CHECK_TENANT: domain+prifixes.MA+"/user/tenant/check",
-    MINFO_REGISTER_COMPLELTE_REGISTRATION: domain+prifixes.MA+"/user/register",
+    MINFO_REGISTER_CHECK_PHONE_NUMBER: domain+prefixes.MA+"/user/checkphonenumber",
+    MINFO_LOGIN_WITH_PASSWORD: domain+prefixes.MA+"/user/login",
+    MINFO_REGISTER_SEND_VERIFICATION_CODE: domain+prefixes.MA+"/user/verificationcode/send",
+    MINFO_REGISTER_CHECK_VERIFICATION_CODE: domain+prefixes.MA+"/user/verificationcode/check",
+    MINFO_REGISTER_CHECK_TENANT: domain+prefixes.MA+"/user/tenant/check",
+    MINFO_REGISTER_COMPLELTE_REGISTRATION: domain+prefixes.MA+"/user/register",
+
+    // upload
+    UPLOAD_GET_UPLOAD_KEY: domain+prefixes.UTA+"/upload/uploadkey",
+    UPLOAD_COVERTOR_CHECK: env.CONVERTOR_DOMAIN+"/upload_check",
+    UPLOAD_FILE_TO_CONVERTOR: env.CONVERTOR_DOMAIN+"/upload_progress",
 
     //minfo educators
-    DASH_CREATE_EDUCATOR: domain+prifixes.UTA+"/educators/create",
-    
+    DASH_CREATE_EDUCATOR: domain+prefixes.UTA+"/educators/create",
+    DASH_FETCH_EDUCATORS: domain+prefixes.UTA+"/educators/fetch",
+
 }
 
 /**
@@ -31,10 +38,14 @@ const urls = {
  */
 function Get(url, config, cb){
 
-    if(!config.noAuthorization){
-        config.headers={
-            'Authorization': "Bearer "+getCookie(env.TOKEN_KEY), 
-        }
+    if(!config.noTenant){
+        if(!config.headers){config.headers = {};}
+        config.headers["X-TENANT"] = getCookie(env.TENANT_KEY);
+    }
+
+    if(!config.noToken){
+        if(!config.params){config.params = {};}
+        config.params["token"] = getCookie(env.TOKEN_KEY);
     }
 
     axios.get(url, config).then(res=>{
@@ -85,10 +96,18 @@ function Get(url, config, cb){
  */
 function Post(url, data, config={}, cb){
 
-    if(!config.noAuthorization){
-        config.headers={
-            'Authorization': "Bearer "+getCookie(env.TOKEN_KEY), 
-        }
+    if(!config.noTenant){
+        if(!config.headers){config.headers = {};}
+        config.headers["X-TENANT"] = getCookie(env.TENANT_KEY);
+    }
+
+    if(!config.noToken){
+        if(!data){data = {}};
+        data["token"] = getCookie(env.TOKEN_KEY);
+    }
+
+    if(config.formData){
+        data = Object2FormData(data);
     }
 
     axios.post(url, data, config).then((res)=>{

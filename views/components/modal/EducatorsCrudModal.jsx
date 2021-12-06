@@ -7,6 +7,8 @@ import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import CreateEducatorModal from "./CreateEducatorModal";
 import chest from "../../../utils/chest";
+import Loading from "../global/Loading";
+import EducatorsCrudController from "../../../controllers/modals/EducatorsCrudController";
 
 /**
  * Props of EducatorsCrudModal Component
@@ -22,14 +24,34 @@ import chest from "../../../utils/chest";
  */
 export default class EducatorsCrudModal extends Component {
 
-    state = {
-        searchText: '',
-        searchedColumn: '',
+    constructor(props){
+        super(props);
+
+        this.controller = new EducatorsCrudController(this);
+
+        this.state = {
+            loading:true,
+            list:[],
+            searchText: '',
+            searchedColumn: '',
+        }
+    }
+
+    componentDidMount(){
+        this.controller.loadEducators();
     }
 
     onCreate=()=>{
         let modal = <CreateEducatorModal/>
         chest.ModalLayout.controlModal(true, modal);
+    }
+
+    onEdit=(record)=>{
+
+    }
+
+    onDelete=(record)=>{
+        
     }
 
     getColumnSearchProps = (dataIndex) => {
@@ -132,24 +154,28 @@ export default class EducatorsCrudModal extends Component {
         const columns = [
             {
               title: 'نام خانوادگی',
-              dataIndex: 'name',
-              key: 'name',
+              dataIndex: 'last_name',
+              key: 'last_name',
               width: '35%',
-              ...this.getColumnSearchProps('name'),
+              ...this.getColumnSearchProps('last_name'),
             },
             {
               title: 'نام',
-              dataIndex: 'age',
-              key: 'age',
+              dataIndex: 'first_name',
+              key: 'first_name',
               width: '30%',
-              ...this.getColumnSearchProps('age'),
+              ...this.getColumnSearchProps('first_name'),
             },
             {
-                title: 'تخصص',
-                dataIndex: 'age',
-                key: 'age',
-                width: '35%',
-                ...this.getColumnSearchProps('age'),
+                title: 'عملیات',
+                key: 'action',
+                render: (text, record) => (
+                  <Space size="middle">
+                    <a onClick={()=>this.onEdit(record)}>ویرایش</a>
+                    &emsp;
+                    <a onClick={()=>this.onDelete(record)}>حذف</a>
+                  </Space>
+                ),
             },
             
         ];
@@ -161,38 +187,50 @@ export default class EducatorsCrudModal extends Component {
                 src={"/svg/modal_close.svg"}
                 onClick={this.onCancel}/>
 
-                <div className={styles.title+" tilt "}>
-                    {
-                        this.props.selectable?
-                        "انتخاب دبیر":
-                        "دبیران"
-                    }
+                {
+                    this.state.loading?
+                    <Loading/>:null
+                }
 
-                    <MainButton className={styles.add_edu_btn}
-                    title="ایجاد دبیر"
-                    onClick={this.onCreate}/>
+                {
+                    !this.state.loading?
+                    <>
 
-                </div>
+                        <div className={styles.title+" tilt "}>
+                            {
+                                this.props.selectable?
+                                "انتخاب دبیر":
+                                "دبیران"
+                            }
 
-                <ConfigProvider direction={"rtl"}>
+                            <MainButton className={styles.add_edu_btn}
+                            title="ایجاد دبیر"
+                            onClick={this.onCreate}/>
 
-                    <Table
-                    scroll={{ y: "calc(80vh - 14rem)" }}
-                    rowSelection={this.props.selectable?{ type: this.props.selectionType || "checkbox", ...rowSelection}:false}
-                    columns={columns} 
-                    dataSource={data}
-                    pagination={false}/>
+                        </div>
 
-                </ConfigProvider>
+                        <ConfigProvider direction={"rtl"}>
 
-                <div className={styles.sec1}>
-                    
-                    <MainButton className={styles.confirm_btn}
-                    title={"تایید"}
-                    onClick={this.onConfirm}/>
+                            <Table
+                            scroll={{ y: "calc(80vh - 14rem)" }}
+                            rowSelection={this.props.selectable?{ type: this.props.selectionType || "checkbox", ...rowSelection}:false}
+                            columns={columns} 
+                            dataSource={this.state.list}
+                            pagination={false}/>
 
-                </div>
+                        </ConfigProvider>
 
+                        <div className={styles.sec1}>
+                            
+                            <MainButton className={styles.confirm_btn}
+                            title={"تایید"}
+                            onClick={this.onConfirm}/>
+
+                        </div>
+
+                    </>:null
+                }
+                
             </div>
         )
     }

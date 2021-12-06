@@ -74,3 +74,19 @@ export function getParamByName(name, url = window.location.href) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+/**
+ * convert object to FormData
+ * @param {Object} object 
+ * @returns {FormData}
+ */
+export function Object2FormData(object){
+
+    let data = new FormData();
+    
+    Object.keys(object).forEach(e=>{
+        data.set(e, object[e]);
+    });
+
+    return data;
+}

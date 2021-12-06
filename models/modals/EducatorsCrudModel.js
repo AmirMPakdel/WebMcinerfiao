@@ -1,25 +1,25 @@
 import myServer from "../../utils/myServer";
 
-export default class CreateEducatorModel{
+export default class EducatorsCrudModel{
 
     /**
      * 
      * @param {object} params
      * @param {import("../jsdoc/RequestCallback").RequestCallback} cb 
      */
-    creatingEducator(params, cb){
+    fetchEducators(params, cb){
 
         if(env.SC.MOCKING_SERVER){
             setTimeout(()=>{
                 cb(null, {
                     result_code:env.SC.SUCCESS,
-                    data:{ educator_id: 1}
+                    data:[]
                 });
             }, 2000, cb);
             return;
         }
 
-        myServer.Post(myServer.urls.DASH_CREATE_EDUCATOR, params, {formData:true}, (err, data)=>{
+        myServer.Post(myServer.urls.DASH_FETCH_EDUCATORS, params, {}, (err, data)=>{
 
             if(!err){
 

@@ -6,13 +6,17 @@ var env = {
 
     MOCKING_SERVER: false,
 
-    FILL_FAKE_DATA: true,
+    FILL_FAKE_DATA: false,
 
     SMS_TIMER: 120,
+
+    TENANT_KEY: "__mgnftnt",
 
     TOKEN_KEY: "__mgnftk",
 
     DOMAIN: "http://tootifa.ir",
+
+    CONVERTOR_DOMAIN: "http://tootifa.ir:8020",
 
     MEDIA_PREFIX: "http://dltest.tootifa.ir",
 
@@ -35,13 +39,13 @@ var env = {
         USER_DASHBOARD: "/dashboard",
     },
 
-    PRIFIXES:{
-        MA : "api/main",
-        UTA : "api/tenant/user",
-        PTA : "api/tenant/public",
-        PSTA : "api/tenant/student/public",
-        STA : "api/tenant/student",
-        AA : "api/app",
+    PREFIXES:{
+        MA : "/api/main",
+        UTA : "/api/tenant/user",
+        PTA : "/api/tenant/public",
+        PSTA : "/api/tenant/student/public",
+        STA : "/api/tenant/student",
+        AA : "/api/app",
     },
 
     SC:{
