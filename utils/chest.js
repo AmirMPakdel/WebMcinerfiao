@@ -14,7 +14,7 @@ let chest = {
     },
 
     ModalLayout:{
-        controlModal: (visible, jsx, options)=>{},
+        controlModal: (visible, Component, options)=>{},
     },
 
     SideMenu:{

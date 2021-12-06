@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FileUploadController from "../../../controllers/components/FileUploadController";
 //import styles from "./FileUpload.module.css";
 
 /**
@@ -12,41 +13,23 @@ import React, { Component } from "react";
 */
 export default class FileUpload extends Component {
 
-    state={
-        file:null,
-        new_image_src:null,
-        fileName:null,
-        validText:"",
-        errorText:"",
-    }
+    constructor(props){
+        super(props);
 
+        this.controller = new FileUploadController(this);
+
+        this.state={
+            file:null,
+        }
+    }
+    
     componentDidMount(){
         this.input.onchange= this.onFile;
     }
 
-    onFile =  (e)=>{
-        let maxSize = (this.props.maxSize?this.props.maxSize:1);
-        let file = e.target.files[0];
-        if(!file) return;
-
-        if(file.size < ((maxSize)*1024*1024)){
-                
-            this.state.errorText="";
-            this.setState(this.state);
-
-        }else{
-            
-            this.setState({
-                errorText:"اندازه فایل نباید بیشتر از "+maxSize+" مگابایت باشد.",
-                image_style : null,
-                editable_mode : false,
-                fileName:""
-            })
-
-        }
-        
+    onFile =  (event)=>{
+        this.controller.onFile(event);
     }
-
 
     onClick=()=>{
         this.input.click();

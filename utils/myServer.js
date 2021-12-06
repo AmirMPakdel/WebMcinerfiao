@@ -27,6 +27,8 @@ const urls = {
     //minfo educators
     DASH_CREATE_EDUCATOR: domain+prefixes.UTA+"/educators/create",
     DASH_FETCH_EDUCATORS: domain+prefixes.UTA+"/educators/fetch",
+    DASH_UPDATE_EDUCATOR: domain+prefixes.UTA+"/educators/update",
+    DASH_DELETE_EDUCATOR: domain+prefixes.UTA+"/educators/delete",
 
 }
 

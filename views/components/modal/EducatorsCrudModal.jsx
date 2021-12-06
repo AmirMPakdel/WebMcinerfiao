@@ -9,6 +9,9 @@ import CreateEducatorModal from "./CreateEducatorModal";
 import chest from "../../../utils/chest";
 import Loading from "../global/Loading";
 import EducatorsCrudController from "../../../controllers/modals/EducatorsCrudController";
+import YesNoModal from "./YesNoModal";
+import AskDeleteEducatorModal from "./Educators/AskDeleteEducatorModal";
+import EditEducatorModal from "./Educators/EditEducatorModal";
 
 /**
  * Props of EducatorsCrudModal Component
@@ -42,16 +45,21 @@ export default class EducatorsCrudModal extends Component {
     }
 
     onCreate=()=>{
-        let modal = <CreateEducatorModal/>
+
+        let modal = <CreateEducatorModal/>;
         chest.ModalLayout.controlModal(true, modal);
     }
 
     onEdit=(record)=>{
 
+        let modal = <EditEducatorModal data={record}/>
+        chest.ModalLayout.controlModal(true, modal);
     }
 
     onDelete=(record)=>{
-        
+
+        let modal = <AskDeleteEducatorModal data={record}/>
+        chest.ModalLayout.controlModal(true, modal);
     }
 
     getColumnSearchProps = (dataIndex) => {

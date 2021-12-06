@@ -6,6 +6,7 @@ import styles from "./MainButton.module.css";
  * Props of MainButton Component
  * @typedef Props
  * @property {string} className
+ * @property {string} titleClassName
  * @property {React.CSSProperties} style
  * @property {string} title
  * @property {boolean} disabled
@@ -24,7 +25,7 @@ export default class MainButton extends Component {
 
         if(this.props.loading)return;
 
-        this.props.onClick(e);
+        this.props.onClick && this.props.onClick(e);
     }
     
     render(){
@@ -75,8 +76,8 @@ export default class MainButton extends Component {
                         }
                         {
                             this.props.whiteBorder?
-                            <div className={styles.title+" flc1"}>{this.props.title}</div>:
-                            <div className={styles.title+" fdc1"}>{this.props.title}</div>
+                            <div className={styles.title+" "+this.props.titleClassName+" flc1"}>{this.props.title}</div>:
+                            <div className={styles.title+" "+this.props.titleClassName+" fdc1"}>{this.props.title}</div>
                         }
                         {
                             this.props.leftArrow?
