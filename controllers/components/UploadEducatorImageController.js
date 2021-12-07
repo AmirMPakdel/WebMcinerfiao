@@ -1,0 +1,124 @@
+import UploadEducatorModel from "../../models/components/UploadEducatorModel";
+import { getCookie } from "../../utils/cookie";
+import UploadEducatorImage from "../../views/components/upload/UploadEducatorImage";
+
+export default class UploadEducatorImageController{
+    
+    /**@param {UploadEducatorImage} view*/
+    constructor(view){
+        this.view = view;
+        this.model = new UploadEducatorModel();
+    }
+    
+    onFile(event){
+
+        let maxSize = (this.view.props.maxSize?this.view.props.maxSize:1);
+
+        let file = event.target.files[0];
+
+        if(!file) return;
+
+        if(file.size < ((maxSize)*1024*1024)){
+            
+            let url = URL.createObjectURL(file);
+
+            let img = new Image();
+
+            img.src = url;
+
+            img.onload = ()=>{
+
+                this.view.state.file = file;
+                console.log(file);
+                this.view.state.image_src = img.src;
+
+                this.view.setState(this.view.state);
+            }
+
+        }else{
+            
+            chest.openNotification("اندازه فایل نباید بیشتر از "+maxSize+" مگابایت باشد.", "error");
+        }
+    }
+
+    upload(cb){
+
+        if(!this.view.state.file){
+            cb(null)
+            return
+        }
+
+        let vs = this.view.state;
+
+        let params = {
+            file_size: vs.file.size,
+            file_type: vs.file.type,
+            upload_type:"ut_educator_image",
+        }
+
+        this.model.getUploadKey(params, (err, data)=>{
+
+            if(data.result_code === env.SC.SUCCESS){
+                
+                this.view.setState({upload_key:data.data.upload_key}, ()=>{
+
+                    this.checkUploadKey(cb);
+                });
+            }
+        })
+    }
+
+    checkUploadKey(cb){
+
+        if(!this.view.state.upload_key){return}
+
+        let vs = this.view.state;
+
+        let params = {
+            file_size: vs.file.size,
+            file_type: vs.file.type,
+            upload_type:"ut_educator_image",
+            upload_key: vs.upload_key,
+        }
+
+        params.tenant = getCookie(env.TENANT_KEY);
+
+        this.model.getUploadCheck(params, (err, data)=>{
+
+            if(data.result_code === env.CSC.SUCCESS){
+
+                this.view.setState({
+                    upload_key:data.data.upload_key,
+                    upload_id: data.data.upload_id,
+                }, ()=>{
+
+                    this.uploadImage(cb);
+                });
+            }
+        });
+    }
+
+    uploadImage(cb){
+
+        if(!this.view.state.upload_id){return}
+
+        let vs = this.view.state;
+
+        let params = {
+            mfile: vs.file,
+            upload_id: vs.upload_id,
+            upload_key: vs.upload_key,
+        }
+
+        params.tenant = getCookie(env.TENANT_KEY);
+
+        this.model.getUploadFile(params, (err, data)=>{
+
+            if(data.result_code === env.CSC.SUCCESS){
+                
+                cb(this.view.state.upload_key);
+            }
+        })
+
+    }
+}

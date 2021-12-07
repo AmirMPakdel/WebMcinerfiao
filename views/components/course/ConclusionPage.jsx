@@ -1,62 +1,52 @@
 import React, { Component } from "react";
 import MainButton from "../global/MainButton";
 import styles from "./ConclusionPage.module.css";
-import NewCourseSelect from "../course/NewCourseSelect";
-import { Checkbox } from "antd";
 import SelectBox from "../global/SelectBox";
 import chest from "../../../utils/chest";
-import EducatorsSelectModal from "../modal/EducatorsSelectModal";
+import EducatorsCrudModal from "../modal/educators/EducatorsCrudModal";
 
 export default class ConclusionPage extends Component {
 
     state={
-        educators:[
-            {
-                key:"1",
-                title:"اکبر مبرا"
-            },
-            {
-                key:"2",
-                title:"محسن اژه ای"
-            },
-            {
-                key:"3",
-                title:"میلاد مهری"
-            },
-            {
-                key:"4",
-                title:"جواد اکبر پور"
-            },
-            {
-                key:"5",
-                title:"اکبر مبرا"
-            },
-            {
-                key:"6",
-                title:"محسن اژه ای"
-            },
-            {
-                key:"7",
-                title:"میلاد مهری"
-            },
-            {
-                key:"8",
-                title:"جواد اکبر پور"
-            },
-        ]
+        selected_edu_keys :[],
+        selected_edus:[],
+        educators:[],
     }
 
     onCancelAddEducatorModal=()=>{
         chest.ModalLayout.controlModal(false);
     }
 
-    onConfirmAddEducatorModal=()=>{
-        
+    EducatorsCrudModalConfirm=(selectedRowKeys, selectedRows)=>{
+        this.setState({
+            selected_edu_keys:selectedRowKeys,
+            selected_edus: selectedRows,
+            educators: selectedRows2Educators(selectedRows),
+        }, ()=>{
+            this.EducatorsCrudModalCancel();
+        });
+    }
+
+    EducatorsCrudModalCancel=()=>{ 
+        chest.ModalLayout.hideModal();
     }
 
     onAddEducator=()=>{
-        this.EducatorsSelectModal = <EducatorsSelectModal onCancel={this.onCancelAddEducatorModal} onConfirm={this.onConfirmAddEducatorModal}/>;
-        chest.ModalLayout.controlModal(true, this.EducatorsSelectModal, {});
+
+        let modal = <EducatorsCrudModal 
+        selectable={true} 
+        selectionType={"checkbox"}
+        selectedRowKeys={this.state.selected_edu_keys}
+        selectedRows={this.state.selected_edus}
+        onConfirm={this.EducatorsCrudModalConfirm}
+        onCancel={this.EducatorsCrudModalCancel}/>;
+
+        console.log(modal);
+
+        chest.ModalLayout.setModal(1, modal, ()=>{
+            chest.ModalLayout.visibleToggle(1, true);
+        });
+        
     }
 
     onRemoveEducator=(obj)=>{
@@ -100,3 +90,7 @@ export default class ConclusionPage extends Component {
 }
 
 const text1 = "در این قسمت مدرس(مدرسین) این دوره را مشخص کنید.";
+
+function selectedRows2Educators(rows){
+    return [];
+}

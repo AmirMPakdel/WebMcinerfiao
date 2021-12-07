@@ -1,4 +1,5 @@
 import EditEducatorModel from "../../../models/modals/educators/EditEducatorModel";
+import chest from "../../../utils/chest";
 import Validation from "../../../utils/validation";
 import EditEducatorModal from "../../../views/components/modal/educators/EditEducatorModal";
 

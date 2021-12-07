@@ -1,5 +1,5 @@
 import EducatorsCrudModel from "../../../models/modals/educators/EducatorsCrudModel";
-import EducatorsCrudModal from "../../../views/components/modal/Educators/EducatorsCrudModal";
+import EducatorsCrudModal from "../../../views/components/modal/educators/EducatorsCrudModal";
 
 export default class EducatorsCrudController{
     
@@ -19,12 +19,23 @@ export default class EducatorsCrudController{
 
             if(data.result_code === env.SC.SUCCESS){
 
+                let list = tableFormat(data.data);
+
                 this.view.setState({
                     loading:false,
-                    list:data.data,
+                    list,
                 })
             }
         })
     }
 
+}
+
+function tableFormat(data){
+    
+    data.forEach(e=>{
+        e.key = e.id;
+    })
+
+    return data;
 }

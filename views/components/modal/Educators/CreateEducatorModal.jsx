@@ -8,6 +8,7 @@ import TextArea from "../../global/TextArea";
 import FileUpload from "../../global/FileUpload";
 import CreateEducatorController from "../../../../controllers/modals/educators/CreateEducatorController";
 import { InputFilter } from "../../../../utils/validation";
+import UploadEducatorImage from "../../upload/UploadEducatorImage";
 
 /**
  * Props of CreateEducatorModal Component
@@ -44,8 +45,7 @@ export default class CreateEducatorModal extends Component {
     }
 
     onCancel=()=>{
-        let modal = <EducatorsCrudModal editable={true}/>
-        chest.ModalLayout.controlModal(true, modal);
+        chest.ModalLayout.showModal("EducatorsCrudModal");
     }
 
     onCreate=()=>{
@@ -76,19 +76,8 @@ export default class CreateEducatorModal extends Component {
 
                     <div className={styles.form_body}>
 
-                        <FileUpload onFile={this.onImage}>
-
-                            <div className={styles.img_con+" btc1 amp_btn"}>
-                                
-                                {
-                                    this.state.img_src?
-                                    <img className={styles.img} src={this.state.img_src}/>:
-                                    <div className={styles.add_img+" ftc2"}>+</div>
-                                }
-
-                            </div>
-
-                        </FileUpload>
+                        <UploadEducatorImage
+                        ref={r=>this.UploadEducatorImage=r}/>
 
                         <TextInput className={styles.form_input}
                         style={{marginTop:"2.5rem"}}

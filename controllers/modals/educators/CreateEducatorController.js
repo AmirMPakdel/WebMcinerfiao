@@ -23,42 +23,45 @@ export default class CreateEducatorController{
 
             this.lock = true;
 
-            this.view.setState({btn_loading:true})
+            this.view.setState({btn_loading:true});
 
-            let vs = this.view.state;
-            let params = {
-                first_name : vs.first_name,
-                last_name : vs.last_name,
-                bio : vs.bio,
-            }
+            this.view.UploadEducatorImage.upload((upload_key)=>{
 
-            if(vs.upload_key){
-                params.upload_key = vs.upload_key;
-            }
-
-            this.model.creatingEducator(params, (err, data)=>{
-
-                this.view.setState({btn_loading:false});
-
-                if(data.result_code === env.SC.SUCCESS){
-
-                    chest.openNotification("دبیر با موفقیت ایجاد شد.", "success");
-
-                    this.view.onCancel();
-
-                }else if(data.result_code === env.SC.INVALID_UPLOAD_KEY){
-
-                    //TODO:handle this error
-                    chest.openNotification("DEV::INVALID_UPLOAD_KEY", "error");
-
-                }else if(data.result_code === env.SC.CONVERTOR_SERVER_ISSUE_MOVING_FILE){
-
-                    //TODO:handle this error
-                    chest.openNotification("DEV::CONVERTOR_SERVER_ISSUE_MOVING_FILE", "error");
+                let vs = this.view.state;
+                let params = {
+                    first_name : vs.first_name,
+                    last_name : vs.last_name,
+                    bio : vs.bio,
                 }
 
-                this.lock = false;
-            })
+                if(upload_key){
+                    params.upload_key = upload_key;
+                }
+
+                this.model.creatingEducator(params, (err, data)=>{
+
+                    this.view.setState({btn_loading:false});
+
+                    if(data.result_code === env.SC.SUCCESS){
+
+                        chest.openNotification("دبیر با موفقیت ایجاد شد.", "success");
+
+                        this.view.onCancel();
+
+                    }else if(data.result_code === env.SC.INVALID_UPLOAD_KEY){
+
+                        //TODO:handle this error
+                        chest.openNotification("DEV::INVALID_UPLOAD_KEY", "error");
+
+                    }else if(data.result_code === env.SC.CONVERTOR_SERVER_ISSUE_MOVING_FILE){
+
+                        //TODO:handle this error
+                        chest.openNotification("DEV::CONVERTOR_SERVER_ISSUE_MOVING_FILE", "error");
+                    }
+
+                    this.lock = false;
+                });
+            });
         }
     }
 

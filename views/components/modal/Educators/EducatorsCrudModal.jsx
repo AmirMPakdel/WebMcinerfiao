@@ -20,7 +20,7 @@ import EditEducatorModal from "./EditEducatorModal";
  * @property {boolean} editable
  * @property {"checkbox" | "radio"} selectionType
  * @property {()=>{}} onCancel
- * @property {()=>{}} onConfirm
+ * @property {(selectedRowKeys, selectedRows)=>{}} onConfirm
  * 
  * @extends {Component<Props>}
  */
@@ -33,9 +33,20 @@ export default class EducatorsCrudModal extends Component {
 
         this.state = {
             loading:true,
+
             list:[],
+
+            selected_row_keys:[],
+            selected_rows:[],
+
             searchText: '',
             searchedColumn: '',
+        }
+
+        console.log(this.props.selectedRowKeys, this.props.selectedRows);
+        if(this.props.selectedRowKeys && this.props.selectedRows){
+            this.state.selected_row_keys = this.props.selectedRowKeys;
+            this.state.selected_rows = this.props.selectedRows;
         }
     }
 
@@ -46,19 +57,19 @@ export default class EducatorsCrudModal extends Component {
     onCreate=()=>{
 
         let modal = <CreateEducatorModal/>;
-        chest.ModalLayout.controlModal(true, modal);
+        chest.ModalLayout.tempModal(modal);
     }
 
     onEdit=(record)=>{
 
         let modal = <EditEducatorModal data={record}/>
-        chest.ModalLayout.controlModal(true, modal);
+        chest.ModalLayout.tempModal(modal);
     }
 
     onDelete=(record)=>{
 
         let modal = <AskDeleteEducatorModal data={record}/>
-        chest.ModalLayout.controlModal(true, modal);
+        chest.ModalLayout.tempModal(modal);
     }
 
     getColumnSearchProps = (dataIndex) => {
@@ -148,13 +159,13 @@ export default class EducatorsCrudModal extends Component {
         if(this.props.onCancel){
             this.props.onCancel();
         }else{
-            chest.ModalLayout.controlModal(false);
+            chest.ModalLayout.hideModal();
         }
     }
 
     onConfirm = ()=>{
 
-        this.props.onConfirm && this.props.onConfirm();
+        this.props.onConfirm && this.props.onConfirm(this.state.selected_row_keys, this.state.selected_rows);
     }
     
     render(){
@@ -186,6 +197,26 @@ export default class EducatorsCrudModal extends Component {
             },
             
         ];
+
+        let rowSelection = false;
+
+        if(this.props.selectable){
+            rowSelection = {
+                
+                type :this.props.selectionType,
+
+                selectedRowKeys:this.state.selected_row_keys,
+
+                onChange: (selectedRowKeys, selectedRows) => {
+                    this.setState({
+                        selected_row_keys : selectedRowKeys,
+                        selected_rows : selectedRows,
+                    })
+                  console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+                },
+
+            };
+        }
 
         return(
             <div className={styles.con+" bglc1 btc2 xl_card_shd"}>
@@ -220,20 +251,24 @@ export default class EducatorsCrudModal extends Component {
 
                             <Table
                             scroll={{ y: "calc(80vh - 14rem)" }}
-                            rowSelection={this.props.selectable?{ type: this.props.selectionType || "checkbox", ...rowSelection}:false}
+                            rowSelection={rowSelection}
                             columns={columns} 
                             dataSource={this.state.list}
                             pagination={false}/>
 
                         </ConfigProvider>
 
-                        <div className={styles.sec1}>
-                            
-                            <MainButton className={styles.confirm_btn}
-                            title={"تایید"}
-                            onClick={this.onConfirm}/>
+                        {
+                            this.props.selectable?
+                                <div className={styles.sec1}>
+                                
+                                    <MainButton className={styles.confirm_btn}
+                                    title={"تایید"}
+                                    onClick={this.onConfirm}/>
 
-                        </div>
+                                </div>
+                                :null
+                        }
 
                     </>:null
                 }
@@ -242,83 +277,3 @@ export default class EducatorsCrudModal extends Component {
         )
     }
 }
-
-const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-    },
-    getCheckboxProps: (record) => ({
-      disabled: record.name === 'Disabled User',
-      // Column configuration not to be checked
-      name: record.name,
-    }),
-};
-
-const data = [
-    // {
-    //   key: '1',
-    //   name: 'اکبر نژادیان',
-    //   age: " محمد رضا",
-    //   address: 'New York No. 1 Lake Park',
-    // },
-    // {
-    //   key: '2',
-    //   name: 'Joe Black',
-    //   age: 42,
-    //   address: 'London No. 1 Lake Park',
-    // },
-    // {
-    //   key: '3',
-    //   name: 'Jim Green',
-    //   age: 32,
-    //   address: 'Sidney No. 1 Lake Park',
-    // },
-    // {
-    //   key: '4',
-    //   name: 'Jim Red',
-    //   age: 32,
-    //   address: 'London No. 2 Lake Park',
-    // },
-    // {
-    //     key: '5',
-    //     name: 'Jim Red',
-    //     age: 32,
-    //     address: 'London No. 2 Lake Park',
-    // },
-    // {
-    //     key: '6',
-    //     name: 'Jim Red',
-    //     age: 32,
-    //     address: 'London No. 2 Lake Park',
-    // },
-    // {
-    //     key: '7',
-    //     name: 'Jim Red',
-    //     age: 32,
-    //     address: 'London No. 2 Lake Park',
-    // },
-    // {
-    //     key: '8',
-    //     name: 'Jim Red',
-    //     age: 32,
-    //     address: 'London No. 2 Lake Park',
-    // },
-    // {
-    //     key: '9',
-    //     name: 'Jim Red',
-    //     age: 32,
-    //     address: 'London No. 2 Lake Park',
-    // },
-    // {
-    //     key: '10',
-    //     name: 'Jim Red',
-    //     age: 32,
-    //     address: 'London No. 2 Lake Park',
-    // },
-    // {
-    //     key: '11',
-    //     name: 'Jim Red',
-    //     age: 32,
-    //     address: 'London No. 2 Lake Park',
-    // },
-];

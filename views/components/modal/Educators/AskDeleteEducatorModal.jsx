@@ -3,7 +3,7 @@ import AskDeleteEducatorController from "../../../../controllers/modals/educator
 import chest from "../../../../utils/chest";
 import Loading from "../../global/Loading";
 import MainButton from "../../global/MainButton";
-import EducatorsCrudModal from "../Educators/EducatorsCrudModal";
+import EducatorsCrudModal from "./EducatorsCrudModal";
 import styles from "./AskDeleteEducatorModal.module.css";
 
 /**
@@ -27,13 +27,11 @@ export default class AskDeleteEducatorModal extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props.data);
     }
     
 
     onCancel=()=>{
-        let modal = <EducatorsCrudModal editable={true}/>
-        chest.ModalLayout.controlModal(true, modal);
+        chest.ModalLayout.showModal("EducatorsCrudModal");
     }
 
     onDelete=()=>{
@@ -43,7 +41,7 @@ export default class AskDeleteEducatorModal extends Component {
     render(){
 
         let d = this.props.data;
-        let title = "آیا میخواهید دبیر با نام " +d.first_name+" "+d.last_name+" را از لیست دبیران خود حذف کنید؟";
+        let title = "آیا می خواهید دبیر با نام " +d.first_name+" "+d.last_name+" را از لیست دبیران خود حذف کنید؟";
 
         return(
             <div className={styles.con+" bglc1 btc2 lg_card_shd"}>

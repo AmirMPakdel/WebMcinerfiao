@@ -6,7 +6,7 @@ import FileUpload from "../../global/FileUpload";
 import MainButton from "../../global/MainButton";
 import TextArea from "../../global/TextArea";
 import TextInput from "../../global/TextInput";
-import EducatorsCrudModal from "../Educators/EducatorsCrudModal";
+import EducatorsCrudModal from "./EducatorsCrudModal";
 import styles from "./EditEducatorModal.module.css";
 
 /**
@@ -42,8 +42,7 @@ export default class EditEducatorModal extends Component {
     }
 
     onCancel=()=>{
-        let modal = <EducatorsCrudModal editable={true}/>
-        chest.ModalLayout.controlModal(true, modal);
+        chest.ModalLayout.showModal("EducatorsCrudModal");
     }
 
     onEdit=()=>{

@@ -95,5 +95,18 @@ var env = {
         CONTENT_NOT_FOUND : 1151,
         REPETITIVE_USERNAME : 1152,
         TAG_NOT_EXIST : 1153,
+    },
+
+    CSC:{
+        "SUCCESS":5000,
+        "INVALID_TOKEN":5001,
+        "INVALID_UPLOAD_KEY":5002,
+        "INVALID_TENANT":5003,
+        "SIZES_NOT_EQUAL":5003,
+        "FILE_NOT_FOUND":5004,
+        "RESPONSE_ARRAY":5005,
+        "PENDING":5100,
+        "UPLOAD_REJECT":5200,
+        "SERVER_ERROR":5300,
     }
 }

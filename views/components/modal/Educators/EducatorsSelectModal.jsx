@@ -138,7 +138,6 @@ export default class EducatorsSelectModal extends Component {
                 width: '35%',
                 ...this.getColumnSearchProps('age'),
             },
-            
         ];
 
         return(
@@ -184,72 +183,3 @@ const rowSelection = {
       name: record.name,
     }),
 };
-
-const data = [
-    {
-      key: '1',
-      name: 'اکبر نژادیان',
-      age: " محمد رضا",
-      address: 'New York No. 1 Lake Park',
-    },
-    {
-      key: '2',
-      name: 'Joe Black',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '5',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '6',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '7',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '8',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '9',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '10',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '11',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-];
