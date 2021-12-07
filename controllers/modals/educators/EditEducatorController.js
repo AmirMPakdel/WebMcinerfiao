@@ -45,6 +45,12 @@ export default class EditEducatorController{
 
                     chest.openNotification("دبیر با موفقیت ویرایش شد.", "success");
 
+                    if(chest.EducatorsCrudModal.controller && 
+                        chest.EducatorsCrudModal.controller.loadEducators){
+    
+                        chest.EducatorsCrudModal.controller.loadEducators();
+                    }
+
                     this.view.onCancel();
 
                 }else if(data.result_code === env.SC.INVALID_UPLOAD_KEY){

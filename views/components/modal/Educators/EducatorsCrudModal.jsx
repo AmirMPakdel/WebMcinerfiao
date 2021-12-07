@@ -30,6 +30,7 @@ export default class EducatorsCrudModal extends Component {
         super(props);
 
         this.controller = new EducatorsCrudController(this);
+        chest.EducatorsCrudModal.controller = this.controller;
 
         this.state = {
             loading:true,
@@ -57,19 +58,25 @@ export default class EducatorsCrudModal extends Component {
     onCreate=()=>{
 
         let modal = <CreateEducatorModal/>;
-        chest.ModalLayout.tempModal(modal);
+        chest.ModalLayout.setModal(2, modal, ()=>{
+            chest.ModalLayout.visibleToggle(2, true);
+        });
     }
 
     onEdit=(record)=>{
 
         let modal = <EditEducatorModal data={record}/>
-        chest.ModalLayout.tempModal(modal);
+        chest.ModalLayout.setModal(2, modal, ()=>{
+            chest.ModalLayout.visibleToggle(2, true);
+        });
     }
 
     onDelete=(record)=>{
 
         let modal = <AskDeleteEducatorModal data={record}/>
-        chest.ModalLayout.tempModal(modal);
+        chest.ModalLayout.setModal(2, modal, ()=>{
+            chest.ModalLayout.visibleToggle(2, true);
+        });
     }
 
     getColumnSearchProps = (dataIndex) => {
@@ -159,7 +166,7 @@ export default class EducatorsCrudModal extends Component {
         if(this.props.onCancel){
             this.props.onCancel();
         }else{
-            chest.ModalLayout.hideModal();
+            chest.ModalLayout.visibleToggle(1, false);
         }
     }
 
@@ -229,7 +236,6 @@ export default class EducatorsCrudModal extends Component {
                     this.state.loading?
                     <Loading/>:null
                 }
-
                 {
                     !this.state.loading?
                     <>

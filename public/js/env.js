@@ -16,7 +16,7 @@ var env = {
 
     DOMAIN: "http://tootifa.ir",
 
-    CONVERTOR_DOMAIN: "http://tootifa.ir:8020",
+    CONVERTOR_DOMAIN: "http://tootifa.ir/conv",
 
     MEDIA_PREFIX: "http://dltest.tootifa.ir",
 

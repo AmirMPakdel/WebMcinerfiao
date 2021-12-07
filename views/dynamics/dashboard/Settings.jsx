@@ -17,7 +17,9 @@ export default class Settings extends Component {
 
     onEducators=()=>{
         let modal = <EducatorsCrudModal editable={true}/>
-        chest.ModalLayout.controlModal(true, modal);
+        chest.ModalLayout.setModal(1, modal, ()=>{
+            chest.ModalLayout.visibleToggle(1, true);
+        });
     }
     
     render(){

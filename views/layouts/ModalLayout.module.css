@@ -20,9 +20,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: blue;
+    height: 20px;
+    width: 100%;
+    max-width: 10rem;
 }
 
 .modal_wrapper{
     background-color: rgba(0,0,0,0.4);
+}
+
+.modal_wrapper2{
+    height: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal_wrapper3{
+    position: absolute;
 }

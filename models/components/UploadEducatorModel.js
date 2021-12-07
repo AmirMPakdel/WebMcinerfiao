@@ -70,7 +70,7 @@ export default class UploadEducatorModel{
             return;
         }
     
-        myServer.Post(myServer.urls.UPLOAD_FILE_TO_CONVERTOR, params, {}, (err, data)=>{
+        myServer.Post(myServer.urls.UPLOAD_FILE_TO_CONVERTOR, params, {formData:true}, (err, data)=>{
     
             if(!err){
             

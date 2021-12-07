@@ -28,7 +28,7 @@ export default class ConclusionPage extends Component {
     }
 
     EducatorsCrudModalCancel=()=>{ 
-        chest.ModalLayout.hideModal();
+        chest.ModalLayout.closeAndDelete(1);
     }
 
     onAddEducator=()=>{
@@ -41,8 +41,6 @@ export default class ConclusionPage extends Component {
         onConfirm={this.EducatorsCrudModalConfirm}
         onCancel={this.EducatorsCrudModalCancel}/>;
 
-        console.log(modal);
-
         chest.ModalLayout.setModal(1, modal, ()=>{
             chest.ModalLayout.visibleToggle(1, true);
         });
@@ -51,6 +49,23 @@ export default class ConclusionPage extends Component {
 
     onRemoveEducator=(obj)=>{
 
+        console.log(obj);
+        let key = obj.key;
+
+        let new_educators = 
+        this.state.educators.filter((v)=>{
+            if(v.key !== key){
+                return v;
+            }
+        });
+
+        let {selectedRowKeys, selectedRows} = educators2SelectedRows(this.state.selected_edus, new_educators);
+
+        this.setState({
+            selected_edu_keys: selectedRowKeys,
+            selected_edus: selectedRows,
+            educators: new_educators,
+        });
     }
 
     onCreate=()=>{
@@ -92,5 +107,32 @@ export default class ConclusionPage extends Component {
 const text1 = "در این قسمت مدرس(مدرسین) این دوره را مشخص کنید.";
 
 function selectedRows2Educators(rows){
-    return [];
+
+    let list = []
+    rows.forEach(e=>{
+        list.push({key:e.id, title:e.first_name+" "+e.last_name});
+    })
+    return list;
+}
+
+function educators2SelectedRows(old_selectedRows, educators){
+
+    let selectedRowKeys = [];
+    let selectedRows = [];
+
+    educators.forEach((e, i)=>{
+
+        old_selectedRows.forEach((e2, i2)=>{
+
+            if(e.key === e2.key){
+                selectedRows.push(e2);
+                selectedRowKeys.push(e2.key);
+            }
+        });
+    });
+
+    return {
+        selectedRowKeys,
+        selectedRows,
+    }
 }

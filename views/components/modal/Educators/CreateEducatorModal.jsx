@@ -45,7 +45,13 @@ export default class CreateEducatorModal extends Component {
     }
 
     onCancel=()=>{
-        chest.ModalLayout.showModal("EducatorsCrudModal");
+        if(this.props.onCancel){
+            this.props.onCancel();
+        }else{
+            chest.ModalLayout.visibleToggle(2, false, ()=>{
+                chest.ModalLayout.visibleToggle(1, true);
+            });
+        }
     }
 
     onCreate=()=>{

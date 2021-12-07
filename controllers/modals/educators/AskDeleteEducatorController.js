@@ -29,6 +29,12 @@ export default class AskDeleteEducatorController{
                 });
                 
                 chest.openNotification("دبیر مورد نظر حذف شد", "success");
+
+                if(chest.EducatorsCrudModal.controller && 
+                    chest.EducatorsCrudModal.controller.loadEducators){
+
+                    chest.EducatorsCrudModal.controller.loadEducators();
+                }
                 
                 this.view.onCancel();
             }

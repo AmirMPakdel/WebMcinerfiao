@@ -46,6 +46,12 @@ export default class CreateEducatorController{
 
                         chest.openNotification("دبیر با موفقیت ایجاد شد.", "success");
 
+                        if(chest.EducatorsCrudModal.controller && 
+                            chest.EducatorsCrudModal.controller.loadEducators){
+        
+                            chest.EducatorsCrudModal.controller.loadEducators();
+                        }
+
                         this.view.onCancel();
 
                     }else if(data.result_code === env.SC.INVALID_UPLOAD_KEY){

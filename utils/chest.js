@@ -16,17 +16,17 @@ let chest = {
     ModalLayout:{
         setModal: (layer, jsx, cb)=>{},
         visibleToggle: (layer, visible, cb)=>{},
-        // tempModal:(jsx)=>{},
-        // addModal:(jsx, name)=>{},
-        // showModal:(name)=>{},
-        // hideModal:()=>{},
-        // deleteModal:(name)=>{},
+        closeAndDelete:(layer, cb)=>{},
     },
 
     SideMenu:{
         menu_is_open:false,
         openSideMenu:()=>{},
         closeSideMenu:()=>{},
+    },
+
+    EducatorsCrudModal:{
+        controller:{},
     },
 
     disableBodyVerticalScroll : ()=>{},

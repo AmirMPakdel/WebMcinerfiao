@@ -6,36 +6,33 @@ import { Modal } from "antd";
 export default class ModalLayout extends Component {
 
     state = {
-        visible:false,
-        modals: {},
-        modal_jsx:null,
 
         layer1:null,
         layer1_visible:false,
+        layer1_destroy:false,
 
+        layer2:null,
+        layer2_visible:false,
+        layer2_destroy:false,
+
+        layer3:null,
+        layer3_visible:false,
+        layer3_destroy:false,
     }
 
     componentDidMount(){
         chest.ModalLayout.setModal = this.setModal;
         chest.ModalLayout.visibleToggle = this.visibleToggle;
-        // chest.ModalLayout.tempModal = this.tempModal;
-        // chest.ModalLayout.addModal = this.addModal;
-        // chest.ModalLayout.showModal = this.showModal;
-        // chest.ModalLayout.hideModal = this.hideModal;
-        // chest.ModalLayout.deleteModal = this.deleteModal;
+        chest.ModalLayout.closeAndDelete = this.closeAndDelete;
     }
 
     componentWillUnmount(){
-        // chest.ModalLayout.tempModal = ()=>{};
-        // chest.ModalLayout.addModal = ()=>{};
-        // chest.ModalLayout.showModal = ()=>{};
-        // chest.ModalLayout.hideModal =  ()=>{};
-        // chest.ModalLayout.deleteModal = ()=>{};
     }
 
     setModal = (layer, jsx, cb)=>{
+        this.state["layer"+layer+"_destroy"] = false;
         this.state["layer"+layer] = jsx;
-        this.setState(this.state, cb)
+        this.setState(this.state, cb);
     }
 
     visibleToggle = (layer, visible, cb)=>{
@@ -43,32 +40,11 @@ export default class ModalLayout extends Component {
         this.setState(this.state, cb)
     }
 
-
-    // tempModal = (jsx)=>{
-    //     this.setState({modal_jsx:jsx, visible:true});
-    // }
-
-    // addModal = (jsx, name)=>{
-    //     this.state.modals[name] = jsx;
-    // }
-
-    // showModal = (name)=>{
-    //     let m = this.state.modals[name];
-    //     this.setState({modal_jsx:m, visible:true});
-    // }
-
-    // hideModal = ()=>{
-    //     this.setState({visible:false});
-    // }
-
-    // deleteModal = (name)=>{
-    //     delete this.state.modals[name];
-    //     this.setState(this.state);
-    // }
-
-    // onBackdrop=()=>{
-        
-    // }
+    closeAndDelete = (layer, cb)=>{
+        this.state["layer"+layer+"_destroy"] = true;
+        this.state["layer"+layer+"_visible"] = false;
+        this.setState(this.state, cb)
+    }
     
     render(){
 
@@ -85,21 +61,59 @@ export default class ModalLayout extends Component {
                 {
                     this.props.children
                 }
-                {
-                    <Modal visible={s.layer1_visible} 
-                    centered={true}
-                    footer={null} 
-                    wrapClassName={styles.modal_wrapper}
-                    //bodyStyle={{backgroundColor:"green", display:"flex", justifyContent:"center", alignItems:"center", height:"100vh", width:"100vw"}}
-                    closable={false}
-                    className={styles.modal_con}>
+                
+                <Modal visible={s.layer1_visible} 
+                centered={true}
+                footer={null} 
+                wrapClassName={styles.modal_wrapper}
+                closable={false}
+                destroyOnClose={true}
+                className={styles.modal_con}>
 
-                        {
-                            s.layer1
-                        }
+                    <div className={styles.modal_wrapper2}>
+                        <div className={styles.modal_wrapper3}>
+                            {
+                                s.layer1
+                            }
+                        </div>
+                    </div>
 
-                    </Modal>
-                }
+                </Modal>
+            
+                <Modal visible={s.layer2_visible} 
+                centered={true}
+                footer={null} 
+                wrapClassName={styles.modal_wrapper}
+                closable={false}
+                className={styles.modal_con}>
+
+                    <div className={styles.modal_wrapper2}>
+                        <div className={styles.modal_wrapper3}>
+                            {
+                                s.layer2
+                            }
+                        </div>
+                    </div>
+
+                </Modal>
+            
+                <Modal visible={s.layer3_visible} 
+                centered={true}
+                footer={null} 
+                wrapClassName={styles.modal_wrapper}
+                closable={false}
+                className={styles.modal_con}>
+
+                    <div className={styles.modal_wrapper2}>
+                        <div className={styles.modal_wrapper3}>
+                            {
+                                s.layer3
+                            }
+                        </div>
+                    </div>
+
+                </Modal>
+                
             </div>
         )
     }

@@ -47,7 +47,7 @@ export default class SelectBox extends Component {
                     this.props.data.map((v,i)=>(
                         <Label key={i}
                         title={v.title}
-                        onClick={(v)=>this.onRemove(v)}/>
+                        onClick={()=>this.onRemove(v)}/>
                     )):null
                 }
 

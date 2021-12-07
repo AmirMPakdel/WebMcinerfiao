@@ -29,7 +29,7 @@ export default class UploadEducatorImageController{
             img.onload = ()=>{
 
                 this.view.state.file = file;
-                console.log(file);
+
                 this.view.state.image_src = img.src;
 
                 this.view.setState(this.view.state);
@@ -88,7 +88,6 @@ export default class UploadEducatorImageController{
             if(data.result_code === env.CSC.SUCCESS){
 
                 this.view.setState({
-                    upload_key:data.data.upload_key,
                     upload_id: data.data.upload_id,
                 }, ()=>{
 
