@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import price from "../../utils/price";
+import price from "../../../utils/price";
 import styles from "./EditablePrice.module.css";
 
 export default class EditablePrice extends Component {

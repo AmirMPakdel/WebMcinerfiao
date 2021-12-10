@@ -1,13 +1,13 @@
 import myServer from "../../utils/myServer";
 
-export default class myCoursesModel{
+export default class NewCourseModel{
     
     /**
     * 
     * @param {object} params
     * @param {import("../jsdoc/RequestCallback").RequestCallback} cb 
     */
-    getData(params, cb){
+    getCategories(params, cb){
     
         if(env.MOCKING_SERVER){
             setTimeout(()=>{
@@ -16,7 +16,7 @@ export default class myCoursesModel{
             return;
         }
     
-        myServer.Post(myServer.urls.SOME_URL, params, {}, (err, data)=>{
+        myServer.Get(myServer.urls.CATEGORY_FETCH, {params}, (err, data)=>{
     
             if(!err){
             
@@ -28,6 +28,4 @@ export default class myCoursesModel{
             }
         });
     }
-    
-    
 }

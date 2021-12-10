@@ -7,14 +7,16 @@
 
 .sec_con{
     width: 29.25rem;
-    height: 18.75rem;
+    /* height: 18.75rem; */
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-top: 2.2rem;
+    padding: 2rem 0;
+
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-right: 1rem;
-    margin-left: 1rem;
-    margin-top: 2.2rem;
     border-radius: 1rem;
     background-color: white;
     box-shadow: 0 0.5rem 1rem 0.1rem rgb(0, 0, 0, 0.15);
@@ -113,9 +115,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1.8rem;
+    margin-top: 3rem;
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
+}
+
+.category_con{
+    margin-top: 1rem;
+    width: 80% !important;
 }
 
 .next_btn{
@@ -129,7 +136,7 @@
 
     .sec_con{
         width: 29.25rem;
-        height: 18.75rem;
+        /* height: 18.75rem; */
     }
 }
 
@@ -137,6 +144,6 @@
 
     .sec_con{
         width: 20.5rem;
-        height: 18.75rem;
+        /* height: 18.75rem; */
     }
 }

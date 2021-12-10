@@ -44,26 +44,32 @@
     margin-top: 0.5rem;
 }
 
+.select_box{
+    width: calc(100% - 3rem);
+    margin-top: 1rem;
+    height: 11rem;
+}
+
 .wrapper2{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin-top: 1.8rem;
-    width: 100%;
     margin-bottom: 2rem;
+    width: 100%;
+    padding: 0 calc(50% - 13rem);
+}
+
+.back_btn{
+    width: 12rem;
+    height: 2.6rem;
+    margin: 0;
 }
 
 .next_btn{
     width: 12rem;
     height: 2.6rem;
     margin: 0;
-    margin-bottom: 1.8rem;
-}
-
-.select_box{
-    width: calc(100% - 3rem);
-    margin-top: 1rem;
-    height: 11rem;
 }
 
 @media(max-width:1024px){

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import MainButton from "../global/MainButton";
 import styles from "./PriceCategoryPage.module.css";
 import TextInput from "../global/TextInput";
+import Dropdown from "../global/SelectSearch";
+import SelectSearch from "../global/SelectSearch";
 
 export default class PriceCategoryPage extends Component {
 
@@ -25,6 +27,11 @@ export default class PriceCategoryPage extends Component {
         this.setState(this.state, this.continueCheck);
     }
 
+    onCategory=(id, obj)=>{
+        this.props.parent.state["category"]= id;
+        this.setState(this.state, this.continueCheck);
+    }
+
     continueCheck=(mark_red)=>{
 
         let ps = this.props.parent.state;
@@ -34,6 +41,9 @@ export default class PriceCategoryPage extends Component {
             can = false;
         }
         if(!ps.price){
+            can = false;
+        }
+        if(!ps.category){
             can = false;
         }
 
@@ -49,6 +59,8 @@ export default class PriceCategoryPage extends Component {
         
         this.props.parent.setState({
             step : 2
+        }, ()=>{
+            window.scrollTo(0,0);
         });
     }
 
@@ -60,6 +72,8 @@ export default class PriceCategoryPage extends Component {
             <div className={styles.con}>
 
                 <div className={styles.sec_con}>
+
+                    
                     
                     <div className={styles.sec_title}>{"عنوان و قیمت دوره"}</div>
 
@@ -74,6 +88,14 @@ export default class PriceCategoryPage extends Component {
                     <input className={styles.txinput1+" cpnt"} placeholder={"قیمت دوره"}
                     value={ps.price}
                     onChange={(e)=>this.onChangeInput("price", e.target.value)}/>
+
+                    <div className={styles.info_sec2}>{text3}</div>
+
+                    <SelectSearch className={styles.category_con}
+                    options={ps.categories}
+                    placeholder={"انتخاب دسته بندی"}
+                    value={ps.category}
+                    onChange={this.onCategory}/>
 
                 </div>
 
@@ -94,13 +116,16 @@ export default class PriceCategoryPage extends Component {
 
 const text1 = "در این قسمت عنوان دوره‌ای را که قصد دارید دوره با این نام ثبت شود و به فروش رود وارد کنید";
 const text2 = "در این قسمت، قیمت مد نظر خود را برای فروش دوره وارد کنید";
+const text3 = "در این قسمت کتگوری این دوره چرت خودتونو سلکت کنید";
 
 function fakeInput(c){
     c.props.parent.setState ({
 
-        title:"دروه ریاضی تکمیلی",
+        title:"2دروه ریاضی تکمیلی",
 
         price:"350000",
+
+        category: 3,
 
     }, c.continueCheck);
 }

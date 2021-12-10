@@ -30,6 +30,12 @@ const urls = {
     DASH_UPDATE_EDUCATOR: domain+prefixes.UTA+"/educators/update",
     DASH_DELETE_EDUCATOR: domain+prefixes.UTA+"/educators/delete",
 
+    //course category
+    CATEGORY_FETCH: domain+prefixes.PTA+"/categories/fetch",
+
+    //course
+    COURSE_CREATE: domain+prefixes.UTA+"/courses/create",
+
 }
 
 /**

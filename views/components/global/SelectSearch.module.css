@@ -1,0 +1,11 @@
+.con{
+    min-width: 16rem;
+}
+
+.option{
+    direction: rtl;
+}
+
+.dropdown{
+    width: auto !important;
+}

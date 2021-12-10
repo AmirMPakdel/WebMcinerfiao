@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MyCoursesController from "../../../controllers/dashboard/myCoursesController";
+import MyCoursesController from "../../../controllers/dashboard/MyCoursesController";
 import MainButton from "../../components/global/MainButton";
 import Svg from "../../components/global/Svg";
 import EducatorDashboardLayout from "../../layouts/EducatorDashboardLayout";
@@ -31,7 +31,7 @@ export default class MyCourses extends Component {
 
                     <div className={styles.mcrs_con}>
 
-                        <BackShape1 fill="#6600AA"/>
+                        {/* <BackShape1 fill="#6600AA"/> */}
 
                         {
                             this.state.myCourseList.map((v,i)=>(

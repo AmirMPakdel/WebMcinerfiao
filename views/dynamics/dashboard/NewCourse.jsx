@@ -4,25 +4,35 @@ import styles from "./NewCourse.module.css";
 import NewCourseSteps from '../../components/course/NewCourseSteps';
 import PriceCategoryPage from "../../components/course/PriceCategoryPage";
 import PlayModeSelectPage from "../../components/course/PlayModeSelectPage";
-import ConclusionPage from "../../components/course/ConclusionPage";
+import CreateCoursePage from "../../components/course/CreateCoursePage";
 import WrapperT1 from "../../layouts/WrapperT1";
+import Loading from "../../components/global/Loading";
+import NewCourseController from "../../../controllers/dashboard/NewCourseController";
 
-export default class NewCourses extends Component {
+export default class NewCourse extends Component {
     
-    state={
+    constructor(props){
+        super(props);
 
-        step:1,
+        this.conroller = new NewCourseController(this);
 
-        title: "",
-        price: "",
+        this.state={
+
+            step: "loading",
+
+            categories:[],
+    
+            title: "",
+            price: "",
+            category: null,
+            is_encrypted: 1,
+        }
     }
+    
 
     componentDidMount(){
 
-    }
-
-    onStep=(step)=>{
-        this.setState({step})
+        this.conroller.getInitialData();
     }
 
     render(){
@@ -30,8 +40,13 @@ export default class NewCourses extends Component {
             <EducatorDashboardLayout>
                 <WrapperT1>
                 
-                    <NewCourseSteps step={this.state.step} onStep={this.onStep}/>
-
+                    <NewCourseSteps step={this.state.step}/>
+                    
+                    {
+                        this.state.step==="loading"?
+                        <Loading style={{minHeight:"24rem"}}/>:
+                        null
+                    }
                     {
                         this.state.step===1?
                         <PriceCategoryPage
@@ -46,7 +61,7 @@ export default class NewCourses extends Component {
                     }
                     {
                         this.state.step===3?
-                        <ConclusionPage
+                        <CreateCoursePage
                         parent={this}/>
                         :null
                     }

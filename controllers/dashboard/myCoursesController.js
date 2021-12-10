@@ -1,24 +1,12 @@
-import MyCoursesModel from "../../models/dashboard/myCoursesModel";
-import MyCourses from "../../views/dynamics/dashboard/MyCourses";
 
-export default class MyCoursesController{
+export default class myCoursesController{
     
-    /**@param {MyCourses} myCorusesView*/
-    constructor(myCorusesView){
-
-        this.view = myCorusesView;
-
-        this.model = new MyCoursesModel();
+    /**@param {ViewClassName} view*/
+    constructor(view){
+        this.view = view;
+        this.model = new ModelClassName();
     }
-
-    async loadMyCourses(){
-
-        let myCourseList = await this.model.getMyCourses();
-
-        this.view.setState({
-            loading:false,
-            myCourseList,
-        });
-    }
+    
+    
     
 }

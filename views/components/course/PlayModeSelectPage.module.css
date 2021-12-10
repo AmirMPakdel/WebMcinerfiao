@@ -63,10 +63,17 @@
 
 .wrapper2{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin-top: 1.8rem;
     width: 100%;
+    padding: 0 calc(50% - 13rem);
+}
+
+.back_btn{
+    width: 12rem;
+    height: 2.6rem;
+    margin: 0;
 }
 
 .next_btn{

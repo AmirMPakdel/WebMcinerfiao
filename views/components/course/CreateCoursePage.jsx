@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import MainButton from "../global/MainButton";
-import styles from "./ConclusionPage.module.css";
+import styles from "./CreateCoursePage.module.css";
 import SelectBox from "../global/SelectBox";
 import chest from "../../../utils/chest";
 import EducatorsCrudModal from "../modal/educators/EducatorsCrudModal";
+import myServer from "../../../utils/myServer";
 
-export default class ConclusionPage extends Component {
+export default class CreateCoursePage extends Component {
 
     state={
         selected_edu_keys :[],
@@ -68,8 +69,44 @@ export default class ConclusionPage extends Component {
         });
     }
 
+    onPrevious=()=>{
+        this.props.parent.setState({
+            step: 2
+        },()=>{
+            window.scrollTo(0,0);
+        })
+    }
+
     onCreate=()=>{
-        window.location.href = "/edu/myCourses/edit";
+        
+        //create mvc later
+        this.props.parent.setState({step:"loading"});
+
+        let ps = this.props.parent.state
+        let params = {
+            title: ps.title,
+            price: Number(ps.price),
+            is_encrypted: ps.is_encrypted,
+            educators: this.state.selected_edu_keys,
+            category_id: ps.category,
+        }
+
+        myServer.Post(myServer.urls.COURSE_CREATE, params, {}, (err, data)=>{
+
+            if(data.result_code === env.SC.SUCCESS){
+
+                chest.openNotification("دوره مورد نظر با موفقیت ایجاد شده.", "success");
+
+                alert(data.data.course_id)
+                //window.location.href = "/dashboard/editCourse/"+data.data.course_id
+
+            }else{
+
+                chest.openNotification("DEV::"+data.result_code, "error");
+
+                this.props.parent.setState({step:3});
+            }
+        });
     }
     
     render(){
@@ -94,8 +131,14 @@ export default class ConclusionPage extends Component {
 
         <div className={styles.wrapper2}>
 
+            <MainButton className={styles.back_btn}
+            title={"مرحله قبل"}
+            borderMode={true}
+            onClick={this.onPrevious}/>
+
             <MainButton className={styles.next_btn} 
             title={"ایجاد دوره"} 
+            disabled={this.state.selected_edu_keys.length===0}
             onClick={this.onCreate}/>
 
         </div>

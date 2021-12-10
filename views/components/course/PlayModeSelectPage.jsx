@@ -6,20 +6,30 @@ import styles from "./PlayModeSelectPage.module.css";
 export default class PlayModeSelectPage extends Component {
     
     state={
-        selected:"secure"
+        selected:1
     }
 
     onSecure = ()=>{
-        this.setState({selected:"secure"})
+        this.setState({selected:1})
     }
 
     onInsecure = ()=>{
-        this.setState({selected:"insecure"})
+        this.setState({selected:0})
+    }
+
+    onPrevious=()=>{
+        this.props.parent.setState({
+            step: 1
+        },()=>{
+            window.scrollTo(0,0);
+        })
     }
 
     onNext=()=>{
         this.props.parent.setState({
             step: 3
+        },()=>{
+            window.scrollTo(0,0);
         })
     }
 
@@ -36,7 +46,7 @@ export default class PlayModeSelectPage extends Component {
                     {t}
                 </div>
 
-                <Checkbox className={styles.select} checked={this.state.selected==="secure"}/>
+                <Checkbox className={styles.select} checked={this.state.selected===1}/>
                 
             </div>
 
@@ -48,15 +58,22 @@ export default class PlayModeSelectPage extends Component {
                     {t}
                 </div>
                 
-                <Checkbox className={styles.select} checked={this.state.selected==="insecure"}/>
+                <Checkbox className={styles.select} checked={this.state.selected===0}/>
                 
             </div>
             
         </div>
         <div className={styles.wrapper2}>
+
+            <MainButton className={styles.back_btn}
+            title={"مرحله قبل"}
+            borderMode={true}
+            onClick={this.onPrevious}/>
+
             <MainButton className={styles.next_btn} 
             title={"تایید و ادامه"}
             onClick={this.onNext}/>
+
         </div>
         </>
         )

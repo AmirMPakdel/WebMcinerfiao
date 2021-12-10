@@ -9,9 +9,9 @@ export default class NewCourseSteps extends Component {
 
                 <div className={styles.wrapper}>
 
-                    <Step step={this.props.step} number={1} onClick={this.props.onStep}/>
-                    <Step step={this.props.step} number={2} onClick={this.props.onStep}/>
-                    <Step step={this.props.step} number={3} onClick={this.props.onStep}/>
+                    <Step step={this.props.step} number={1}/>
+                    <Step step={this.props.step} number={2}/>
+                    <Step step={this.props.step} number={3}/>
 
                     <Line step={this.props.step} number={1}/>
                     <Line step={this.props.step} number={2}/>
@@ -33,7 +33,7 @@ function Step(props){
     }
 
     return(
-        <div className={styles.step_con+" "+add_class} onClick={()=>props.onClick(props.number)}>
+        <div className={styles.step_con+" "+add_class}>
             
             <span>{props.number}</span>
 
