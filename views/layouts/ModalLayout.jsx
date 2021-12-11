@@ -90,6 +90,7 @@ export default class ModalLayout extends Component {
                     <div className={styles.modal_wrapper2}>
                         <div className={styles.modal_wrapper3}>
                             {
+                      
                                 s.layer2
                             }
                         </div>

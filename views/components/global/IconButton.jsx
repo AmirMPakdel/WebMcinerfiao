@@ -5,6 +5,7 @@ import styles from "./IconButton.module.css";
 * Props of IconButton Component
 * @typedef Props
 * @property {string} className
+* @property {React.CSSProperties} style
 * @property {string} title
 * @property {boolean} disabled
 * @property {boolean} borderMode
@@ -28,7 +29,7 @@ export default class IconButton extends Component {
         }
 
         return(
-            <div className={styles.con+" bdyt "+add_class+" amp_btn "+this.props.className}>
+            <div className={styles.con+" bdyt "+add_class+" amp_btn "+this.props.className} style={this.props.style}>
 
                 <img className={styles.icon} src={this.props.icon}/>
 

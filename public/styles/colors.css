@@ -53,6 +53,20 @@
 }
 
 /**
+    white color
+**/
+
+.bgw{
+    background-color: #FFF;
+}
+.fw{
+    color: #FFF;
+}
+.bw{
+    border-color: #FFF;
+}
+
+/**
     main light color
 **/
 .bglc1{
@@ -160,6 +174,21 @@
 }
 .bdc2i{
     border-color: #939597 !important;
+}
+
+
+/**
+    white color
+**/
+
+.bgwi{
+    background-color: #FFF !important;
+}
+.fwi{
+    color: #FFF !important;
+}
+.bwi{
+    border-color: #FFF !important;
 }
 
 /**

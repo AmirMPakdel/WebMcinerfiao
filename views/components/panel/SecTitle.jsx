@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import styles from "./SecTitle.module.css";
 
+/**
+* Props of SecTitle Component
+* @typedef Props
+* @property {string} className
+* @property {React.CSSProperties} style
+* @property {string} title
+* 
+* @extends {Component<Props>}
+*/
 export default class SecTitle extends Component {
     
     render(){
@@ -12,7 +21,7 @@ export default class SecTitle extends Component {
         }
 
         return(
-            <div className={styles.con+" "+add_class}>
+            <div className={styles.con+" "+add_class} style={this.props.style}>
 
                 <div className={styles.title}>{this.props.title}</div>
                 
