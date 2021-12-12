@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import EditTitleController from "../../../controllers/components/editCourse/EditTitleController";
-import EditabeText from "../editable/EditableText";
+import EditableText from "../editable/EditableText";
 import EditableTitle from "../editable/EditableTitle";
-import IconButton from "../global/IconButton";
+import Loading from "../global/Loading";
 import styles from "./EditCourseTitle.module.css";
+import EditCourse from "../../dynamics/dashboard/EditCourse";
 
 /**
 * Props of EditCourseTitle Component
 * @typedef Props
 * @property {string} className
 * @property {React.CSSProperties} style
+* @property {EditCourse} parent
 * 
 * @extends {Component<Props>}
 */
@@ -19,29 +21,61 @@ export default class EditCourseTitle extends Component {
         super(props);
         this.controller = new EditTitleController(this);
         this.state = {
-        
+
         }
     }
     
     componentDidMount(){
         
     }
+
+    onEdit=()=>{
+        this.EditableText.onEdit();
+        let status = this.props.parent.state.status;
+        status.title = "edit";
+        this.props.parent.setState(status);
+    }
+
+    onSubmit=()=>{
+        this.EditableText.onSubmit();
+        
+    }
+
+    onCancel=()=>{
+        this.EditableText.onCancel();
+    }
     
+    onChange=(t)=>{
+        let newVal = this.props.parent.state.new_values;
+        newVal.title = t;
+        this.props.parent.setState(newVal)
+    }
+
     render(){
+        let p = this.props.parent;
+        let ps = p.state;
+        let st = ps.status;
+        let od = ps.old_values;
+        let nw = ps.new_values;
+
         return(
             <div className={styles.con}>
 
                 <EditableTitle
-                title={"عنوان دوره"}>
+                title={"عنوان دوره"}
+                status={st.title}
+                onEdit={this.onEdit}
+                onSubmit={this.onSubmit}
+                onCancel={this.onCancel}/>
 
-                    <IconButton style={{marginTop:"0"}}
-                    title={"ویرایش"}/>
+                <EditableText
+                className={styles.edit_title}
+                ref={r=>this.EditableText=r}
+                maxLength={64}
+                value={nw.title}
+                oldValue={od.title}
+                onChange={this.onChange}/>
 
-                </EditableTitle>
-
-                <EditabeText
-                />
-                
             </div>
         )
     }

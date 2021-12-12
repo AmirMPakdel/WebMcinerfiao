@@ -10,5 +10,7 @@ export default class EditTitleController{
     }
     
     
-    
+    onSubmit(){
+        
+    }
 }

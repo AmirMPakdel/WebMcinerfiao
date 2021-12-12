@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import IconButton from "../global/IconButton";
+import Loading from "../global/Loading";
 import styles from "./EditableTitle.module.css";
 
 /**
@@ -7,10 +9,26 @@ import styles from "./EditableTitle.module.css";
 * @property {string} className
 * @property {React.CSSProperties} style
 * @property {string} title
+* @property {"idle"|"edit"|"loading"} status
+* @property {()=>{}} onEdit
+* @property {()=>{}} onSubmit
+* @property {()=>{}} onCancel
 * 
 * @extends {Component<Props>}
 */
 export default class EditableTitle extends Component {
+
+    onEdit=()=>{
+        this.props.onEdit();
+    }
+
+    onSubmit=()=>{
+        this.props.onSubmit();
+    }
+
+    onCancel=()=>{
+        this.props.onCancel();
+    }
     
     render(){
 
@@ -35,6 +53,27 @@ export default class EditableTitle extends Component {
 
                     {
                         this.props.children
+                    }
+
+                    {
+                        this.props.status==="idle"?
+                        <IconButton className={styles.edit+" bgtc1 "}
+                        onClick={this.onEdit}/>
+                        :null
+                    }
+                    {
+                        this.props.status==="loading"?
+                        <Loading className={styles.loading} scale={0.5}/>:null
+                    }
+                    {
+                        this.props.status==="edit"?
+                        <>
+                        <IconButton className={styles.edit+" bgsc "}
+                        onClick={this.onSubmit}/>
+
+                        <IconButton className={styles.edit+" bgec "}
+                        onClick={this.onCancel}/>
+                        </>:null
                     }
 
                 </div>

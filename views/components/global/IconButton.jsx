@@ -9,6 +9,7 @@ import styles from "./IconButton.module.css";
 * @property {string} title
 * @property {boolean} disabled
 * @property {boolean} borderMode
+* @property {(event:Event)=>{}} onClick
 * 
 * @extends {Component<Props>}
 */
@@ -29,12 +30,16 @@ export default class IconButton extends Component {
         }
 
         return(
-            <div className={styles.con+" bdyt "+add_class+" amp_btn "+this.props.className} style={this.props.style}>
+            <div className={styles.con+" bdyt "+add_class+" amp_btn "+this.props.className} style={this.props.style}
+            onClick={this.props.onClick}>
 
                 <img className={styles.icon} src={this.props.icon}/>
 
-                <div className={styles.title} >{this.props.title}</div>
-
+                {
+                    this.props.title?
+                    <div className={styles.title} >{this.props.title}</div>:null
+                }
+                
             </div>
         )
     }

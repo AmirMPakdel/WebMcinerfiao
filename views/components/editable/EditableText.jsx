@@ -1,7 +1,19 @@
 import React, { Component } from "react";
-import styles from "./EditabeText.module.css";
+import styles from "./EditableText.module.css";
 
-export default class EditabeText extends Component {
+/**
+* Props of EditableText Component
+* @typedef Props
+* @property {string} className
+* @property {React.CSSProperties} style
+* @property {(text)=>{}} onChange
+* @property {string} value
+* @property {string} oldValue
+* @property {number} maxLength
+* 
+* @extends {Component<Props>}
+*/
+export default class EditableText extends Component {
     
     state = {
         readOnly : true,
@@ -15,37 +27,25 @@ export default class EditabeText extends Component {
     }
 
     onSubmit = ()=>{
-        this.props.onSubmit();
         this.setState({readOnly : true});
     }
 
     onCancel = ()=>{
-        this.input.value = this.props.old_value;
-        this.props.onChange(this.props.old_value);
+        this.input.value = this.props.oldValue;
+        this.props.onChange(this.props.oldValue);
         this.setState({readOnly : true});
     }
 
     render(){
         return(
-            <div className={styles.con}>
+            <div className={styles.con+" bgwi bdc2i "+this.props.className} style={this.props.style}>
 
-                <input ref={r=>this.input=r} className={styles.input} value={this.props.value} 
-                readOnly={this.state.readOnly} onChange={(e)=>this.props.onChange(e.target.value)}/>
-
-                {
-                    this.state.readOnly?
-                    <div className={styles.edit_btn+" amp_btn"} onClick={this.onEdit}>
-                        {"ویرایش"}
-                    </div>:
-                    <>
-                    <div className={styles.submit_btn+" amp_btn"} onClick={this.onSubmit}>
-                        {"ثبت"}
-                    </div>
-                    <div className={styles.cancel_btn+" amp_btn"} onClick={this.onCancel}>
-                        {"انصراف"}
-                    </div>
-                    </>
-                }
+                <input ref={r=>this.input=r} 
+                className={styles.input} 
+                value={this.props.value} 
+                readOnly={this.state.readOnly} 
+                maxLength={this.props.maxLength}
+                onChange={(e)=>this.props.onChange(e.target.value)}/>
                 
             </div>
         )
