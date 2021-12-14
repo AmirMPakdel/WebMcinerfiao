@@ -1,4 +1,5 @@
 import myServer from "../../../utils/myServer";
+import _ from "lodash"
 
 export default class EditCourseModel{
     
@@ -13,7 +14,7 @@ export default class EditCourseModel{
             setTimeout(()=>{
                 cb(null, {
                     result_code:env.SC.SUCCESS,
-                    data: fake_CourseItem,
+                    data: _.cloneDeep(fake_CourseItem),
                 });
             }, 2000, cb);
             return;

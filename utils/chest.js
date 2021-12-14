@@ -33,7 +33,14 @@ let chest = {
     enableBodyVerticalScroll : ()=>{},
     disableAllAntDTooltips : ()=>{},
     enableAllAntDTooltips : ()=>{},
-    openNotification : ()=>{},
+
+    /**
+     * shows a notification on screen
+     * @param {string} title 
+     * @param {"success"|"alert"|"error"} icon 
+     * @param {{ducation:number}} options 
+     */
+    openNotification : (title, icon, options)=>{},
 }
 
 export class ChestComponent extends Component{
@@ -107,7 +114,7 @@ export class ChestComponent extends Component{
 
         if(!options){options={}}
       
-        if(!options.duration){options.duration=5}
+        if(!options.duration){options.duration=500}
       
         if(!options.description){options.description = ""};
       

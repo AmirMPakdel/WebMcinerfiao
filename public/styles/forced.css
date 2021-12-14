@@ -23,6 +23,10 @@
     border-color: #FBAD16 !important;
 }
 
+.ant-notification-notice-with-icon .ant-notification-notice-message{
+    direction: rtl !important;
+}
+
 .ReactCollapse--collapse {
     transition: height 500ms;
 }

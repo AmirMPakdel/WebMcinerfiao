@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import EditCourseController from "../../../controllers/dynamics/dashboard/EditCourseController";
+import EditCourseBackgrund from "../../components/editCourse/EditCourseBackgrund";
 import EditCourseTitle from "../../components/editCourse/EditCourseTitle";
 import Loading from "../../components/global/Loading";
 import SecTitle from "../../components/panel/SecTitle";
@@ -46,6 +47,8 @@ export default class EditCourse extends Component {
                 <>
                 
                 <EditCourseTitle parent={this}/>
+
+                <EditCourseBackgrund parent={this}/>
 
                 </>
             }

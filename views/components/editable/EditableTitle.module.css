@@ -33,5 +33,6 @@
 }
 
 .loading{
+    height: 3rem !important;
     margin-top: 0 !important;
 }

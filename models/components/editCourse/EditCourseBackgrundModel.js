@@ -1,23 +1,22 @@
 import myServer from "../../../utils/myServer";
 
-export default class EditTitleModel{
+export default class EditCourseBackgrundModel{
     
     /**
     * 
     * @param {object} params
-    * @param {import("../../jsdoc/RequestCallback").RequestCallback} cb 
+    * @param {import("../jsdoc/RequestCallback").RequestCallback} cb 
     */
-    editTitle(params, cb){
+    getData(params, cb){
     
         if(env.MOCKING_SERVER){
-            console.log(params);
             setTimeout(()=>{
                 cb(null, {result_code:env.SC.SUCCESS});
             }, 2000, cb);
             return;
         }
     
-        myServer.Post(myServer.urls.COURSE_EDIT+env.EP.EDIT_PARAM_TITLE, params, {}, (err, data)=>{
+        myServer.Post(myServer.urls.COURSE_EDIT+env.EP.EDIT_PARAM_COVER, params, {}, (err, data)=>{
     
             if(!err){
             
@@ -29,4 +28,6 @@ export default class EditTitleModel{
             }
         });
     }
+    
+    
 }

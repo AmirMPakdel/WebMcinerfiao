@@ -30,25 +30,19 @@ export default class EditCourseTitle extends Component {
     }
 
     onEdit=()=>{
-        this.EditableText.onEdit();
-        let status = this.props.parent.state.status;
-        status.title = "edit";
-        this.props.parent.setState(status);
+        this.controller.onEdit()
     }
 
-    onSubmit=()=>{
-        this.EditableText.onSubmit();
-        
+    onSubmit=()=>{        
+        this.controller.onSubmit();
     }
 
     onCancel=()=>{
-        this.EditableText.onCancel();
+        this.controller.onCancel();
     }
     
     onChange=(t)=>{
-        let newVal = this.props.parent.state.new_values;
-        newVal.title = t;
-        this.props.parent.setState(newVal)
+        this.controller.onChange(t);
     }
 
     render(){

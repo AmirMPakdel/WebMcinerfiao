@@ -22,7 +22,19 @@ export default class EditableText extends Component {
     onEdit = ()=>{
         this.setState({readOnly : false},
             ()=>{
-                this.input.focus()
+                // Mostly for Web Browsers
+                // setting focus on intput and putting the text cursor at the end of the input
+                let len = this.input.value.length;
+                if (this.input.setSelectionRange) {
+                    this.input.focus();
+                    this.input.setSelectionRange(len, len);
+                } else if (this.input.createTextRange) {
+                    var t = this.input.createTextRange();
+                    t.collapse(true);
+                    t.moveEnd('character', len);
+                    t.moveStart('character', len);
+                    t.select();
+                }
             });
     }
 

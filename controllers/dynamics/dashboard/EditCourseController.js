@@ -1,6 +1,7 @@
 import EditCourseModel from "../../../models/dynamics/dashboard/EditCourseModel";
 import { getUrlPart } from "../../../utils/helpers";
 import EditCourse from "../../../views/dynamics/dashboard/EditCourse";
+import _ from "lodash";
 
 export default class EditCourseController{
     
@@ -26,8 +27,8 @@ export default class EditCourseController{
 
                 this.view.setState({
                     loading:false,
-                    new_values: data.data,
-                    old_values: data.data,
+                    new_values: _.cloneDeep(data.data),
+                    old_values: _.cloneDeep(data.data),
                 })
             }
         })

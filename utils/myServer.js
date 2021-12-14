@@ -35,7 +35,8 @@ const urls = {
 
     //course
     COURSE_CREATE: domain+prefixes.UTA+"/courses/create",
-    COURSE_FETCH: domain+prefixes.UTA+"//course/load"
+    COURSE_FETCH: domain+prefixes.UTA+"/course/load",
+    COURSE_EDIT: domain+prefixes.UTA+"/course/edit/",
 
 }
 
