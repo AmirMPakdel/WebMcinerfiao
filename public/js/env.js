@@ -174,5 +174,27 @@ var env = {
         EDIT_PARAM_POST_FORM_ADD : "ep_content_post_form_add",
         EDIT_PARAM_POST_FORM_UPDATE : "ep_content_post_form_update",
         EDIT_PARAM_POST_FORM_DELETE : "ep_content_post_form_delete",
-    }
+    },
+
+    UT:{
+        UPLOAD_TYPE_WRITER_IMAGE: "ut_writer_image",
+        UPLOAD_TYPE_EDUCATOR_IMAGE: "ut_educator_image",
+
+        UPLOAD_TYPE_MAIN_PAGE_LOGO: "ut_main_page_logo",
+        UPLOAD_TYPE_MAIN_PAGE_COVER: "ut_main_page_cover",
+        UPLOAD_TYPE_BANNER_COVER: "ut_banner_cover",
+        UPLOAD_TYPE_MAIN_PAGE_VIDEO: "ut_main_page_video",
+        UPLOAD_TYPE_MAIN_PAGE_VOICE: "ut_main_page_voice",
+        UPLOAD_TYPE_MAIN_PAGE_IMAGE: "ut_main_page_image",
+        UPLOAD_TYPE_MAIN_PAGE_SLIDER_IMAGE: "ut_main_page_slider_image",
+
+        UPLOAD_TYPE_COURSE_LOGO: "ut_course_logo",
+        UPLOAD_TYPE_COURSE_COVER: "ut_course_cover",
+        UPLOAD_TYPE_COURSE_VIDEO: "ut_course_video",
+        UPLOAD_TYPE_COURSE_DOCUMENT: "ut_course_document",
+        UPLOAD_TYPE_COURSE_VOICE: "ut_course_voice",
+        UPLOAD_TYPE_COURSE_VIDEO_FREE: "ut_course_video_free",
+        UPLOAD_TYPE_COURSE_DOCUMENT_FREE: "ut_course_document_free",
+        UPLOAD_TYPE_COURSE_VOICE_FREE: "ut_course_voice_free",
+    },
 }
