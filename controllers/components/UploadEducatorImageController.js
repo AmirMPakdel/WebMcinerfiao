@@ -1,4 +1,5 @@
 import UploadEducatorModel from "../../models/components/UploadEducatorModel";
+import chest from "../../utils/chest";
 import { getCookie } from "../../utils/cookie";
 import UploadEducatorImage from "../../views/components/upload/UploadEducatorImage";
 
