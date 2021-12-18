@@ -90,3 +90,20 @@ export function Object2FormData(object){
 
     return data;
 }
+
+export function fileType2Ext(file_type){
+
+    switch(file_type){
+
+        case "image/png":
+            return "png";
+        case "image/jpeg":
+            return "jpg";
+        case "video/mp4":
+            return "mp4";
+        default:
+            let ex = file_type.split("/")[1];
+            if(!ex){ex = file_type}
+            return ex;
+    }
+}

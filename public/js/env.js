@@ -4,7 +4,7 @@ var env = {
 
     ENVIRONMENT_MODE: "dev",
 
-    MOCKING_SERVER: true,
+    MOCKING_SERVER: false,
 
     FILL_FAKE_DATA: false,
 

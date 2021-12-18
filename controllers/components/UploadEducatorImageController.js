@@ -1,6 +1,7 @@
 import UploadEducatorModel from "../../models/components/UploadEducatorModel";
 import chest from "../../utils/chest";
 import { getCookie } from "../../utils/cookie";
+import { fileType2Ext } from "../../utils/helpers";
 import UploadEducatorImage from "../../views/components/upload/UploadEducatorImage";
 
 export default class UploadEducatorImageController{
@@ -53,7 +54,7 @@ export default class UploadEducatorImageController{
 
         let params = {
             file_size: vs.file.size,
-            file_type: vs.file.type,
+            file_type: fileType2Ext(vs.file.type),
             upload_type:"ut_educator_image",
         }
 
@@ -77,7 +78,7 @@ export default class UploadEducatorImageController{
 
         let params = {
             file_size: vs.file.size,
-            file_type: vs.file.type,
+            file_type: fileType2Ext(vs.file.type),
             upload_type:"ut_educator_image",
             upload_key: vs.upload_key,
         }

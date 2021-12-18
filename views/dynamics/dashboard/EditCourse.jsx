@@ -9,6 +9,19 @@ import Loading from "../../components/global/Loading";
 import SecTitle from "../../components/panel/SecTitle";
 import EducatorDashboardLayout from "../../layouts/EducatorDashboardLayout";
 import styles from "./EditCourse.module.css";
+import EditCoruseDuration from "../../components/editCourse/EditCourseDuration";
+import EditCourseHoldingStatus from "../../components/editCourse/EditCourseHoldingStatus";
+import EditCourseLongDesc from "../../components/editCourse/EditCourseLongDesc";
+import EditCourseShortDesc from "../../components/editCourse/EditCourseShortDesc";
+import EditCoursePrice from "../../components/editCourse/EditCoursePrice";
+import EditCourseReleaseDate from "../../components/editCourse/EditCourseReleaseDate";
+import EditCourseSuggestedCourses from "../../components/editCourse/EditCourseSuggestedCourses";
+import EditCourseSuggestedPosts from "../../components/editCourse/EditCourseSuggestedPosts";
+import EditCourseSubjects from "../../components/editCourse/EditCourseSubjects";
+import EditCourseRequirements from "../../components/editCourse/EditCourseRequirements";
+import EditCourseGroups from "../../components/editCourse/EditCourseGroups";
+import EditCourseTags from "../../components/editCourse/EditCourseTags";
+import EditCourseContents from "../../components/editCourse/EditCourseContents";
 
 export default class EditCourse extends Component {
 
@@ -69,6 +82,32 @@ export default class EditCourse extends Component {
                     <EditCourseIntroVideo parent={this}/>
 
                     <EditCourseEducators parent={this}/>
+
+                    <EditCoruseDuration parent={this}/>
+
+                    <EditCourseHoldingStatus parent={this}/>
+
+                    <EditCourseLongDesc parent={this}/>
+
+                    <EditCourseShortDesc parent={this}/>
+
+                    <EditCoursePrice parnet={this}/>
+
+                    <EditCourseReleaseDate parnet={this}/>
+
+                    <EditCourseSuggestedCourses parnet={this}/>
+
+                    <EditCourseSuggestedPosts parnet={this}/>
+
+                    <EditCourseSubjects parnet={this}/>
+
+                    <EditCourseRequirements parnet={this}/>
+
+                    <EditCourseGroups parnet={this}/>
+
+                    <EditCourseTags parnet={this}/>
+
+                    <EditCourseContents parnet={this}/>
 
                     <div style={{marginTop:"8rem"}}/>
 
