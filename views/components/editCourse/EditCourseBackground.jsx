@@ -69,6 +69,7 @@ export default class EditCourseBackground extends Component {
                 ref={r=>this.EditableImage=r}
                 onSelect={this.onSelect}
                 className={styles.image}
+                defaultSrc={"/default_img/default_cover.png"}
                 uploadKey={nw.cover}
                 oldUploadKey={od.cover}/>
                 

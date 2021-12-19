@@ -114,7 +114,7 @@ export class ChestComponent extends Component{
 
         if(!options){options={}}
       
-        if(!options.duration){options.duration=500}
+        if(!options.duration){options.duration=5}
       
         if(!options.description){options.description = ""};
       

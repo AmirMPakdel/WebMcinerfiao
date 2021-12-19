@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./EditableImage.module.css";
 import chest from "../../../utils/chest";
+import myServer from "../../../utils/myServer";
 
 /**
 * Props of EditableImage Component
@@ -14,9 +15,19 @@ export default class EditableImage extends Component {
     
     constructor(props){
         super(props);
+
         this.state = {
             image_file: null,
-            image_url: "https://gamefa.com/wp-content/uploads/2021/12/Spider-Man-No-Way-Home-Iron-Spider-suit.webp"
+            image_url: null,
+        }
+
+        if(props.uploadKey){
+            
+            this.state.image_url = myServer.MediaFiles.publicImage(props.uploadKey);
+
+        }else{
+
+            this.state.image_url = props.defaultSrc;
         }
     }
     
@@ -65,6 +76,7 @@ export default class EditableImage extends Component {
     }
     
     render(){
+
         return(
             <div className={styles.con+" bdc2 md_card_shd "+this.props.className}
             style={{
@@ -74,7 +86,7 @@ export default class EditableImage extends Component {
                 <input ref={r=>this.input=r} 
                 onClick={this.onInputClick}
                 onChange={this.onInputChange}
-                type="file" accept=".jpg, .png" 
+                type="file" accept=".jpg" //".jpg, .png" 
                 style={{display:"none"}}/>
 
             </div>

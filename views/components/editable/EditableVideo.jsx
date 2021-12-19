@@ -16,7 +16,7 @@ export default class EditableVideo extends Component {
         super(props);
         this.state = {
             image_file: null,
-            image_url: "https://dl.gamefa.com/user2/video/2021/Y2Mate.is%20-%20SPIDER-MAN%20NO%20WAY%20HOME%20-%20Watching%20%20In%20Cinemas%20December%2016%20%20English%2C%20Hindi%2C%20Tamil%20%26%20Telugu-T1ysN8SWkCo-1080p-1639116407835.mp4"
+            image_url: null
         }
     }
     
@@ -64,11 +64,16 @@ export default class EditableVideo extends Component {
         return(
             <div className={styles.con+" bdc2 md_card_shd "+this.props.className}>
 
-                <video className={styles.video} 
-                ref={r=>this.video=r}
-                src={this.state.image_url}
-                controls={true} preload={false}/>
-
+                {
+                    this.state.image_url?
+                    <video className={styles.video} 
+                    ref={r=>this.video=r}
+                    src={this.state.image_url}
+                    controls={true} preload={false}/>
+                    :
+                    <img className={styles.video} src={this.props.defaultPoster}/>   
+                }
+                
                 <input ref={r=>this.input=r} 
                 onClick={this.onInputClick}
                 onChange={this.onInputChange}

@@ -2,6 +2,8 @@ import axios from "axios";
 import chest from "./chest";
 import { getCookie } from "./cookie";
 import { Object2FormData } from "./helpers";
+import serverErrorHandler from "./myServer/serverErrorHandler";
+import serverMediaFiles from "./myServer/serverMediaFiles";
 
 const domain = env.DOMAIN;
 const prefixes = env.PREFIXES;
@@ -37,7 +39,6 @@ const urls = {
     COURSE_CREATE: domain+prefixes.UTA+"/courses/create",
     COURSE_FETCH: domain+prefixes.UTA+"/course/load",
     COURSE_EDIT: domain+prefixes.UTA+"/course/edit/",
-
 }
 
 /**
@@ -60,40 +61,14 @@ function Get(url, config, cb){
 
     axios.get(url, config).then(res=>{
 
-        if(env.ENVIRONMENT_MODE==="dev"){
-            console.log(res);
-        }
+        serverErrorHandler.errorCheck(res.data);
+
         cb(null, res.data);
 
     }).catch(e=>{
         
-        if(e.response && e.response.data){
+        //TODO: handle this error
 
-            if(env.ENVIRONMENT_MODE==="dev"){
-                console.log(e.response);
-            }
-            cb(e, e.response);
-            if(!config.hideNotif && e.response.data){
-                let data = e.response.data;
-                let error = data.error;
-                if(error){
-                    let error_array = Object.keys(error);
-                    error_array.forEach((key)=>{
-                        if(typeof error[key] === "string"){
-                            chest.openNotification(error[key], null, "error");
-                        }else if(typeof error[key].forEach === 'function'){
-                            error[key].forEach((v)=>{
-                                chest.openNotification(v, null, "error");
-                            });
-                        }
-                    })
-                }
-            }
-
-        }else{
-
-            cb(e, {});
-        }
     });
 }
 
@@ -121,59 +96,26 @@ function Post(url, data, config={}, cb){
     }
 
     axios.post(url, data, config).then((res)=>{
-                
-        if(env.ENVIRONMENT_MODE==="dev"){
-            console.log(res);
-        }
 
         if(res.status == 200){
+
+            serverErrorHandler.errorCheck(res.data);
+
             cb(null, res.data);
         }
 
     }).catch((e)=>{
 
-        if(e.response && e.response.data){
-
-            if(env.ENVIRONMENT_MODE==="dev"){
-                console.log(e.response);
-            }
-            cb(e, e.response);
-            if(!config.hideNotif && e.response.data){
-                let data = e.response.data;
-                let error = data.error;
-                if(error){
-                    let error_array = Object.keys(error);
-                    error_array.forEach((key)=>{
-                        if(typeof error[key] === "string"){
-                            chest.openNotification(error[key], null, "error");
-                        }else if(typeof error[key].forEach === 'function'){
-                            error[key].forEach((v)=>{
-                                chest.openNotification(v, null, "error");
-                            });
-                        }
-                    })
-                }
-            }
-
-        }else{
-
-            cb(e, {});
-        }
+        //TODO: handle this error 
     });
-}
-
-const ErrorHandler = {
-
-    type1:(error)=>{
-        console.log(error);
-    }
 }
 
 const myServer = {
     urls,
     Get,
     Post,
-    ErrorHandler,
+    MediaFiles: serverMediaFiles,
+    ErrorHandler: serverErrorHandler,
 }
 
 export default myServer;
