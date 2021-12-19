@@ -1,4 +1,4 @@
-import myServer from "../../utils/myServer";
+import myServer from "../../../utils/myServer";
 
 export default class EditCourseShortDescModel{
     

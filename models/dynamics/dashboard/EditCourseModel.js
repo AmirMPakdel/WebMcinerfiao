@@ -14,7 +14,7 @@ export default class EditCourseModel{
             setTimeout(()=>{
                 cb(null, {
                     result_code:env.SC.SUCCESS,
-                    data: _.cloneDeep(fake_CourseItem),
+                    // data: _.cloneDeep(fake_CourseItem),
                 });
             }, 2000, cb);
             return;

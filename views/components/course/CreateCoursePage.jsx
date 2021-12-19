@@ -89,6 +89,14 @@ export default class CreateCoursePage extends Component {
             is_encrypted: ps.is_encrypted,
             educators: this.state.selected_edu_keys,
             category_id: ps.category,
+
+            //TODO:
+            tags:[],
+            groups:{
+                g1:null,
+                g2:null,
+                g3:null,
+            }
         }
 
         myServer.Post(myServer.urls.COURSE_CREATE, params, {}, (err, data)=>{

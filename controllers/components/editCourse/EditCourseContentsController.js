@@ -3,10 +3,10 @@ import EditCourseContents from "../../../views/components/editCourse/EditCourseC
 
 export default class EditCourseContentsController{
     
-    /**@param {EditCourseContentsModel} view*/
+    /**@param {EditCourseContents} view*/
     constructor(view){
         this.view = view;
-        this.model = new EditCourseContents();
+        this.model = new EditCourseContentsModel();
     }
     
     
