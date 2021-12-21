@@ -1,6 +1,6 @@
 import EditCourseLogoModel from "../../../models/components/editCourse/EditCourseLogoModel";
 import { getCookie } from "../../../utils/cookie";
-import { getUrlPart } from "../../../utils/helpers";
+import { fileType2Ext, getUrlPart } from "../../../utils/helpers";
 import EditCourseLogo from "../../../views/components/editCourse/EditCourseLogo";
 
 export default class EditCourseLogoController{
@@ -42,9 +42,9 @@ export default class EditCourseLogoController{
 
         let params1={
             file_size:image_file.size,
-            file_type:image_file.type,
+            file_type: fileType2Ext(image_file.type),
             token: getCookie(env.TOKEN_KEY),
-            upload_type: env.UT.UPLOAD_TYPE_MAIN_PAGE_COVER,
+            upload_type: env.UT.UPLOAD_TYPE_COURSE_LOGO,
             course_id: getUrlPart(3)
         }
 
@@ -88,13 +88,39 @@ export default class EditCourseLogoController{
 
         this.model.uploadFile(params3, (err, data)=>{
 
+            try{
+
             if(data.result_code === env.CSC.SUCCESS){
 
-                let status = this.view.props.parent.state.status;
-                status.logo = "idle";
-                this.view.props.parent.setState({status});
+                let params4 = {
+                    upload_key:params3.upload_key,
+                    course_id: getUrlPart(3),
+                }
+
+                if(0 && this.view.props.parent.state.old_values.logo){
+                    params4.file_state = "ufs_replace";
+                    params4.old_upload_key = this.view.props.parent.state.old_values.logo;
+                }else{
+                    params4.file_state = "ufs_new"
+                }
+
+                this.save(params4);
+
             }
+
+            }catch(e){console.log(e)}
         })
+    }
+
+    save(param4){
+
+        
+        this.model.save(param4, (err, data)=>{
+
+            let status = this.view.props.parent.state.status;
+            status.logo = "idle";
+            this.view.props.parent.setState({status});
+        });
     }
 
 }

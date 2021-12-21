@@ -70,8 +70,8 @@ export default class EditCourseLogo extends Component {
                 onSelect={this.onSelect}
                 className={styles.image}
                 defaultSrc={"/default_img/default_logo.png"}
-                uploadKey={nw.cover}
-                oldUploadKey={od.cover}/>
+                uploadKey={nw.logo}
+                oldUploadKey={od.logo}/>
 
             </div>
         )
