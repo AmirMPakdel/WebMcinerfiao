@@ -33,7 +33,7 @@ export default class EditCourseEducators extends Component {
 
                 <EditableTitle
                 title={"دبیر (یا دبیران) دوره"}
-                status={"null"}
+                status={"idle"}
                 onEdit={this.onEdit}
                 onSubmit={this.onSubmit}
                 onCancel={this.onCancel}/>

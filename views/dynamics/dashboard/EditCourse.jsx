@@ -39,6 +39,8 @@ export default class EditCourse extends Component {
                 logo:"",
                 cover:"",
                 intro_video:"",
+                educators:[],
+                duration:"",
             },
 
             new_values:{
@@ -46,6 +48,8 @@ export default class EditCourse extends Component {
                 logo:"",
                 cover:"",
                 intro_video:"",
+                educators:[],
+                duration:"",
             },
 
             status:{
@@ -53,6 +57,8 @@ export default class EditCourse extends Component {
                 logo:"idle",
                 cover:"idle",
                 intro_video:"idle",
+                educators:"idle",
+                duration:"idle",
             }
         }
     }
@@ -91,23 +97,23 @@ export default class EditCourse extends Component {
 
                     <EditCourseShortDesc parent={this}/>
 
-                    <EditCoursePrice parnet={this}/>
+                    <EditCoursePrice parent={this}/>
 
-                    <EditCourseReleaseDate parnet={this}/>
+                    <EditCourseReleaseDate parent={this}/>
 
-                    <EditCourseSuggestedCourses parnet={this}/>
+                    <EditCourseSuggestedCourses parent={this}/>
 
-                    <EditCourseSuggestedPosts parnet={this}/>
+                    <EditCourseSuggestedPosts parent={this}/>
 
-                    <EditCourseSubjects parnet={this}/>
+                    <EditCourseSubjects parent={this}/>
 
-                    <EditCourseRequirements parnet={this}/>
+                    <EditCourseRequirements parent={this}/>
 
-                    <EditCourseGroups parnet={this}/>
+                    <EditCourseGroups parent={this}/>
 
-                    <EditCourseTags parnet={this}/>
+                    <EditCourseTags parent={this}/>
 
-                    <EditCourseContents parnet={this}/>
+                    <EditCourseContents parent={this}/>
 
                     <div style={{marginTop:"8rem"}}/>
 

@@ -1,6 +1,6 @@
 import EditCourseBackgroundModel from "../../../models/components/editCourse/EditCourseBackgroundModel";
 import { getCookie } from "../../../utils/cookie";
-import { getUrlPart } from "../../../utils/helpers";
+import { fileType2Ext, getUrlPart } from "../../../utils/helpers";
 import EditCourseBackground from "../../../views/components/editCourse/EditCourseBackground";
 
 export default class EditCourseBackgroundController{
@@ -35,18 +35,19 @@ export default class EditCourseBackgroundController{
 
     onSubmit(image_file){
 
-        console.log(image_file);
-
         let status = this.view.props.parent.state.status;
         status.cover = "loading";
         this.view.props.parent.setState({status});
 
         let params1={
             file_size:image_file.size,
-            file_type:image_file.type,
+            file_type: fileType2Ext(image_file.type),
             token: getCookie(env.TOKEN_KEY),
             upload_type: env.UT.UPLOAD_TYPE_MAIN_PAGE_COVER,
-            course_id: getUrlPart(3)
+        }
+
+        if(this.view.props.parent.state.old_values.cover){
+            params1.old_upload_key = this.view.props.parent.state.old_values.logo;
         }
 
         this.model.getUploadKey(params1, (err, data)=>{
@@ -57,7 +58,7 @@ export default class EditCourseBackgroundController{
                     token: params1.token,
                     file_type: params1.file_type,
                     upload_type: params1.upload_type,
-                    course_id: params1.course_id,
+                    course_id: getUrlPart(3),
                     tenant: getCookie(env.TENANT_KEY),
                     upload_key: data.data.upload_key,
                 }
@@ -91,11 +92,30 @@ export default class EditCourseBackgroundController{
 
             if(data.result_code === env.CSC.SUCCESS){
 
-                let status = this.view.props.parent.state.status;
-                status.cover = "idle";
-                this.view.props.parent.setState({status});
+                let params4 = {
+                    upload_key:params3.upload_key,
+                    course_id: getUrlPart(3),
+                }
+
+                if(this.view.props.parent.state.old_values.cover){
+                    params4.file_state = "ufs_replace";
+                }else{
+                    params4.file_state = "ufs_new"
+                }
+
+                this.save(params4);
             }
         })
+    }
+
+    save(param4){
+
+        this.model.save(param4, (err, data)=>{
+
+            let status = this.view.props.parent.state.status;
+            status.cover = "idle";
+            this.view.props.parent.setState({status});
+        });
     }
 
 }

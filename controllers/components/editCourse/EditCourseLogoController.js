@@ -34,8 +34,6 @@ export default class EditCourseLogoController{
 
     onSubmit(image_file){
 
-        console.log(image_file);
-
         let status = this.view.props.parent.state.status;
         status.logo = "loading";
         this.view.props.parent.setState({status});
@@ -44,8 +42,11 @@ export default class EditCourseLogoController{
             file_size:image_file.size,
             file_type: fileType2Ext(image_file.type),
             token: getCookie(env.TOKEN_KEY),
-            upload_type: env.UT.UPLOAD_TYPE_COURSE_LOGO,
-            course_id: getUrlPart(3)
+            upload_type: env.UT.UPLOAD_TYPE_COURSE_LOGO
+        }
+
+        if(this.view.props.parent.state.old_values.logo){
+            params1.old_upload_key = this.view.props.parent.state.old_values.logo;
         }
 
         this.model.getUploadKey(params1, (err, data)=>{
@@ -56,7 +57,7 @@ export default class EditCourseLogoController{
                     token: params1.token,
                     file_type: params1.file_type,
                     upload_type: params1.upload_type,
-                    course_id: params1.course_id,
+                    course_id: getUrlPart(3),
                     tenant: getCookie(env.TENANT_KEY),
                     upload_key: data.data.upload_key,
                 }
@@ -88,8 +89,6 @@ export default class EditCourseLogoController{
 
         this.model.uploadFile(params3, (err, data)=>{
 
-            try{
-
             if(data.result_code === env.CSC.SUCCESS){
 
                 let params4 = {
@@ -97,9 +96,8 @@ export default class EditCourseLogoController{
                     course_id: getUrlPart(3),
                 }
 
-                if(0 && this.view.props.parent.state.old_values.logo){
+                if(this.view.props.parent.state.old_values.logo){
                     params4.file_state = "ufs_replace";
-                    params4.old_upload_key = this.view.props.parent.state.old_values.logo;
                 }else{
                     params4.file_state = "ufs_new"
                 }
@@ -107,8 +105,6 @@ export default class EditCourseLogoController{
                 this.save(params4);
 
             }
-
-            }catch(e){console.log(e)}
         })
     }
 

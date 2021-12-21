@@ -7,7 +7,7 @@ export default class EditCourseBackgroundModel{
     * @param {object} params
     * @param {import("../../jsdoc/RequestCallback").RequestCallback} cb 
     */
-    getUploadKey(params, cb){
+     getUploadKey(params, cb){
     
         if(env.MOCKING_SERVER){
             setTimeout(()=>{
@@ -21,7 +21,7 @@ export default class EditCourseBackgroundModel{
             return;
         }
     
-        myServer.Post(myServer.urls.COURSE_EDIT+env.EP.EDIT_PARAM_COVER, params, {}, (err, data)=>{
+        myServer.Post(myServer.urls.UPLOAD_GET_UPLOAD_KEY, params, {}, (err, data)=>{
     
             if(!err){
             
@@ -58,7 +58,7 @@ export default class EditCourseBackgroundModel{
             return;
         }
     
-        myServer.Post(myServer.urls.COURSE_EDIT+env.EP.EDIT_PARAM_COVER, params, {}, (err, data)=>{
+        myServer.Post(myServer.urls.UPLOAD_COVERTOR_CHECK, params, {}, (err, data)=>{
     
             if(!err){
             
@@ -77,6 +77,35 @@ export default class EditCourseBackgroundModel{
     * @param {import("../../jsdoc/RequestCallback").RequestCallback} cb 
     */
     uploadFile(params, cb){
+    
+        if(env.MOCKING_SERVER){
+            setTimeout(()=>{
+                cb(null, {
+                    result_code:env.CSC.SUCCESS,
+                });
+            }, 2000, cb);
+            return;
+        }
+    
+        myServer.Post(myServer.urls.UPLOAD_FILE_TO_CONVERTOR, params, {formData:true}, (err, data)=>{
+    
+            if(!err){
+            
+                cb(null, data);
+            
+            }else{
+            
+                myServer.ErrorHandler.type1(err);
+            }
+        });
+    }
+
+    /**
+    * 
+    * @param {object} params
+    * @param {import("../../jsdoc/RequestCallback").RequestCallback} cb 
+    */
+    save(params, cb){
     
         if(env.MOCKING_SERVER){
             setTimeout(()=>{
