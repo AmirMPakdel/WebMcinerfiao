@@ -69,10 +69,13 @@ export default class EditableImage extends Component {
     }
 
     onCancel = ()=>{
-        //TODO:
-        this.setState({
-            image_url: "https://gamefa.com/wp-content/uploads/2021/12/Spider-Man-No-Way-Home-Iron-Spider-suit.webp"
-        })
+        let image_url = "";
+        if(this.props.oldUploadKey){
+            image_url = myServer.MediaFiles.publicImage(this.props.oldUploadKey);
+        }else{
+            image_url = this.props.defaultSrc;
+        }
+        this.setState({image_url})
     }
     
     render(){

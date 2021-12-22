@@ -5,9 +5,9 @@ export default class EditCourseEducatorsModel{
     /**
     * 
     * @param {object} params
-    * @param {import("../jsdoc/RequestCallback").RequestCallback} cb 
+    * @param {import("../../jsdoc/RequestCallback").RequestCallback} cb 
     */
-    getData(params, cb){
+    saveEducators(params, cb){
     
         if(env.MOCKING_SERVER){
             setTimeout(()=>{
@@ -16,7 +16,7 @@ export default class EditCourseEducatorsModel{
             return;
         }
     
-        myServer.Post(myServer.urls.SOME_URL, params, {}, (err, data)=>{
+        myServer.Post(myServer.urls.COURSE_EDIT+env.EP.EDIT_PARAM_COURSE_EDUCATORS, params, {}, (err, data)=>{
     
             if(!err){
             

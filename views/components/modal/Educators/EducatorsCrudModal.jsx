@@ -115,8 +115,7 @@ export default class EducatorsCrudModal extends Component {
                         this.setState({
                             searchText: selectedKeys[0],
                             searchedColumn: dataIndex,
-                        });
-                        }}
+                        })}}
                     >
                         Filter
                     </Button>

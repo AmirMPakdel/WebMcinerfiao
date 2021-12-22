@@ -48,11 +48,12 @@ export default class ModalLayout extends Component {
     
     render(){
 
-        if(this.state.visible){
-            chest.disableBodyVerticalScroll();
-        }else{
-            chest.enableBodyVerticalScroll();
-        }
+        //TODO: delete later, no need for this
+        // if(this.state.visible){
+        //     chest.disableBodyVerticalScroll();
+        // }else{
+        //     chest.enableBodyVerticalScroll();
+        // }
 
         let s = this.state;
 

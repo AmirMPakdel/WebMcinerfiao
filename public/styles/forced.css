@@ -27,6 +27,11 @@
     direction: rtl !important;
 }
 
+/*when a modal shows up*/
+.ant-scrolling-effect{
+    width: 100% !important;
+}
+
 .ReactCollapse--collapse {
     transition: height 500ms;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import EditCourseIntroVideoController from "../../../controllers/components/editCourse/EditCourseIntroVideoController";
+import EditCourse from "../../dynamics/dashboard/EditCourse";
 import EditableTitle from "../editable/EditableTitle";
 import EditableVideo from "../editable/EditableVideo";
 import styles from "./EditCourseIntroVideo.module.css";
@@ -9,6 +10,7 @@ import styles from "./EditCourseIntroVideo.module.css";
 * @typedef Props
 * @property {string} className
 * @property {React.CSSProperties} style
+* @property {EditCourse} parent
 * 
 * @extends {Component<Props>}
 */
@@ -37,7 +39,7 @@ export default class EditCourseIntroVideo extends Component {
 
     onSubmit=()=>{
 
-        this.controller.onSubmit(this.EditableImage.state.image_file);
+        this.controller.onSubmit(this.EditableImage.state.file);
     }
 
     onCancel=()=>{
@@ -58,7 +60,7 @@ export default class EditCourseIntroVideo extends Component {
 
                 <EditableTitle
                 title={"ویدیو معرفی دوره"}
-                status={st.cover}
+                status={st.intro_video}
                 onEdit={this.onEdit}
                 onSubmit={this.onSubmit}
                 onCancel={this.onCancel}/>
@@ -68,8 +70,8 @@ export default class EditCourseIntroVideo extends Component {
                 onSelect={this.onSelect}
                 className={styles.video}
                 defaultPoster={"/default_img/default_intro_video.png"}
-                uploadKey={nw.cover}
-                oldUploadKey={od.cover}/>
+                uploadKey={nw.intro_video.url}
+                oldUploadKey={od.intro_video.url}/>
                 
             </div>
         )

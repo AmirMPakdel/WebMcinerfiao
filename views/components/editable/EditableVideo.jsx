@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./EditableVideo.module.css";
 import chest from "../../../utils/chest";
+import myServer from "../../../utils/myServer";
 
 /**
 * Props of EditableVideo Component
@@ -15,8 +16,17 @@ export default class EditableVideo extends Component {
     constructor(props){
         super(props);
         this.state = {
-            image_file: null,
-            image_url: null
+            file: null,
+            url: null
+        }
+
+        if(props.uploadKey){
+            
+            this.state.url = myServer.MediaFiles.publicVideo(props.uploadKey);
+
+        }else{
+
+            this.state.url = props.defaultSrc;
         }
     }
     
@@ -35,17 +45,17 @@ export default class EditableVideo extends Component {
         // this.video.src = URL.createObjectURL(file);
         // this.video.load();
 
-        if(file.size < (120*1024*1024)){
+        if(file.size < (480*1024*1024)){
 
             this.setState({
-                image_url : URL.createObjectURL(file),
-                image_file: file,
+                url : URL.createObjectURL(file),
+                file: file,
             }, ()=>{
                 this.props.onSelect();
             });
 
         }else{
-            chest.openNotification("عکس انتخابی حجم بالای 2 مگابایت دارد", "error");
+            chest.openNotification("ویدیوی انتخابی حجم بالای 480 مگابایت دارد", "error");
         }
     }
 
@@ -54,10 +64,13 @@ export default class EditableVideo extends Component {
     }
 
     onCancel = ()=>{
-        //TODO:
-        this.setState({
-            image_url: "https://dl.gamefa.com/user2/video/2021/Y2Mate.is%20-%20SPIDER-MAN%20NO%20WAY%20HOME%20-%20Watching%20%20In%20Cinemas%20December%2016%20%20English%2C%20Hindi%2C%20Tamil%20%26%20Telugu-T1ysN8SWkCo-1080p-1639116407835.mp4"
-        })
+        let url = "";
+        if(this.props.oldUploadKey){
+            url = myServer.MediaFiles.publicVideo(this.props.oldUploadKey);
+        }else{
+            url = this.props.defaultSrc;
+        }
+        this.setState({url})
     }
     
     render(){
@@ -65,10 +78,10 @@ export default class EditableVideo extends Component {
             <div className={styles.con+" bdc2 md_card_shd "+this.props.className}>
 
                 {
-                    this.state.image_url?
+                    this.state.url?
                     <video className={styles.video} 
                     ref={r=>this.video=r}
-                    src={this.state.image_url}
+                    src={this.state.url}
                     controls={true} preload={false}/>
                     :
                     <img className={styles.video} src={this.props.defaultPoster}/>   
