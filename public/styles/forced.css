@@ -35,3 +35,19 @@
 .ReactCollapse--collapse {
     transition: height 500ms;
 }
+
+
+/* SelectSearch */
+.ant-select-selector{
+    height: 100% !important;
+}
+
+.ant-select-selection-search{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.ant-select-selection-search-input{
+    padding-top: 24px;
+}

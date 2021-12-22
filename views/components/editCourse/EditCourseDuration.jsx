@@ -3,12 +3,14 @@ import styles from "./EditCourseDuration.module.css";
 import EditCourseDurationController from "../../../controllers/components/editCourse/EditCourseDurationController";
 import EditableTitle from "../editable/EditableTitle";
 import EditableText from "../editable/EditableText";
+import EditCourse from "../../dynamics/dashboard/EditCourse";
 
 /**
 * Props of EditCourseDuration Component
 * @typedef Props
 * @property {string} className
 * @property {React.CSSProperties} style
+* @property {EditCourse} parent
 * 
 * @extends {Component<Props>}
 */
@@ -59,9 +61,9 @@ export default class EditCourseDuration extends Component {
                 onCancel={this.onCancel}/>
 
                 <EditableText
-                className={styles.edit_title}
+                className={styles.edit_text}
                 ref={r=>this.EditableText=r}
-                maxLength={64}
+                maxLength={4}
                 value={nw.duration}
                 oldValue={od.duration}
                 onChange={this.onChange}/>

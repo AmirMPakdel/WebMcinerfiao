@@ -40,7 +40,7 @@ export default class EditCourseTitle extends Component {
     onCancel=()=>{
         this.controller.onCancel();
     }
-    
+
     onChange=(t)=>{
         this.controller.onChange(t);
     }
@@ -63,7 +63,7 @@ export default class EditCourseTitle extends Component {
                 onCancel={this.onCancel}/>
 
                 <EditableText
-                className={styles.edit_title}
+                className={styles.edit_text}
                 ref={r=>this.EditableText=r}
                 maxLength={64}
                 value={nw.title}

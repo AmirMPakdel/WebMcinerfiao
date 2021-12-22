@@ -3,7 +3,9 @@
     margin-top: 3rem;
 }
 
-.edit_title{
+.edit_text{
     width: 92%;
     max-width: 12rem;
+    margin: 1rem;
+    margin-right: 2rem;
 }

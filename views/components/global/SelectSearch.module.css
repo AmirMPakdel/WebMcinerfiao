@@ -1,5 +1,10 @@
 .con{
     min-width: 16rem;
+    border-radius: 1rem !important;
+    height: 3rem !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .option{

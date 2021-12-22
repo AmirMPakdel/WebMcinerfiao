@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./EditCourseHoldingStatus.module.css";
 import EditCourseHoldingStatusController from "../../../controllers/components/editCourse/EditCourseHoldingStatusController";
 import EditableTitle from "../editable/EditableTitle";
+import SelectSearch from "../../components/global/SelectSearch";
 
 /**
 * Props of EditCourseHoldingStatus Component
@@ -56,6 +57,12 @@ export default class EditCourseHoldingStatus extends Component {
                 onEdit={this.onEdit}
                 onSubmit={this.onSubmit}
                 onCancel={this.onCancel}/>
+
+                <SelectSearch className={styles.select_con}
+                options={ps.categories}
+                placeholder={"انتخاب وضعیت انتشار"}
+                value={ps.category}
+                onChange={this.onCategory}/>
 
             </div>
         )

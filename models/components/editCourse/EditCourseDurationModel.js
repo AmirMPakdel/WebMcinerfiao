@@ -7,7 +7,7 @@ export default class EditCourseDurationModel{
     * @param {object} params
     * @param {import("../jsdoc/RequestCallback").RequestCallback} cb 
     */
-    getData(params, cb){
+     saveDuration(params, cb){
     
         if(env.MOCKING_SERVER){
             setTimeout(()=>{
@@ -16,7 +16,7 @@ export default class EditCourseDurationModel{
             return;
         }
     
-        myServer.Post(myServer.urls.SOME_URL, params, {}, (err, data)=>{
+        myServer.Post(myServer.urls.COURSE_EDIT+env.EP.EDIT_PARAM_DURATION, params, {}, (err, data)=>{
     
             if(!err){
             

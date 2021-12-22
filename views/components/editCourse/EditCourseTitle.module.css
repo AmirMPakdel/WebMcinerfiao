@@ -1,5 +1,7 @@
 
-.edit_title{
+.edit_text{
     width: 92%;
     max-width: 36rem;
+    margin: 1rem;
+    margin-right: 2rem;
 }
