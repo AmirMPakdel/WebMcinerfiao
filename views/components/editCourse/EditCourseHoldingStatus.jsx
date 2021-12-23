@@ -3,12 +3,14 @@ import styles from "./EditCourseHoldingStatus.module.css";
 import EditCourseHoldingStatusController from "../../../controllers/components/editCourse/EditCourseHoldingStatusController";
 import EditableTitle from "../editable/EditableTitle";
 import SelectSearch from "../../components/global/SelectSearch";
+import EditCourse from "../../dynamics/dashboard/EditCourse";
 
 /**
 * Props of EditCourseHoldingStatus Component
 * @typedef Props
 * @property {string} className
 * @property {React.CSSProperties} style
+* @property {EditCourse} parent
 * 
 * @extends {Component<Props>}
 */
@@ -18,7 +20,7 @@ export default class EditCourseHoldingStatus extends Component {
         super(props);
         this.controller = new EditCourseHoldingStatusController(this);
         this.state = {
-        
+            
         }
     }
     
@@ -53,18 +55,34 @@ export default class EditCourseHoldingStatus extends Component {
 
                 <EditableTitle
                 title={"وضعیت انتشار دوره"}
-                status={st.duration}
+                status={st.holding_status}
                 onEdit={this.onEdit}
                 onSubmit={this.onSubmit}
                 onCancel={this.onCancel}/>
 
                 <SelectSearch className={styles.select_con}
-                options={ps.categories}
+                options={HoldingStatus}
+                disabled={st.holding_status != "edit"}
                 placeholder={"انتخاب وضعیت انتشار"}
-                value={ps.category}
-                onChange={this.onCategory}/>
+                value={nw.holding_status}
+                onChange={this.onChange}/>
 
             </div>
         )
     }
 }
+
+const HoldingStatus = [
+    {
+        title:"به زودی",
+        id: "coming_soon"
+    },
+    {
+        title:"در حال انتشار",
+        id: "is_holding"
+    },
+    {
+        title:"اتمام دوره",
+        id: "finished"
+    },
+]

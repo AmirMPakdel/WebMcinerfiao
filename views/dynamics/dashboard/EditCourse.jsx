@@ -6,7 +6,6 @@ import EditCourseIntroVideo from "../../components/editCourse/EditCourseIntroVid
 import EditCourseLogo from "../../components/editCourse/EditCourseLogo";
 import EditCourseTitle from "../../components/editCourse/EditCourseTitle";
 import Loading from "../../components/global/Loading";
-import SecTitle from "../../components/panel/SecTitle";
 import EducatorDashboardLayout from "../../layouts/EducatorDashboardLayout";
 import styles from "./EditCourse.module.css";
 import EditCoruseDuration from "../../components/editCourse/EditCourseDuration";
@@ -41,6 +40,10 @@ export default class EditCourse extends Component {
                 intro_video:"",
                 educators:[],
                 duration:"",
+                holding_status:"",
+                short_desc:"",
+                long_desc:"",
+                price:"",
             },
 
             new_values:{
@@ -50,6 +53,10 @@ export default class EditCourse extends Component {
                 intro_video:"",
                 educators:[],
                 duration:"",
+                holding_status:"",
+                short_desc:"",
+                long_desc:"",
+                price:"",
             },
 
             status:{
@@ -59,6 +66,10 @@ export default class EditCourse extends Component {
                 intro_video:"idle",
                 educators:"idle",
                 duration:"idle",
+                holding_status:"idle",
+                short_desc:"idle",
+                long_desc:"idle",
+                price:"idle",
             }
         }
     }
@@ -93,27 +104,27 @@ export default class EditCourse extends Component {
 
                     <EditCourseHoldingStatus parent={this}/>
 
-                    <EditCourseLongDesc parent={this}/>
-
                     <EditCourseShortDesc parent={this}/>
 
+                    <EditCourseLongDesc parent={this}/>
+
                     <EditCoursePrice parent={this}/>
-
-                    <EditCourseReleaseDate parent={this}/>
-
-                    <EditCourseSuggestedCourses parent={this}/>
-
-                    <EditCourseSuggestedPosts parent={this}/>
 
                     <EditCourseSubjects parent={this}/>
 
                     <EditCourseRequirements parent={this}/>
 
-                    <EditCourseGroups parent={this}/>
-
-                    <EditCourseTags parent={this}/>
-
                     <EditCourseContents parent={this}/>
+
+                    {/* <EditCourseGroups parent={this}/> */}
+
+                    {/* <EditCourseTags parent={this}/> */}
+
+                    {/* <EditCourseReleaseDate parent={this}/> */}
+
+                    {/* <EditCourseSuggestedCourses parent={this}/> */}
+
+                    {/* <EditCourseSuggestedPosts parent={this}/> */}
 
                     <div style={{marginTop:"8rem"}}/>
 

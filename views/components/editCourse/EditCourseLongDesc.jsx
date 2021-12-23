@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./EditCourseLongDesc.module.css";
 import EditCourseLongDescController from "../../../controllers/components/editCourse/EditCourseLongDescController";
 import EditableTitle from "../editable/EditableTitle";
+import EditableTextArea from "../editable/EditableTextArea";
 
 /**
 * Props of EditCourseLongDesc Component
@@ -52,10 +53,19 @@ export default class EditCourseLongDesc extends Component {
 
                 <EditableTitle
                 title={"توضیحات کامل دوره"}
-                status={st.duration}
+                status={st.long_desc}
                 onEdit={this.onEdit}
                 onSubmit={this.onSubmit}
                 onCancel={this.onCancel}/>
+
+                <EditableTextArea
+                className={styles.edit_text}
+                ref={r=>this.EditableText=r}
+                maxLength={2000}
+                placeholder="توضیحات کامل دوره"
+                value={nw.long_desc}
+                oldValue={od.long_desc}
+                onChange={this.onChange}/>
 
             </div>
         )

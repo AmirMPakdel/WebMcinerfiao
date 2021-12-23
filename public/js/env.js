@@ -187,6 +187,7 @@ var env = {
         UPLOAD_TYPE_MAIN_PAGE_VOICE: "ut_main_page_voice",
         UPLOAD_TYPE_MAIN_PAGE_IMAGE: "ut_main_page_image",
         UPLOAD_TYPE_MAIN_PAGE_SLIDER_IMAGE: "ut_main_page_slider_image",
+        UPLOAD_TYPE_COURSE_VIDEO_INTRODUCTION: "ut_course_video_introduction",
 
         UPLOAD_TYPE_COURSE_LOGO: "ut_course_logo",
         UPLOAD_TYPE_COURSE_COVER: "ut_course_cover",

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./EditCoursePrice.module.css";
 import EditCoursePriceController from "../../../controllers/components/editCourse/EditCoursePriceController";
 import EditableTitle from "../editable/EditableTitle";
+import EditableText from "../editable/EditableText";
 
 /**
 * Props of EditCoursePrice Component
@@ -22,8 +23,9 @@ export default class EditCoursePrice extends Component {
     }
     
     componentDidMount(){
+        
     }
-    
+
     onEdit=()=>{
         this.controller.onEdit()
     }
@@ -35,7 +37,7 @@ export default class EditCoursePrice extends Component {
     onCancel=()=>{
         this.controller.onCancel();
     }
-    
+
     onChange=(t)=>{
         this.controller.onChange(t);
     }
@@ -52,10 +54,18 @@ export default class EditCoursePrice extends Component {
 
                 <EditableTitle
                 title={"قیمت دوره"}
-                status={st.duration}
+                status={st.price}
                 onEdit={this.onEdit}
                 onSubmit={this.onSubmit}
                 onCancel={this.onCancel}/>
+
+                <EditableText
+                className={styles.edit_text}
+                ref={r=>this.EditableText=r}
+                maxLength={12}
+                value={nw.price}
+                oldValue={od.price}
+                onChange={this.onChange}/>
 
             </div>
         )

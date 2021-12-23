@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./EditCourseShortDesc.module.css";
 import EditCourseShortDescController from "../../../controllers/components/editCourse/EditCourseShortDescController";
 import EditableTitle from "../editable/EditableTitle";
+import EditableTextArea from "../editable/EditableTextArea";
 
 /**
 * Props of EditCourseShortDesc Component
@@ -51,11 +52,20 @@ export default class EditCourseShortDesc extends Component {
             <div className={styles.con}>
 
                 <EditableTitle
-                title={"چکیده دوره"}
-                status={st.duration}
+                title={"معرفی دوره"}
+                status={st.short_desc}
                 onEdit={this.onEdit}
                 onSubmit={this.onSubmit}
                 onCancel={this.onCancel}/>
+
+                <EditableTextArea
+                className={styles.edit_text}
+                ref={r=>this.EditableText=r}
+                maxLength={250}
+                placeholder="معرفی دوره"
+                value={nw.short_desc}
+                oldValue={od.short_desc}
+                onChange={this.onChange}/>
 
             </div>
         )

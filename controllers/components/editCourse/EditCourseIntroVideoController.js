@@ -42,12 +42,11 @@ export default class EditCourseIntroVideoController{
             file_size:file.size,
             file_type: fileType2Ext(file.type),
             token: getCookie(env.TOKEN_KEY),
-            upload_type: env.UT.UPLOAD_TYPE_COURSE_VIDEO_FREE,
-            course_id:getUrlPart(3)
+            upload_type: env.UT.UPLOAD_TYPE_COURSE_VIDEO_INTRODUCTION,
         }
 
         if(this.view.props.parent.state.old_values.intro_video){
-            params1.old_upload_key = this.view.props.parent.state.old_values.intro_video;
+            params1.old_upload_key = this.view.props.parent.state.old_values.intro_video.url;
         }
 
         this.model.getUploadKey(params1, (err, data)=>{
