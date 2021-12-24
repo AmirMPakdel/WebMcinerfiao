@@ -11,7 +11,7 @@ export default class FloatingCard extends Component {
         return(
             <Affix offsetTop={40} style={{ position: 'absolute', top: 30, left: 15 }}>
 
-                <div className={styles.fltcrd_con}>
+                <div className={styles.fltcrd_con+" bglc1i "}>
 
                     <img className={styles.fltcrd_img} src={"/fake_img/20.jpg"}/>
 

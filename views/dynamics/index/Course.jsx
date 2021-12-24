@@ -34,7 +34,7 @@ export default class Course extends Component {
 
                     <SectionTitle title="چه چیزی در این دوره یاد خواهید گرفت؟"/>
 
-                    <div className={styles.sec3}>
+                    <div className={styles.sec3+" bglc1i"}>
 
                         {
                             arr1.map((v,i)=>(

@@ -16,7 +16,7 @@ export default class IndexLayout extends Component {
         return(
             <AccessLayout accessLevel={this.props.accessLevel}>
                 <ModalLayout>
-                    <div className={styles.con+" bglc1i"}>
+                    <div className={styles.con+" bglc2i"}>
 
                         <IndexHeader/>
                     

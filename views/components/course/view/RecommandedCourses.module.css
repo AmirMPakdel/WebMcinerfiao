@@ -8,7 +8,7 @@
     align-items: center;
     margin-top: 1rem;
     width: calc(86% - 14rem);
-    padding: 1rem;
+    padding: 0.2rem;
     font-weight: 700;
     padding-right: 4rem;
     padding-left: 2.5rem;
@@ -43,7 +43,7 @@
     justify-content: center;
     width: 8rem;
     border-right-width: 1px;
-    border-right-style: solid;
+    border-right-style: dashed;
 }
 
 @media(max-width:1024px){
