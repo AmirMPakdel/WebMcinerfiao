@@ -24,6 +24,21 @@ export default class EditCourseModel{
     
             if(!err){
             
+                //validation check
+                if(!data.data.subjects){
+                    data.data.subjects = [];
+                }else{
+                    data.data.subjects = JSON.parse(data.data.subjects);
+                    console.log(data.data.subjects);
+                }
+
+                if(!data.data.requirements){
+                    data.data.requirements = [];
+                }else{
+                    data.data.requirements = JSON.parse(data.data.requirements);
+                    console.log(data.data.requirements);
+                }
+
                 cb(null, data);
             
             }else{

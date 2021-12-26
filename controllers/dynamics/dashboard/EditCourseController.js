@@ -18,7 +18,7 @@ export default class EditCourseController{
         });
 
         let params = {
-            course_id: getUrlPart(3)
+            course_id: getUrlPart(3),
         }
 
         this.model.getCourse(params, (err, data)=>{

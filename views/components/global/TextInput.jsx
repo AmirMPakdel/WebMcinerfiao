@@ -17,6 +17,7 @@ import styles from "./TextInput.module.css";
 * @property {function} inputFilter
 * @property {"password"|"price"} type
 * @property {string} autocomplete
+* @property {boolean} disabled
 * 
 * @extends {Component<Props>}
 */
@@ -97,6 +98,7 @@ export default class TextInput extends Component {
                 value={this.props.value}
                 onChange={this.onChange} 
                 style={input_st}
+                disabled={this.props.disabled}
                 maxLength={this.props.maxLength}
                 type={m_input_type}
                 autoComplete={this.props.autocomplete}

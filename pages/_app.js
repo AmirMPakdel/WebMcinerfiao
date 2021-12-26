@@ -15,6 +15,7 @@ function MyApp({ Component, pageProps }) {
       <link rel="stylesheet" href="/styles/forced.css"/>
       <link rel="stylesheet" href="/styles/shadows.css"/>
 
+      <script src="/js/consts.js"/>
       <script src="/js/env.js"/>
       <script src="/js/poly.js"/>
 

@@ -1,5 +1,8 @@
 import EditCourseSubjectsModel from "../../../models/components/editCourse/EditCourseSubjectsModel";
 import EditCourseSubjects from "../../../views/components/editCourse/EditCourseSubjects";
+import _ from "lodash";
+import chest from "../../../utils/chest";
+import { getUrlPart } from "../../../utils/helpers";
 
 export default class EditCourseSubjectsController{
     
@@ -33,8 +36,16 @@ export default class EditCourseSubjectsController{
         let p = this.view.props.parent;
         let ps = p.state;
         let status = ps.status;
+
         
-        if(ps.new_values.subjects === ps.old_values.subjects){
+        //validate the subjects
+        ps.new_values.subjects = ps.new_values.subjects.filter((v,i)=>{
+            if(v && v != " " && v != "0" && isNaN(Number(v))){
+                return v;
+            }
+        });
+        
+        if(_.isEqual(ps.new_values.subjects, ps.old_values.subjects)){
 
             status.subjects = "idle";
             p.setState({status});
@@ -53,14 +64,13 @@ export default class EditCourseSubjectsController{
 
                 if(data.result_code === env.SC.SUCCESS){
 
-                    chest.openNotification("قیمت دوره با موفقیت ویرایش شد.", "success");
+                    chest.openNotification("موارد آموزشی این دوره با موفقیت ویرایش شد.", "success");
                     
                     status.subjects = "idle";
                     let old_values = ps.old_values;
-                    old_values.subjects = params.subjects;
+                    old_values.subjects = params.subjects.map(e=>e);
                     p.setState({status, old_values});
                 }
-
             });
         }
     }
@@ -68,19 +78,13 @@ export default class EditCourseSubjectsController{
     onCancel(){
 
         let p = this.view.props.parent;
+
         let ps = p.state;
-        let status = ps.status;
-        status.subjects = "idle";
-        p.setState({status});
+
+        ps.status.subjects = "idle";
+
+        ps.new_values.subjects = ps.old_values.subjects.map(e=>e);
+
+        p.setState(ps);
     }
-
-    onChange(t){
-
-        let newVal = this.view.props.parent.state.new_values;
-
-        newVal.subjects = t;
-
-        this.view.props.parent.setState(newVal)
-    }
-    
 }

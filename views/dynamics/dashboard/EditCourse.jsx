@@ -45,6 +45,7 @@ export default class EditCourse extends Component {
                 long_desc:"",
                 price:"",
                 subjects:[],
+                requirements:[],
             },
 
             new_values:{
@@ -59,6 +60,7 @@ export default class EditCourse extends Component {
                 long_desc:"",
                 price:"",
                 subjects:[],
+                requirements:[],
             },
 
             status:{
@@ -73,6 +75,7 @@ export default class EditCourse extends Component {
                 long_desc:"idle",
                 price:"idle",
                 subjects:"idle",
+                requirements:"idle",
             }
         }
     }

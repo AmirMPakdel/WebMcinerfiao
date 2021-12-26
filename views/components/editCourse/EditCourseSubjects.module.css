@@ -31,3 +31,11 @@
     border-radius: 0.5rem;
     margin-left: 1rem;
 }
+
+.nestable_row_delete{
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 0.4rem;
+    position: absolute;
+    left: -2.2rem;
+}

@@ -40,10 +40,6 @@ export default class EditCourseSubjects extends Component {
     onCancel=()=>{
         this.controller.onCancel();
     }
-    
-    onChange=(t)=>{
-        this.controller.onChange(t);
-    }
 
     onAddSubject=()=>{
         this.controller.onAddSubject();
@@ -53,24 +49,26 @@ export default class EditCourseSubjects extends Component {
 
         return (
             <div className={styles.nestable_card}>
+
                 {item.handler}
+
                 <TextInput className={styles.nestable_inputs}
-                value={item.text}
+                value={item.item.text}
                 onChange={(t)=>this.onNestableInputChange(t, item)}/>
+
+                <div className={styles.nestable_row_delete+" bgec amp_btn"}
+                onClick={()=>this.deleteNestableRow(item)}/>
+
             </div>
-            
         )
     }
 
-    onNestableInputChange=(text, obj)=>{
+    onNestableInputChange=(text, item)=>{
+
         let p = this.props.parent;
         let ps = p.state;
         let nw = ps.new_values;
-
-        let item = obj.item;
-
-        nw.subjects[item.id-1] = text
-
+        nw.subjects[item.index] = text
         p.setState({new_values: nw});
     }
 
@@ -79,19 +77,22 @@ export default class EditCourseSubjects extends Component {
         let p = this.props.parent;
         let ps = p.state;
         let nw = ps.new_values;
-
-        let temp = nw.subjects[targetPath[0]];
-        nw.subjects[targetPath[0]] = nw.subjects[dragItem.id-1];
-        nw.subjects[dragItem.id-1] = temp;
-
-        const subjects = nw.subjects.map(l => Object.assign("", l));
-
+        let subjects = items.map(i=>i.text);
+        nw.subjects = subjects;
         p.setState({new_values: nw});
+    }
 
-        console.log(nw.subjects);
+    deleteNestableRow=(item)=>{
+
+        let p = this.props.parent;
+        let ps = p.state;
+        let nw = ps.new_values;
+        nw.subjects.splice(item.index, 1);
+        p.setState({new_values: nw});
     }
 
     render(){
+
         let p = this.props.parent;
         let ps = p.state;
         let st = ps.status;
@@ -108,14 +109,31 @@ export default class EditCourseSubjects extends Component {
                 onSubmit={this.onSubmit}
                 onCancel={this.onCancel}/>
                 
-                <Nestable className={styles.nestable}
-                items={apiSubjects2NestableItem(nw.subjects)}
-                renderItem={this.renderNestableItem}
-                onChange={this.onNesableChange}
-                handler={<div className={styles.nestable_handler+" bgtc2"}/>}/>
-
                 {
                     st.subjects === "edit"?
+                    <Nestable className={styles.nestable}
+                    ref={r=>this.Nestable=r}
+                    items={apiSubjects2NestableItem(nw.subjects)}
+                    renderItem={this.renderNestableItem}
+                    onChange={this.onNesableChange}
+                    handler={<div className={styles.nestable_handler+" bgtc2"}/>}/>
+                    :
+                    <div className={styles.nestable}>
+                    {
+                        nw.subjects.map((v,i)=>(
+                            <div className={styles.nestable_card} key={i}>
+                                <TextInput className={styles.nestable_inputs}
+                                value={v}
+                                disabled={true}
+                                onChange={t=>t}/>
+                            </div>
+                        ))
+                    }
+                    </div>
+                }
+
+                {
+                    st.subjects === "edit" && nw.subjects.length < env.LIMITS.MAX_COURSE_SUBJECTS?
                     <MainButton className={styles.add_sub_btn}
                     onClick={this.onAddSubject}
                     title={"ایجاد مورد جدید"}/>:null
