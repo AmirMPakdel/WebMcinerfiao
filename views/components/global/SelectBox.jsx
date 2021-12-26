@@ -40,11 +40,11 @@ export default class SelectBox extends Component {
         
         }else{
 
-            addClass += "blc2 ";
+            addClass += "bdc2 ";
         }
 
         return(
-            <div className={styles.con+" "+addClass}>
+            <div className={styles.con+" bglc1 "+addClass}>
 
                 {
                     this.props.data && this.props.data.length?

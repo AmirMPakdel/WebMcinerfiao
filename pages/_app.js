@@ -1,6 +1,7 @@
 import 'antd/dist/antd.css';
 import {ChestComponent} from '../utils/chest';
 import Head from 'next/head';
+import 'react-nestable/dist/styles/index.css'
 
 
 function MyApp({ Component, pageProps }) {
