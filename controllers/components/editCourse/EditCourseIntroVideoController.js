@@ -1,4 +1,5 @@
 import EditCourseIntroVideoModel from "../../../models/components/editCourse/EditCourseIntroVideoModel";
+import chest from "../../../utils/chest";
 import { getCookie } from "../../../utils/cookie";
 import { fileType2Ext, getUrlPart } from "../../../utils/helpers";
 import EditCourseIntroVideo from "../../../views/components/editCourse/EditCourseIntroVideo";
@@ -97,7 +98,11 @@ export default class EditCourseIntroVideoController{
                 }
 
                 if(this.view.props.parent.state.old_values.intro_video){
+
                     params4.file_state = "ufs_replace";
+
+                    params4.intro_id = this.view.props.parent.state.old_values.intro_video.id;
+
                 }else{
                     params4.file_state = "ufs_new"
                 }
@@ -111,9 +116,14 @@ export default class EditCourseIntroVideoController{
 
         this.model.save(param4, (err, data)=>{
 
-            let status = this.view.props.parent.state.status;
-            status.intro_video = "idle";
-            this.view.props.parent.setState({status});
+            if(data.result_code === env.SC.SUCCESS){
+
+                chest.openNotification("ویدیو معرفی دوره با موفقیت بارگذاری شد.", "success");
+
+                let status = this.view.props.parent.state.status;
+                status.intro_video = "idle";
+                this.view.props.parent.setState({status});
+            }
         });
     }
 

@@ -46,7 +46,7 @@ export default class AccessLayout extends Component {
     
     render(){
         return(
-            <div className={styles.layout}>
+            <div className={styles.layout+" bglc2i "}>
 
                 {
                     this.props.accessLevel === "1" || !this.props.accessLevel?

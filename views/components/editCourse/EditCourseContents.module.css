@@ -1,3 +1,54 @@
 .con{
     margin-top: 3rem;
 }
+
+.add_heading_btn{
+    margin-top: 2rem;
+    margin-right: 2rem;
+}
+
+.heading_nestable{
+    width: 92%;
+    max-width: 36rem;
+    margin-right: 2rem;
+    margin-top: 2rem;
+}
+
+.heading_wrapper{
+    border-width: 2px;
+    border-style: dashed;
+    border-radius: 1rem;
+    padding: 0.5rem;
+}
+
+.heading_header{
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+}
+
+.nestable_handler{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    margin-left: 1rem;
+}
+
+.heading_input{
+    margin-top: 0.8rem;
+    max-width: 24rem;
+}
+
+.heading_delete{
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 0.4rem;
+    position: absolute;
+    left: 0rem;
+}
+
+.add_heading_content_btn{
+    margin-top: 2rem;
+    margin-right: 3rem;
+    margin-bottom: 1rem;
+}

@@ -53,6 +53,10 @@ html, body, #__next{
     width: 100%;
 }
 
+#__next{
+	background-color: #EAEAEA;
+}
+
 input{
 	background-color: transparent;
     outline: none;

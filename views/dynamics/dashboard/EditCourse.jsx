@@ -46,6 +46,8 @@ export default class EditCourse extends Component {
                 price:"",
                 subjects:[],
                 requirements:[],
+                headings:[],
+                contents:[],
             },
 
             new_values:{
@@ -61,6 +63,8 @@ export default class EditCourse extends Component {
                 price:"",
                 subjects:[],
                 requirements:[],
+                headings:[],
+                contents:[],
             },
 
             status:{
@@ -76,6 +80,8 @@ export default class EditCourse extends Component {
                 price:"idle",
                 subjects:"idle",
                 requirements:"idle",
+                headings:"idle",
+                contents:"idle",
             }
         }
     }
@@ -95,6 +101,8 @@ export default class EditCourse extends Component {
                 <>
 
                     <div style={{marginTop:"2rem"}}/>
+
+                    <EditCourseContents parent={this}/>
                     
                     <EditCourseTitle parent={this}/>
 
@@ -120,7 +128,7 @@ export default class EditCourse extends Component {
 
                     <EditCourseRequirements parent={this}/>
 
-                    <EditCourseContents parent={this}/>
+                    
 
                     {/* <EditCourseGroups parent={this}/> */}
 

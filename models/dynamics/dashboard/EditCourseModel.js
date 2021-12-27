@@ -39,6 +39,9 @@ export default class EditCourseModel{
                     console.log(data.data.requirements);
                 }
 
+                //TODO: handle contents
+                data.data.contents = [];
+
                 cb(null, data);
             
             }else{

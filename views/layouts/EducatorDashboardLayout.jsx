@@ -45,9 +45,9 @@ export default class EducatorDashboardLayout extends Component {
 
             <AccessLayout accessLevel={this.props.accessLevel}>
                 <ModalLayout>
-                    <div className={styles.layout+" bglc2i"}>
+                    <div className={styles.layout}>
                         
-                        <div className={styles.header_bar}>
+                        <div className={styles.header_bar+" bgwi"}>
 
                             <SideMenu/>
 
