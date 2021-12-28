@@ -53,30 +53,70 @@ export default class EditCourseContents extends Component {
 
     }
     
-    renderNestableItem=(item)=>{
+    renderNestableItem=(obj)=>{
 
-        let p = this.props.parent;
-        let ps = p.state;
-        let nw = ps.new_values;
+        let {item, handler,collapseIcon, depth} = obj;
+        // let p = this.props.parent;
+        // let ps = p.state;
+        // let nw = ps.new_values;
 
-        console.log(nw.contents[item.item.id - 1]);
+        
+
+        let heading_item_con = styles.heading_item_con+" bglc1 ";
+        let content_item_con = styles.content_item_con+" bglc1 bdc2 ";
 
         return (
-            <CourseHeading
-            parent={this}
-            pparent={p}
-            item={item}/>
+
+            <div className={item.type=="content"?content_item_con:heading_item_con}>
+                {/* {handler} */}
+
+                {collapseIcon}
+
+                <div className={styles.nestable_item_text+(item.type=="content"?" bydt ":" tilt ")}>{item.text}</div>
+            </div>
+            // <CourseHeading
+            // parent={this}
+            // pparent={p}
+            // item={item}/>
         )
     }
 
-    onNesableChange=({items, dragItem, targetPath})=>{
+    onNesableChange=(obj)=>{
+        let {items, dragItem, targetPath} = obj
 
-        let p = this.props.parent;
-        let ps = p.state;
-        let nw = ps.new_values;
-        let requirements = items.map(i=>i.text);
-        nw.requirements = requirements;
-        p.setState({new_values: nw});
+        console.log(obj);
+
+        // let p = this.props.parent;
+        // let ps = p.state;
+        // let nw = ps.new_values;
+        // let requirements = items.map(i=>i.text);
+        // nw.requirements = requirements;
+        // p.setState({new_values: nw});
+    }
+
+    nestableConfirmChange=(obj)=>{
+
+        //console.log(obj);
+
+        let {destinationParent, dragItem} = obj;
+
+        if(dragItem.type == "heading" && destinationParent){
+            return false;
+        }
+
+        // if(dragItem.type == "content" && !destinationParent){
+        //     return false;
+        // }
+
+        if(dragItem.type == "heading" && (destinationParent && destinationParent.type == "heading")){
+            return false;
+        }
+
+        if(dragItem.type == "content" && (destinationParent && destinationParent.type == "content")){
+            return false;
+        }
+
+        return true;
     }
 
     deleteNestableRow=(item)=>{
@@ -106,13 +146,16 @@ export default class EditCourseContents extends Component {
                 onCancel={this.onCancel}/>
 
                 {
-                    st.headings === "edit"?
+                    st.headings === "edit" || 1?
                     <Nestable className={styles.heading_nestable}
                     ref={r=>this.Nestable=r}
-                    items={apiHeadings2NestableItem(nw.headings)}
+                    maxDepth={2}
+                    items={apiHierarchy2NestableItem(nw.content_hierarchy)}
                     renderItem={this.renderNestableItem}
                     onChange={this.onNesableChange}
-                    handler={<div className={styles.nestable_handler+" bgtc2"}/>}/>
+                    confirmChange={this.nestableConfirmChange}
+                    //handler={<div className={styles.nestable_handler+" bgtc2"}/>}
+                    />
                     :
                     <div className={styles.nestable}>
                     {
@@ -188,17 +231,43 @@ class CourseHeading extends Component{
     }
 }
 
-function apiHeadings2NestableItem(sub) {
+function apiHierarchy2NestableItem(sub) {
 
-    if(!sub){
-        return [];
-    }
+    // if(!sub){
+    //     return [];
+    // }
 
     let items = [];
 
-    sub.forEach((e, i) => {
-        items.push({id:i+1, text:e});
-    });
+    // sub.forEach((e, i) => {
+    //     items.push({id:i+1, text:e});
+    // });
+
+    // items = [
+    //     {h_id:1, content_ids:[1,2,3]},
+    //     {h_id:2, content_ids:[4,5]},
+    // ]
+
+    items = [
+        {
+            id: 24,
+            text: "مقدمه",
+            type:"heading",
+            children:[
+                {id: 12, text: "جلسه اول", type:"content"},
+                {id: 56, text: "جلسه دوم", type:"content"},
+            ]
+        },
+        {
+            id: 28,
+            text: "فصل 1",
+            type:"heading",
+            children:[
+                {id: 174, text: "جلسه سوم", type:"content"},
+                {id: 256, text: "جلسه چهارم", type:"content"},
+            ]
+        },
+    ]
 
     return items
 }

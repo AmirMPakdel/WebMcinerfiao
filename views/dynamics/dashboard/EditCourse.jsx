@@ -46,8 +46,10 @@ export default class EditCourse extends Component {
                 price:"",
                 subjects:[],
                 requirements:[],
+
                 headings:[],
                 contents:[],
+                content_hierarchy:"",
             },
 
             new_values:{
@@ -63,8 +65,10 @@ export default class EditCourse extends Component {
                 price:"",
                 subjects:[],
                 requirements:[],
+                
                 headings:[],
                 contents:[],
+                content_hierarchy:"",
             },
 
             status:{
@@ -80,8 +84,10 @@ export default class EditCourse extends Component {
                 price:"idle",
                 subjects:"idle",
                 requirements:"idle",
+                
                 headings:"idle",
                 contents:"idle",
+                content_hierarchy:"idle",
             }
         }
     }

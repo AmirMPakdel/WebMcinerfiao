@@ -1,5 +1,7 @@
 import EditCourseContentsModel from "../../../models/components/editCourse/EditCourseContentsModel";
+import chest from "../../../utils/chest";
 import EditCourseContents from "../../../views/components/editCourse/EditCourseContents";
+import NewHeadingModal from "../../../views/components/modal/editCourse/NewHeadingModal";
 
 export default class EditCourseContentsController{
     
@@ -17,17 +19,23 @@ export default class EditCourseContentsController{
 
     onAddHeading=()=>{
 
-        let newVal = this.view.props.parent.state.new_values;
+        let modal = <NewHeadingModal/>;
 
-        if(!newVal.headings){
-            newVal.headings = [];
-        }
+        chest.ModalLayout.setModal(1, modal, ()=>{
+            chest.ModalLayout.visibleToggle(1, true);
+        })
 
-        newVal.headings.push("");
+        // let newVal = this.view.props.parent.state.new_values;
 
-        newVal.contents[newVal.headings.length-1] = [{id:"new", title:""}]
+        // if(!newVal.headings){
+        //     newVal.headings = [];
+        // }
+
+        // newVal.headings.push("");
+
+        // newVal.contents[newVal.headings.length-1] = [{id:"new", title:""}]
         
-        this.view.props.parent.setState(newVal)
+        // this.view.props.parent.setState(newVal)
     }
     
     onSubmit(){
