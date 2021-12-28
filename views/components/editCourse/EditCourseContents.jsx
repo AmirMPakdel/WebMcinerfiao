@@ -6,6 +6,16 @@ import EditCourse from "../../dynamics/dashboard/EditCourse";
 import MainButton from "../global/MainButton";
 import Nestable from "react-nestable";
 import TextInput from "../global/TextInput";
+import {sortableContainer, sortableElement} from 'react-sortable-hoc';
+
+import { Container, Draggable } from "react-smooth-dnd";
+import TestCards from "./TestCards";
+
+const SortableItem = sortableElement(({value}) => <li>{value}</li>);
+
+const SortableContainer = sortableContainer(({children}) => {
+  return <div>{children}</div>;
+});
 
 /**
 * Props of EditCourseContents Component
@@ -23,7 +33,30 @@ export default class EditCourseContents extends Component {
 
         this.controller = new EditCourseContentsController(this);
         this.state = {
-        
+
+            items:{
+
+                children:[
+
+                    {id:1, text: "فصل اول", 
+                    children:[
+                        {id:22, text:"مقدمه"},
+                        {id:32, text:"توضیحات نصب نرم افزار"},
+                        {id:42, text:"آموزش مقدماتی"},
+                    ]},
+
+                    {id:2, text: "فصل دوم",
+                    children:[
+                        {id:52, text:"طریقه ی استفاده"},
+                    ]},
+
+                    {id:3, text: "فصل سوم",
+                    children:[
+                        {id:62, text:"شکار بره ها"},
+                        {id:72, text:"نقد انتزاعی"},
+                    ]},
+                ]
+            }
         }
     }
     
@@ -128,6 +161,36 @@ export default class EditCourseContents extends Component {
         p.setState({new_values: nw});
     }
 
+    getCardPayload=(columnId, index)=>{
+        return this.state.items.children.filter(p => p.id === columnId)[0].children[
+          index
+        ];
+    }
+
+    onColumnDrop=(dropResult)=>{
+        const items = Object.assign({}, this.state.items);
+        items.children = applyDrag(items.children, dropResult);
+        this.setState({
+            items
+        });
+    }
+
+    onCardDrop=(columnId, dropResult)=>{
+        if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+          const items = Object.assign({}, this.state.items);
+          const column = items.children.filter(p => p.id === columnId)[0];
+          const columnIndex = items.children.indexOf(column);
+    
+          const newColumn = Object.assign({}, column);
+          newColumn.children = applyDrag(newColumn.children, dropResult);
+          items.children.splice(columnIndex, 1, newColumn);
+    
+          this.setState({
+            items
+          });
+        }
+      }
+
     render(){
         let p = this.props.parent;
         let ps = p.state;
@@ -140,44 +203,94 @@ export default class EditCourseContents extends Component {
 
                 <EditableTitle
                 title={"محتویات دوره"}
-                status={st.headings}
+                status={st.content_hierarchy}
                 onEdit={this.onEdit}
                 onSubmit={this.onSubmit}
                 onCancel={this.onCancel}/>
 
-                {
-                    st.headings === "edit" || 1?
-                    <Nestable className={styles.heading_nestable}
-                    ref={r=>this.Nestable=r}
-                    maxDepth={2}
-                    items={apiHierarchy2NestableItem(nw.content_hierarchy)}
-                    renderItem={this.renderNestableItem}
-                    onChange={this.onNesableChange}
-                    confirmChange={this.nestableConfirmChange}
-                    //handler={<div className={styles.nestable_handler+" bgtc2"}/>}
-                    />
-                    :
-                    <div className={styles.nestable}>
-                    {
-                        nw.headings.map((v,i)=>(
-                            <div className={styles.nestable_card} key={i}>
-                                <TextInput className={styles.nestable_inputs}
-                                value={v}
-                                disabled={true}
-                                onChange={t=>t}/>
-                            </div>
-                        ))
-                    }
-                    </div>
-                }
+                <div className={styles.hierarchy_con}>
+                    <Container
+                    dragHandleSelector={st.content_hierarchy == "edit"?undefined:"null"}
+                    onDrop={this.onColumnDrop}
+                    dropPlaceholder={{                      
+                        animationDuration: 150,
+                        showOnTop: true,
+                        className: styles.heading_card_preview+" btc2 bgtc1"
+                    }}>
+                    {this.state.items.children.map(item => {
+                        return (
+                        <Draggable key={item.id}> 
 
+                            <div className={styles.heading_drag_wrapper+" bdc2i bglc1"}>
+
+                                <div className={styles.heading_title_bar}>
+                                    {
+                                        st.content_hierarchy == "edit"?
+                                        <>
+                                        <span className={styles.heading_drag_handle+" ftc2"}>&#x2630;</span>
+                                        <div className={styles.heading_text+" tilt"}>{item.text}</div>
+                                        <div className={styles.heading_edit+" amp_btn bgtc1"}/>
+                                        <div className={styles.heading_delete+" amp_btn bgec"}/>
+                                        </>
+                                        :
+                                        <div className={styles.heading_text+" tilt"}>{item.text}</div>
+                                    }
+                                </div>
+
+                                <Container
+                                dragHandleSelector={st.content_hierarchy == "edit"?undefined:"null"}
+                                groupName="content_group"
+                                onDrop={e => this.onCardDrop(item.id, e)}
+                                getChildPayload={index =>this.getCardPayload(item.id, index)}
+                                dropPlaceholder={{                      
+                                    animationDuration: 150,
+                                    showOnTop: true,
+                                    className: styles.content_card_preview+" btc2 bgtc1"
+                                }}>
+                                {
+                                item.children.map(sub=>{
+
+                                    return(
+                                        <Draggable key={sub.id}>
+
+                                            <div className={styles.content_drag_bar+" bglc2"}>
+                                                {
+                                                    st.content_hierarchy == "edit"?
+                                                    <>
+                                                    <span className={styles.content_drag_handle+" ftc2"}>&#x2630;</span>
+                                                    <div className={styles.content_edit+" amp_btn bgtc1"}/>
+                                                    <div className={styles.content_delete+" amp_btn bgec"}/>
+                                                    </>
+                                                    :null
+                                                }
+                                                <div className={styles.content_text+" bdy"}>{sub.text}</div>
+                                            </div>
+
+                                        </Draggable>
+                                    )
+                                })
+                                }
+                                </Container>
+                                {
+                                    st.content_hierarchy == "edit"?
+                                    <MainButton className={styles.new_content_btn}
+                                    title="اضافه کردن محتوا"/>
+                                    :null
+                                }
+
+                            </div>
+
+                        </Draggable>
+                        );
+                    })}
+                    </Container>
+                </div>
                 {
-                    st.headings === "edit" && nw.headings.length < env.LIMITS.MAX_COURSE_HEADINGS?
+                    st.content_hierarchy == "edit" && nw.headings.length < env.LIMITS.MAX_COURSE_HEADINGS?
                     <MainButton className={styles.add_heading_btn}
                     onClick={this.onAddHeading}
                     title={"ایجاد سرفصل جدید"}/>:null
                 }
-
             </div>
         )
     }
@@ -271,3 +384,21 @@ function apiHierarchy2NestableItem(sub) {
 
     return items
 }
+
+const applyDrag = (arr, dragResult) => {
+    const { removedIndex, addedIndex, payload } = dragResult;
+    if (removedIndex === null && addedIndex === null) return arr;
+  
+    const result = [...arr];
+    let itemToAdd = payload;
+  
+    if (removedIndex !== null) {
+      itemToAdd = result.splice(removedIndex, 1)[0];
+    }
+  
+    if (addedIndex !== null) {
+      result.splice(addedIndex, 0, itemToAdd);
+    }
+  
+    return result;
+};

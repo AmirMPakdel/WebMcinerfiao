@@ -13,7 +13,7 @@ export default class EditCourseContentsController{
     
     onEdit(){
         let status = this.view.props.parent.state.status;
-        status.headings = "edit";
+        status.content_hierarchy = "edit";
         this.view.props.parent.setState(status);
     }
 
@@ -88,7 +88,7 @@ export default class EditCourseContentsController{
 
         let ps = p.state;
 
-        ps.status.headings = "idle";
+        ps.status.content_hierarchy = "idle";
 
         ps.new_values.headings = ps.old_values.headings.map(e=>e);
 
