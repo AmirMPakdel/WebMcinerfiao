@@ -107,3 +107,34 @@ export function fileType2Ext(file_type){
             return ex;
     }
 }
+
+export function findInJsonObj(obj, value, keyName="id"){
+
+    let obj2 = {}
+    Object.keys(obj).forEach((i)=>{
+
+        if(obj[i][keyName] == value){
+
+            obj2 = obj[i]
+            return;
+        }
+
+    })
+
+    return obj2;
+}
+
+export function findInJsonArray(jsonArray, value, keyName="id"){
+
+    let obj = {}
+    jsonArray.forEach((v)=>{
+
+        if(v[keyName] == value){
+
+            obj = v
+            return;
+        }
+    })
+
+    return obj;
+}

@@ -1,16 +1,16 @@
-import NewHeadingModel from "../../../models/modals/editCourse/NewHeadingModel";
+import UpdateHeadingModal from "../../../views/components/modal/editCourse/UpdateHeadingModal";
+import UpdateHeadingModel from "../../../models/modals/editCourse/UpdateHeadingModel";
 import chest from "../../../utils/chest";
 import { getUrlPart } from "../../../utils/helpers";
-import NewHeadingModal from "../../../views/components/modal/editCourse/NewHeadingModal";
 
-export default class NewHeadingController{
+export default class UpdateHeadingController{
     
-    /**@param {NewHeadingModal} view*/
+    /**@param {UpdateHeadingModal} view*/
     constructor(view){
         this.view = view;
-        this.model = new NewHeadingModel();
+        this.model = new UpdateHeadingModel();
     }
-
+    
     onCancel(){
 
         chest.ModalLayout.closeAndDelete(1);
@@ -32,33 +32,46 @@ export default class NewHeadingController{
 
         this.view.setState({can_continue:can});
     }
-    
-    create(){
+
+    update(){
         
         let s = this.view.state;
 
         if(!s.can_continue){return};
 
-        this.view.setState({create_loading:true});
+        this.view.setState({update_loading:true});
 
         let params = {
             course_id: getUrlPart(3),
+            heading_id: this.view.props.heading.id,
             title: s.heading,
         }
 
-        this.model.save(params, (err, data)=>{
+        this.model.update(params, (err, data)=>{
 
             if(data.result_code === env.SC.SUCCESS){
 
-                chest.openNotification("سرفصل جدید ایجاد شد.", "success");
+                chest.openNotification("سرفصل موردنظر ویرایش شد.", "success");
                 
                 let EditCourseContents = this.view.props.parent;
 
                 let EditCourse = EditCourseContents.props.parent;
 
-                EditCourse.state.new_values.headings.push({id:data.data.heading_id, title: params.title});
+                EditCourse.state.new_values.headings = EditCourse.state.new_values.headings.map((v,i)=>{
 
-                EditCourse.state.new_values.content_hierarchy.children.push({id:data.data.heading_id, title: params.title, children:[]});
+                    if(v.id === params.heading_id){
+                        v.title = params.title;
+                    }
+                    return v;
+                })
+
+                EditCourse.state.new_values.content_hierarchy.children = EditCourse.state.new_values.content_hierarchy.children.map((v,i)=>{
+
+                    if(v.id === params.heading_id){
+                        v.title = params.title;
+                    }
+                    return v;
+                })
 
                 EditCourse.state.old_values.headings = EditCourse.state.new_values.headings.map(e=>e);
 
@@ -68,22 +81,10 @@ export default class NewHeadingController{
                 EditCourse.state.status.content_hierarchy = "idle";
 
                 EditCourse.setState(EditCourse.state, ()=>{
-
-                    //save new content_hierarchy which includes new heading
-                    let params = {
-                        course_id : getUrlPart(3),
-                        hierarchy: EditCourse.state.new_values.content_hierarchy,
-                    }
         
-                    EditCourseContents.controller.model.save(params, (err, data)=>{
+                    this.view.setState({update_loading:false});
         
-                        if(data.result_code === env.SC.SUCCESS){
-
-                            this.view.setState({create_loading:false});
-        
-                            this.onCancel();
-                        }
-                    });
+                    this.onCancel();
                 });
             }
         })

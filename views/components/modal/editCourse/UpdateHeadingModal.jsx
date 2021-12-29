@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import NewHeadingController from "../../../../controllers/modals/editCourse/NewHeadingController";
-import chest from "../../../../utils/chest";
-import Validation, { InputFilter } from "../../../../utils/validation";
-import EditCourseContents from "../../editCourse/EditCourseContents";
+import UpdateHeadingController from "../../../../controllers/modals/editCourse/UpdateHeadingController";
+import { InputFilter } from "../../../../utils/validation";
 import MainButton from "../../global/MainButton";
 import TextInput from "../../global/TextInput";
-import styles from "./NewHeadingModal.module.css";
+import styles from "./UpdateHeadingModal.module.css";
 
 /**
-* Props of NewHeading Component
+* Props of UpdateHeadingModal Component
 * @typedef Props
 * @property {string} className
 * @property {React.CSSProperties} style
@@ -16,20 +14,32 @@ import styles from "./NewHeadingModal.module.css";
 * 
 * @extends {Component<Props>}
 */
-export default class NewHeadingModal extends Component {
+export default class UpdateHeadingModal extends Component {
     
     constructor(props){
         super(props);
-        this.controller = new NewHeadingController(this);
+        this.controller = new UpdateHeadingController(this);
         this.state = {
-            heading:"",
-            create_loading:false,
-            can_continue:false,
+            update_loading:false,
+            heading: props.heading.title,
+            can_continue:true,
         }
     }
-    
+
     componentDidMount(){
-        this.TextInput.input.focus();
+
+        this.input = this.TextInput.input;
+        let len = this.input.value.length;
+        if (this.input.setSelectionRange) {
+            this.input.focus();
+            this.input.setSelectionRange(len, len);
+        } else if (this.input.createTextRange) {
+            var t = this.input.createTextRange();
+            t.collapse(true);
+            t.moveEnd('character', len);
+            t.moveStart('character', len);
+            t.select();
+        }
     }
 
     onInput=(t)=>{
@@ -40,8 +50,8 @@ export default class NewHeadingModal extends Component {
         this.controller.onCancel();
     }
     
-    onCreate=()=>{
-        this.controller.create();
+    onUpdate=()=>{
+        this.controller.update();
     }
     
     render(){
@@ -52,7 +62,7 @@ export default class NewHeadingModal extends Component {
                 src={"/svg/modal_close.svg"}
                 onClick={this.onCancel}/>
 
-                <div className={styles.title+" tilt"}>{"ایجاد سرفصل جدید"}</div>
+                <div className={styles.title+" tilt"}>{"ویرایش عنوان سرفصل"}</div>
 
                 <TextInput className={styles.input}
                 ref={r=>this.TextInput=r}
@@ -62,10 +72,10 @@ export default class NewHeadingModal extends Component {
                 placeholder={"عنوان سرفصل"}/>
 
                 <MainButton className={styles.submit_btn}
-                title={"ایجاد"}
+                title={"ویرایش"}
                 disabled={!this.state.can_continue}
-                onClick={this.onCreate}
-                loading={this.state.create_loading}/>
+                onClick={this.onUpdate}
+                loading={this.state.update_loading}/>
                 
             </div>
         )

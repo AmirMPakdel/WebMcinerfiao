@@ -1,5 +1,6 @@
 import myServer from "../../../utils/myServer";
 import _ from "lodash"
+import { findInJsonArray } from "../../../utils/helpers";
 
 export default class EditCourseModel{
     
@@ -39,8 +40,7 @@ export default class EditCourseModel{
                     console.log(data.data.requirements);
                 }
 
-                //TODO: handle contents
-                data.data.contents = [];
+                data.data.content_hierarchy = apiContentHierarchy2MyHierarchy(data.data);
 
                 cb(null, data);
             
@@ -52,6 +52,41 @@ export default class EditCourseModel{
     }
     
     
+}
+
+function apiContentHierarchy2MyHierarchy(data){
+
+    let ch = data.content_hierarchy;
+
+    if(!ch){
+        
+        return {
+            children:[],
+        };
+        
+    }else{
+
+        let temp = JSON.parse(ch);
+
+        let mych = {
+            children:[],
+        }
+
+        temp.forEach((v,i)=>{
+
+            mych.children.push({
+
+                id: v.h_id,
+                title: findInJsonArray(data.headings, v.h_id).title,
+                children: v.content_ids.map((c_id)=>{
+
+                    return findInJsonArray(data.contents, c_id);
+                })
+            });
+        });
+
+        return mych;
+    }
 }
 
 const fake_IntroVideo = {

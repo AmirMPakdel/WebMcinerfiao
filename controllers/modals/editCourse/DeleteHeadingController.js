@@ -1,64 +1,57 @@
-import NewHeadingModel from "../../../models/modals/editCourse/NewHeadingModel";
+import DeleteHeadingModel from "../../../models/modals/editCourse/DeleteHeadingModel";
 import chest from "../../../utils/chest";
 import { getUrlPart } from "../../../utils/helpers";
-import NewHeadingModal from "../../../views/components/modal/editCourse/NewHeadingModal";
+import DeleteHeadingModal from "../../../views/components/modal/editCourse/DeleteHeadingModal";
 
-export default class NewHeadingController{
+export default class DeleteHeadingController{
     
-    /**@param {NewHeadingModal} view*/
+    /**@param {DeleteHeadingModal} view*/
     constructor(view){
         this.view = view;
-        this.model = new NewHeadingModel();
+        this.model = new DeleteHeadingModel();
     }
-
-    onCancel(){
-
+    
+    onCancel=()=>{
         chest.ModalLayout.closeAndDelete(1);
     }
 
-    onInput(t){
+    onDelete=()=>{
 
-        this.view.setState({heading:t}, this.continueCheck);
-    }
+        let heading = this.view.props.heading;
 
-    continueCheck=()=>{
-
-        let can = true;
-        let s = this.view.state;
-        
-        if(s.heading.length < 4){
-            can = false;
-        }
-
-        this.view.setState({can_continue:can});
-    }
-    
-    create(){
-        
-        let s = this.view.state;
-
-        if(!s.can_continue){return};
-
-        this.view.setState({create_loading:true});
+        this.view.setState({delete_loading:true});
 
         let params = {
             course_id: getUrlPart(3),
-            title: s.heading,
+            heading_id: heading.id,
         }
 
-        this.model.save(params, (err, data)=>{
+        this.model.delete(params, (err, data)=>{
 
             if(data.result_code === env.SC.SUCCESS){
 
-                chest.openNotification("سرفصل جدید ایجاد شد.", "success");
+                chest.openNotification("سرفصل مورد نظر حذف شد.", "success");
                 
                 let EditCourseContents = this.view.props.parent;
 
                 let EditCourse = EditCourseContents.props.parent;
 
-                EditCourse.state.new_values.headings.push({id:data.data.heading_id, title: params.title});
+                EditCourse.state.new_values.headings = EditCourse.state.new_values.headings.filter((v,i)=>{
 
-                EditCourse.state.new_values.content_hierarchy.children.push({id:data.data.heading_id, title: params.title, children:[]});
+                    if(v.id === params.heading_id){
+                        return false
+                    }
+                    return true;
+
+                });
+
+                EditCourse.state.new_values.content_hierarchy.children = EditCourse.state.new_values.content_hierarchy.children.filter((v,i)=>{
+
+                    if(v.id === params.heading_id){
+                        return false
+                    }
+                    return true;
+                });
 
                 EditCourse.state.old_values.headings = EditCourse.state.new_values.headings.map(e=>e);
 
@@ -79,12 +72,14 @@ export default class NewHeadingController{
         
                         if(data.result_code === env.SC.SUCCESS){
 
-                            this.view.setState({create_loading:false});
+                            this.view.setState({delete_loading:false});
         
                             this.onCancel();
                         }
                     });
                 });
+
+
             }
         })
     }

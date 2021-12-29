@@ -33,30 +33,6 @@ export default class EditCourseContents extends Component {
 
         this.controller = new EditCourseContentsController(this);
         this.state = {
-
-            items:{
-
-                children:[
-
-                    {id:1, text: "فصل اول", 
-                    children:[
-                        {id:22, text:"مقدمه"},
-                        {id:32, text:"توضیحات نصب نرم افزار"},
-                        {id:42, text:"آموزش مقدماتی"},
-                    ]},
-
-                    {id:2, text: "فصل دوم",
-                    children:[
-                        {id:52, text:"طریقه ی استفاده"},
-                    ]},
-
-                    {id:3, text: "فصل سوم",
-                    children:[
-                        {id:62, text:"شکار بره ها"},
-                        {id:72, text:"نقد انتزاعی"},
-                    ]},
-                ]
-            }
         }
     }
     
@@ -70,7 +46,7 @@ export default class EditCourseContents extends Component {
         this.controller.onEdit()
     }
 
-    onSubmit=()=>{        
+    onSubmit=()=>{
         this.controller.onSubmit();
     }
 
@@ -82,112 +58,57 @@ export default class EditCourseContents extends Component {
         this.controller.onAddHeading();
     }
 
-    onAddHeadingContent=()=>{
-
-    }
-    
-    renderNestableItem=(obj)=>{
-
-        let {item, handler,collapseIcon, depth} = obj;
-        // let p = this.props.parent;
-        // let ps = p.state;
-        // let nw = ps.new_values;
-
-        
-
-        let heading_item_con = styles.heading_item_con+" bglc1 ";
-        let content_item_con = styles.content_item_con+" bglc1 bdc2 ";
-
-        return (
-
-            <div className={item.type=="content"?content_item_con:heading_item_con}>
-                {/* {handler} */}
-
-                {collapseIcon}
-
-                <div className={styles.nestable_item_text+(item.type=="content"?" bydt ":" tilt ")}>{item.text}</div>
-            </div>
-            // <CourseHeading
-            // parent={this}
-            // pparent={p}
-            // item={item}/>
-        )
+    onUpdateHeading=(heading_obj)=>{
+        this.controller.onUpdateHeading(heading_obj);
     }
 
-    onNesableChange=(obj)=>{
-        let {items, dragItem, targetPath} = obj
-
-        console.log(obj);
-
-        // let p = this.props.parent;
-        // let ps = p.state;
-        // let nw = ps.new_values;
-        // let requirements = items.map(i=>i.text);
-        // nw.requirements = requirements;
-        // p.setState({new_values: nw});
+    onDeleteHeading=(heading_obj)=>{
+        this.controller.onDeleteHeading(heading_obj);
     }
 
-    nestableConfirmChange=(obj)=>{
-
-        //console.log(obj);
-
-        let {destinationParent, dragItem} = obj;
-
-        if(dragItem.type == "heading" && destinationParent){
-            return false;
-        }
-
-        // if(dragItem.type == "content" && !destinationParent){
-        //     return false;
-        // }
-
-        if(dragItem.type == "heading" && (destinationParent && destinationParent.type == "heading")){
-            return false;
-        }
-
-        if(dragItem.type == "content" && (destinationParent && destinationParent.type == "content")){
-            return false;
-        }
-
-        return true;
-    }
-
-    deleteNestableRow=(item)=>{
-
-        let p = this.props.parent;
-        let ps = p.state;
-        let nw = ps.new_values;
-        nw.requirements.splice(item.index, 1);
-        p.setState({new_values: nw});
+    onAddHeadingContent=(heading_obj)=>{
+        this.controller.onAddHeadingContent(heading_obj);
     }
 
     getCardPayload=(columnId, index)=>{
-        return this.state.items.children.filter(p => p.id === columnId)[0].children[
+        let p = this.props.parent;
+        let ps = p.state;
+        let nw = ps.new_values;
+        return nw.content_hierarchy.children.filter(p => p.id === columnId)[0].children[
           index
         ];
     }
 
     onColumnDrop=(dropResult)=>{
-        const items = Object.assign({}, this.state.items);
-        items.children = applyDrag(items.children, dropResult);
-        this.setState({
-            items
-        });
+        let p = this.props.parent;
+        let ps = p.state;
+        let nw = ps.new_values;
+
+        const new_ch = Object.assign({}, nw.content_hierarchy);
+        new_ch.children = applyDrag(new_ch.children, dropResult);
+
+        ps.new_values.content_hierarchy = new_ch;
+        p.setState(ps);
     }
 
     onCardDrop=(columnId, dropResult)=>{
+
+        let p = this.props.parent;
+        let ps = p.state;
+        let nw = ps.new_values;
+
         if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-          const items = Object.assign({}, this.state.items);
-          const column = items.children.filter(p => p.id === columnId)[0];
-          const columnIndex = items.children.indexOf(column);
+
+            const new_ch = Object.assign({}, nw.content_hierarchy);
+            const column = new_ch.children.filter(p => p.id === columnId)[0];
+            const columnIndex = new_ch.children.indexOf(column);
     
-          const newColumn = Object.assign({}, column);
-          newColumn.children = applyDrag(newColumn.children, dropResult);
-          items.children.splice(columnIndex, 1, newColumn);
+            const newColumn = Object.assign({}, column);
+            newColumn.children = applyDrag(newColumn.children, dropResult);
+            new_ch.children.splice(columnIndex, 1, newColumn);
     
-          this.setState({
-            items
-          });
+            ps.new_values.content_hierarchy = new_ch;
+            p.setState(ps);
         }
       }
 
@@ -217,7 +138,7 @@ export default class EditCourseContents extends Component {
                         showOnTop: true,
                         className: styles.heading_card_preview+" btc2 bgtc1"
                     }}>
-                    {this.state.items.children.map(item => {
+                    {nw.content_hierarchy.children.map(item => {
                         return (
                         <Draggable key={item.id}> 
 
@@ -228,12 +149,14 @@ export default class EditCourseContents extends Component {
                                         st.content_hierarchy == "edit"?
                                         <>
                                         <span className={styles.heading_drag_handle+" ftc2"}>&#x2630;</span>
-                                        <div className={styles.heading_text+" tilt"}>{item.text}</div>
-                                        <div className={styles.heading_edit+" amp_btn bgtc1"}/>
-                                        <div className={styles.heading_delete+" amp_btn bgec"}/>
+                                        <div className={styles.heading_text+" tilt"}>{item.title}</div>
+                                        <div className={styles.heading_edit+" amp_btn bgtc1"}
+                                        onClick={()=>this.onUpdateHeading(item)}/>
+                                        <div className={styles.heading_delete+" amp_btn bgec"}
+                                        onClick={()=>this.onDeleteHeading(item)}/>
                                         </>
                                         :
-                                        <div className={styles.heading_text+" tilt"}>{item.text}</div>
+                                        <div className={styles.heading_text+" tilt"}>{item.title}</div>
                                     }
                                 </div>
 
@@ -263,7 +186,7 @@ export default class EditCourseContents extends Component {
                                                     </>
                                                     :null
                                                 }
-                                                <div className={styles.content_text+" bdy"}>{sub.text}</div>
+                                                <div className={styles.content_text+" bdy"}>{sub.title}</div>
                                             </div>
 
                                         </Draggable>
@@ -274,10 +197,10 @@ export default class EditCourseContents extends Component {
                                 {
                                     st.content_hierarchy == "edit"?
                                     <MainButton className={styles.new_content_btn}
+                                    onClick={()=>this.onAddHeadingContent(item)}
                                     title="اضافه کردن محتوا"/>
                                     :null
                                 }
-
                             </div>
 
                         </Draggable>
