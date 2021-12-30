@@ -68,7 +68,7 @@ export default class ModalLayout extends Component {
                 footer={null} 
                 wrapClassName={styles.modal_wrapper}
                 closable={false}
-                destroyOnClose={true}
+                destroyOnClose={this.state.layer1_destroy}
                 className={styles.modal_con}>
 
                     <div className={styles.modal_wrapper2}>
@@ -86,6 +86,7 @@ export default class ModalLayout extends Component {
                 footer={null} 
                 wrapClassName={styles.modal_wrapper}
                 closable={false}
+                destroyOnClose={this.state.layer2_destroy}
                 className={styles.modal_con}>
 
                     <div className={styles.modal_wrapper2}>
@@ -104,6 +105,7 @@ export default class ModalLayout extends Component {
                 footer={null} 
                 wrapClassName={styles.modal_wrapper}
                 closable={false}
+                destroyOnClose={this.state.layer3_destroy}
                 className={styles.modal_con}>
 
                     <div className={styles.modal_wrapper2}>

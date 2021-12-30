@@ -65,6 +65,7 @@ input{
 
 input::placeholder{
     user-select: none;
+	opacity: 0.5;
 }
 
 textarea{

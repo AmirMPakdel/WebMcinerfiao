@@ -70,6 +70,14 @@ export default class EditCourseContents extends Component {
         this.controller.onAddHeadingContent(heading_obj);
     }
 
+    onUpdateContent=(heading_obj, content_obj)=>{
+        this.controller.onUpdateContent(heading_obj, content_obj);
+    }
+
+    onDeleteContent=(heading_obj, content_obj)=>{
+        this.controller.onDeleteContent(heading_obj, content_obj);
+    }
+
     getCardPayload=(columnId, index)=>{
         let p = this.props.parent;
         let ps = p.state;
@@ -133,14 +141,14 @@ export default class EditCourseContents extends Component {
                     <Container
                     dragHandleSelector={st.content_hierarchy == "edit"?undefined:"null"}
                     onDrop={this.onColumnDrop}
-                    dropPlaceholder={{                      
+                    dropPlaceholder={{      
                         animationDuration: 150,
                         showOnTop: true,
                         className: styles.heading_card_preview+" btc2 bgtc1"
                     }}>
-                    {nw.content_hierarchy.children.map(item => {
+                    {nw.content_hierarchy.children.map((item, item_index) => {
                         return (
-                        <Draggable key={item.id}> 
+                        <Draggable key={item_index}> 
 
                             <div className={styles.heading_drag_wrapper+" bdc2i bglc1"}>
 
@@ -171,18 +179,20 @@ export default class EditCourseContents extends Component {
                                     className: styles.content_card_preview+" btc2 bgtc1"
                                 }}>
                                 {
-                                item.children.map(sub=>{
+                                item.children.map((sub, sub_index)=>{
 
                                     return(
-                                        <Draggable key={sub.id}>
+                                        <Draggable key={sub_index}>
 
-                                            <div className={styles.content_drag_bar+" bglc2"}>
+                                            <div className={styles.content_drag_bar+" bglc2"} key={sub_index}>
                                                 {
                                                     st.content_hierarchy == "edit"?
                                                     <>
                                                     <span className={styles.content_drag_handle+" ftc2"}>&#x2630;</span>
-                                                    <div className={styles.content_edit+" amp_btn bgtc1"}/>
-                                                    <div className={styles.content_delete+" amp_btn bgec"}/>
+                                                    <div className={styles.content_edit+" amp_btn bgtc1"}
+                                                    onClick={()=>this.onUpdateContent(item, sub)}/>
+                                                    <div className={styles.content_delete+" amp_btn bgec"}
+                                                    onClick={()=>this.onDeleteContent(item, sub)}/>
                                                     </>
                                                     :null
                                                 }
@@ -217,95 +227,6 @@ export default class EditCourseContents extends Component {
             </div>
         )
     }
-}
-
-class CourseHeading extends Component{
-
-
-    onHeadingInputChange=(text, item)=>{
-
-        let p = this.props.pparent;
-        let ps = p.state;
-        let nw = ps.new_values;
-        nw.headings[item.index] = text
-        p.setState({new_values: nw});
-    }
-
-    render(){
-
-        let nw = this.props.pparent.state.new_values;
-        let p = this.props.parent;
-
-        return(
-            <div className={styles.heading_wrapper+" bdc2 "}>
-
-                <div className={styles.heading_header}>
-
-                    {this.props.item.handler}
-
-                    <div>{"عنوان فصل " + (this.props.item.item.id)}</div>
-
-                    <div className={styles.heading_delete+" bgec amp_btn"}
-                    onClick={()=>p.deleteNestableRow(this.props.item)}/>
-
-                </div>
-
-                <TextInput className={styles.heading_input}
-                value={this.props.item.item.text}
-                placeholder={"عنوان فصل"}
-                onChange={(t)=>this.onHeadingInputChange(t, this.props.item)}/>
-
-                {
-                    nw.contents[this.props.item.item.id - 1].length < env.LIMITS.MAX_COURSE_HEADING_CONTENTS?
-                    <MainButton className={styles.add_heading_content_btn}
-                    onClick={this.onAddHeadingContent}
-                    title={"ایجاد محتوای جدید"}/>:null
-                }
-
-            </div>
-        )
-    }
-}
-
-function apiHierarchy2NestableItem(sub) {
-
-    // if(!sub){
-    //     return [];
-    // }
-
-    let items = [];
-
-    // sub.forEach((e, i) => {
-    //     items.push({id:i+1, text:e});
-    // });
-
-    // items = [
-    //     {h_id:1, content_ids:[1,2,3]},
-    //     {h_id:2, content_ids:[4,5]},
-    // ]
-
-    items = [
-        {
-            id: 24,
-            text: "مقدمه",
-            type:"heading",
-            children:[
-                {id: 12, text: "جلسه اول", type:"content"},
-                {id: 56, text: "جلسه دوم", type:"content"},
-            ]
-        },
-        {
-            id: 28,
-            text: "فصل 1",
-            type:"heading",
-            children:[
-                {id: 174, text: "جلسه سوم", type:"content"},
-                {id: 256, text: "جلسه چهارم", type:"content"},
-            ]
-        },
-    ]
-
-    return items
 }
 
 const applyDrag = (arr, dragResult) => {

@@ -59,4 +59,6 @@ var env = {
     EP:consts.EP,
 
     UT:consts.UT,
+
+    CT:consts.CT,
 }

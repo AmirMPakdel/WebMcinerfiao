@@ -2,9 +2,11 @@ import EditCourseContentsModel from "../../../models/components/editCourse/EditC
 import chest from "../../../utils/chest";
 import { getUrlPart } from "../../../utils/helpers";
 import EditCourseContents from "../../../views/components/editCourse/EditCourseContents";
+import DeleteContentModal from "../../../views/components/modal/editCourse/DeleteContentModal";
 import DeleteHeadingModal from "../../../views/components/modal/editCourse/DeleteHeadingModal";
 import NewContentTypeModal from "../../../views/components/modal/editCourse/NewContentTypeModal";
 import NewHeadingModal from "../../../views/components/modal/editCourse/NewHeadingModal";
+import UpdateContentModal from "../../../views/components/modal/editCourse/UpdateContentModal";
 import UpdateHeadingModal from "../../../views/components/modal/editCourse/UpdateHeadingModal";
 
 export default class EditCourseContentsController{
@@ -101,6 +103,26 @@ export default class EditCourseContentsController{
     onAddHeadingContent=(heading_obj)=>{
 
         let modal = <NewContentTypeModal heading={heading_obj} parent={this.view}/>;
+
+        chest.ModalLayout.setModal(1, modal, ()=>{
+            chest.ModalLayout.visibleToggle(1, true);
+        })
+    }
+
+    onUpdateContent=(heading_obj, content_obj)=>{
+
+        let modal = <UpdateContentModal heading={heading_obj} 
+        content={content_obj} parent={this.view}/>;
+
+        chest.ModalLayout.setModal(1, modal, ()=>{
+            chest.ModalLayout.visibleToggle(1, true);
+        })
+    }
+
+    onDeleteContent=(heading_obj, content_obj)=>{
+
+        let modal = <DeleteContentModal heading={heading_obj} 
+        content={content_obj} parent={this.view}/>;
 
         chest.ModalLayout.setModal(1, modal, ()=>{
             chest.ModalLayout.visibleToggle(1, true);

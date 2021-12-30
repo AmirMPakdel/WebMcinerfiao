@@ -6,6 +6,12 @@
   width: 100%;
 }
 
+.loading_centerize_wrapper{
+  position: absolute;
+  width: 7.5rem;
+  height: 7.5rem;
+}
+
 .lds_facebook {
   display: inline-block;
   position: relative;

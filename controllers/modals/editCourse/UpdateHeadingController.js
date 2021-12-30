@@ -77,9 +77,6 @@ export default class UpdateHeadingController{
 
                 EditCourse.state.old_values.content_hierarchy.children = EditCourse.state.new_values.content_hierarchy.children.map(e=>e);
 
-                //set EditContent status to idle
-                EditCourse.state.status.content_hierarchy = "idle";
-
                 EditCourse.setState(EditCourse.state, ()=>{
         
                     this.view.setState({update_loading:false});

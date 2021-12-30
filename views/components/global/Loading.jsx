@@ -22,11 +22,13 @@ export default class Loading extends Component {
         return(
             <div className={styles.con+" "+this.props.className}
              style={s}>
-
-                <div className={styles.lds_facebook}>
-                    <div className={"bgtc1"}></div>
-                    <div className={"bgtc1"}></div>
-                    <div className={"bgtc1"}></div>
+                
+                <div className={styles.loading_centerize_wrapper}>
+                    <div className={styles.lds_facebook}>
+                        <div className={"bgtc1"}></div>
+                        <div className={"bgtc1"}></div>
+                        <div className={"bgtc1"}></div>
+                    </div>
                 </div>
                 
             </div>

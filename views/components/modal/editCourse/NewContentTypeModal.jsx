@@ -75,7 +75,7 @@ export default class NewContentTypeModal extends Component {
 
                 <div className={type_btn} onClick={this.onAudio}>{"فایل صوتی"} <span>{"(mp3)"}</span> </div>
 
-                <div className={type_btn} onClick={this.onText}>{"فایل متن"} <span>{"(pdf)"}</span> </div>
+                <div className={type_btn} onClick={this.onText}>{"فایل متنی"} <span>{"(pdf)"}</span> </div>
                 
             </div>
         )

@@ -1,5 +1,5 @@
 
-var consts = {
+var consts={
 
     //main server constant result codes
     SC:{
@@ -155,4 +155,14 @@ var consts = {
         UPLOAD_TYPE_COURSE_DOCUMENT_FREE: "ut_course_document_free",
         UPLOAD_TYPE_COURSE_VOICE_FREE: "ut_course_voice_free",
     },
+
+    //content types
+    CT:{
+        CONTENT_TYPE_VIDEO: "ct_video",
+        CONTENT_TYPE_IMAGE: "ct_image",
+        CONTENT_TYPE_DOCUMENT: "ct_document",
+        CONTENT_TYPE_VOICE: "ct_voice",
+        CONTENT_TYPE_TEXT: "ct_text",
+        CONTENT_TYPE_SLIDER: "ct_slider",
+    }
 }
