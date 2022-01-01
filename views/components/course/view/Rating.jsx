@@ -7,11 +7,17 @@ export default class Rating extends Component {
         return(
             <div className={styles.rating+" "+this.props.className}>
                 
+                    <img className={styles.star} src={"/svg/rating_emptystar.svg"}/>
+                    <img className={styles.star} src={"/svg/rating_emptystar.svg"}/>
+                    <img className={styles.star} src={"/svg/rating_emptystar.svg"}/>
+                    <img className={styles.star} src={"/svg/rating_emptystar.svg"}/>
+                    <img className={styles.star} src={"/svg/rating_emptystar.svg"}/>
+                
+                {/* <img className={styles.star} src={"/svg/rating_fullstar_black.svg"}/>
                 <img className={styles.star} src={"/svg/rating_fullstar_black.svg"}/>
                 <img className={styles.star} src={"/svg/rating_fullstar_black.svg"}/>
                 <img className={styles.star} src={"/svg/rating_fullstar_black.svg"}/>
-                <img className={styles.star} src={"/svg/rating_fullstar_black.svg"}/>
-                <img className={styles.star} src={"/svg/rating_fullstar_black.svg"}/>
+                <img className={styles.star} src={"/svg/rating_fullstar_black.svg"}/> */}
                 
             </div>
         )

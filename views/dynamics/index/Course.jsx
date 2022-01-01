@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CourseController from "../../../controllers/index/CourseController";
 import CommentsSec from "../../components/course/view/CommentsSec";
 import ContentCard from "../../components/course/view/ContentCard";
 import CourseBanner from "../../components/course/view/CourseBanner";
@@ -8,98 +9,117 @@ import IconLine from "../../components/course/view/IconLine";
 import RecommandedArticles from "../../components/course/view/RecommandedArticles";
 import RecommandedCourses from "../../components/course/view/RecommandedCourses";
 import SectionTitle from "../../components/course/view/SectionTitle";
+import Loading from "../../components/global/Loading";
 import IndexLayout from "../../layouts/IndexLayout";
 import WrapperT1 from "../../layouts/WrapperT1";
 import styles from "./Course.module.css";
 
 export default class Course extends Component {
+
+    constructor(props){
+        super(props);
+
+        this.controller = new CourseController(this);
+        this.state={
+            loading:true,
+            course:{},
+        }
+    }
+
+    componentDidMount(){
+        
+        this.controller.getCourse();
+    }
     
     render(){
+        let c = this.state.course;
         return(
             <IndexLayout>
 
+            {
+                this.state.loading?
+                <Loading style={{minHeight:"75vh"}}/>
+                :
+                <>
+
                 <WrapperT1 style={{minHeight:"auto"}}>
 
-                    <div className={styles.sec1}>
+                <div className={styles.sec1}>
 
-                        <CourseBanner/>
+                    <CourseBanner parent={this}/>
 
-                    </div>
+                </div>
 
-                    <FloatingCard/>
+                <FloatingCard parent={this}/>
 
                 </WrapperT1>
 
                 <div className={styles.sec2}>
 
-                    <SectionTitle title="چه چیزی در این دوره یاد خواهید گرفت؟"/>
+                <SectionTitle title="چه چیزی در این دوره یاد خواهید گرفت؟"/>
 
-                    <div className={styles.sec3+" bglc1i"}>
+                <div className={styles.sec3+" bglc1i"}>
+                    {
+                        c.subjects.map((v,i)=>(
+                            <IconLine key={i} className={styles.crs_points} 
+                            icon_className={styles.crs_points_icn}
+                            text_className={styles.crs_points_txt} 
+                            icon={"/svg/crs_point_icn.svg"} 
+                            text={v}/>
+                        ))
+                    }
+                </div>
 
-                        {
-                            arr1.map((v,i)=>(
-                                <IconLine className={styles.crs_points} icon_className={styles.crs_points_icn}
-                                text_className={styles.crs_points_txt} icon={"/svg/crs_point_icn.svg"} text={v}/>
-                            ))
-                        }
+                <div className={styles.space1}/>
 
-                    </div>
+                <SectionTitle title="محتوای دوره"/>
+                {
+                    c.headings.map((v,i)=>(
+                        <ContentCard key={i} 
+                        data={v}
+                        parent={this}/>
+                    ))
+                }
+                <div className={styles.space1}/>
 
-                    <div className={styles.space1}/>
+                <SectionTitle title="پیش نیاز های دوره"/>
 
-                    <SectionTitle title="محتوای دوره"/>
+                <div className={styles.req_sec}>
+                    {
+                        c.requirements.map((v,i)=>(
+                        <IconLine key={i} icon_className={styles.square_icon} 
+                        icon={"/svg/crs_square_icn.svg"} 
+                        text={v}/>
+                        ))
+                    }
+                </div>
 
-                    <ContentCard text={txt1}/>
+                <div className={styles.space1}/>
 
-                    <ContentCard text={txt2}/>
+                <SectionTitle title="توضیحات دوره"/>
 
-                    <ContentCard text={txt3}/>
+                <CourseInfo parent={this}/>
 
-                    <ContentCard text={txt4}/>
+                {/* <div className={styles.space1}/>
 
-                    <ContentCard text={txt5}/>
+                <SectionTitle title="نظرات کاربران"/>
 
-                    <div className={styles.space1}/>
+                <CommentsSec/>
 
-                    <SectionTitle title="پیش نیاز های دوره"/>
+                <SectionTitle title="دوره های پیشنهادی"/>
 
-                    <div className={styles.req_sec}>
+                <RecommandedCourses/>
 
-                        <IconLine icon_className={styles.square_icon} 
-                        icon={"/svg/crs_square_icn.svg"} text={txt6}/>
+                <SectionTitle title="مقالات پیشنهادی"/>
 
-                        <IconLine icon_className={styles.square_icon} 
-                        icon={"/svg/crs_square_icn.svg"} text={txt7}/>
-
-                    </div>
-
-                    <div className={styles.space1}/>
-
-                    <SectionTitle title="توضیحات دوره"/>
-
-                    <CourseInfo/>
-
-                    <div className={styles.space1}/>
-
-                    <SectionTitle title="نظرات کاربران"/>
-
-                    <CommentsSec/>
-
-                    <SectionTitle title="دوره های پیشنهادی"/>
-
-                    <RecommandedCourses/>
-
-                    <SectionTitle title="مقالات پیشنهادی"/>
-
-                    <RecommandedArticles/>
+                <RecommandedArticles/> */}
 
 
                 </div>
 
-                
-
-                <div style={{height:"40rem"}}/>
-
+                <div style={{height:"10rem"}}/>
+                </>
+            }
             </IndexLayout>
         )
     }

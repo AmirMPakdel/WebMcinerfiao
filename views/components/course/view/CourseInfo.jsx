@@ -18,18 +18,25 @@ export default class CourseInfo extends Component {
         //     line_style = {height:"20rem"}
         // }
 
-        return(
-            <div className={styles.crs_info_con}>
+        let c = this.props.parent.state.course;
 
-                <img className={styles.crs_info_icn+" amp_btn"} src={"/svg/closed_ccard_icn.svg"}
+        return(
+            <div className={styles.crs_info_con+" bglc1 "}>
+
+
+
+                {/* <img className={styles.crs_info_icn+" amp_btn"} src={"/svg/closed_ccard_icn.svg"}
                 onClick={this.toggle}/>
                 
                 <Collapse isOpened={true}>
                 {
                     getText(this.state.opened?100:1)
                 }
-                </Collapse>
+                </Collapse> */}
 
+                
+                <div className={styles.text+" bdyt fdc1 "}>{c.long_desc}</div>
+                
             </div>
         )
     }

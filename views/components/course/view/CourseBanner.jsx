@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import { minutes2Hours } from "../../../../utils/helpers";
+import myServer from "../../../../utils/myServer";
+import { priceFormat } from "../../../../utils/price";
+import Course from "../../../dynamics/index/Course";
 import IconButton from "../../global/IconButton";
 import MainButton from "../../global/MainButton";
 import Price from "../../global/Price";
@@ -7,26 +11,37 @@ import styles from "./CourseBanner.module.css";
 import IconLine from "./IconLine";
 import Rating from "./Rating";
 
+/**
+* Props of CourseBanner Component
+* @typedef Props
+* @property {string} className
+* @property {React.CSSProperties} style
+* @property {Course} parent
+* 
+* @extends {Component<Props>}
+*/
 export default class CourseBanner extends Component {
     
     render(){
+        let ps = this.props.parent.state;
+        let c = ps.course;
         return(
             <>
-                <div className={styles.back_img} style={{backgroundImage:`url(${"/fake_img/3.jpg"})`}}/>
+                <div className={styles.back_img} style={{backgroundImage:`url(${myServer.MediaFiles.publicImage(c.cover)})`}}/>
 
                 <div className={styles.title+" ftc1i btc1i tilt"}>
-                    {" جامع ترین دوره آموزش فیزیک کوانتوم در آموزشگاه مهتا"}
+                    {c.title}
                 </div>
 
                 <div className={styles.row1+"  flc1i cpnt"}>
 
                     <div>{"آخرین بروزرسانی : 1400/02/05"}</div>
                     <div>|</div>
-                    <div>{"755,499 : شرکت کننده در دوره"}</div>
+                    <div>{"شرکت کننده در دوره"+ " : " +priceFormat(c.sells)}</div>
                     <div>|</div>
                     <div className={styles.rating_sec}>
-                        <Rating className={styles.rating}/>
-                        {"2.5 (466,551)"}
+                        <Rating className={styles.rating} rate={c.score}/>
+                        {c.score+" (466,551)"}
                     </div>
                     
 
@@ -35,9 +50,7 @@ export default class CourseBanner extends Component {
                 <img className={styles.dashed} src={"/svg/wide_dashed.svg"}/>
 
                 <div className={styles.row2+" flc1i bdyt"}>
-                    {
-                        "دوره از صفر صفر شروع خواهد شد! باهم نصب و تنظیم می کنیم و دوره شروع می شود. از مقدمات فیزیک شروع خواهیم کرد به تمام ابزار ها از مقدماتی تا حرفه ای و حتی فراتر خدمت شرکت کنندگان تدریس خواهد شد "
-                    }
+                    {c.short_desc}
                 </div>
 
                 <img className={styles.dashed+" "+styles.dashed2} src={"/svg/wide_dashed.svg"}/>
@@ -57,18 +70,18 @@ export default class CourseBanner extends Component {
                     <img className={styles.dashed} src={"/svg/wide_dashed.svg"}/>
 
                     <VideoCard className={styles.tablet_video}
-                    thumbnail={"/fake_img/3.jpg"}/>
+                    uploadKey={c.intro_video.url}/>
 
                     <div className={styles.tablet_sec1+" flc1"}>
 
-                        <IconLine icon={"/svg/crs_play_icn.svg"} text={txt1}/>
+                        <IconLine icon={"/svg/crs_play_icn.svg"} text={minutes2Hours(c.duration)+" ساعت دوره"}/>
 
-                        <IconLine icon={"/svg/crs_document_icn.svg"} text={txt2}/>
+                        <IconLine icon={"/svg/crs_document_icn.svg"} text={c.headings.length+" سرفصل دوره"}/>
 
                         <IconLine icon_className={styles.download_icon} 
-                        icon={"/svg/crs_download_icn.svg"} text={txt3}/>
+                        icon={"/svg/crs_download_icn.svg"} text={c.contents.length+" محتوای قابل دانلود"}/>
 
-                        <IconLine icon={"/svg/crs_complete_icn.svg"} text={txt4}/>
+                        {/* <IconLine icon={"/svg/crs_complete_icn.svg"} text={txt4}/> */}
 
                     </div>
 
@@ -77,18 +90,21 @@ export default class CourseBanner extends Component {
                     <div className={styles.price_wrapper+" flc1"}>
 
                         <Price
-                        offPercent={32}
-                        orginalPrice={645000}
-                        price={345000}/>
+                        offPercent={c.discount}
+                        orginalPrice={c.price}
+                        price={c.price}/>
 
                     </div>
 
                     <img className={styles.dashed} src={"/svg/wide_dashed.svg"}/>
 
-                    <MainButton className={styles.tablet_buy_btn} title={"افزودن به سبد خرید"}/>
+                    {/* <MainButton className={styles.tablet_buy_btn} title={"افزودن به سبد خرید"}/> */}
 
-                    <MainButton className={styles.tablet_buy_btn} title={"خرید سریع"}
-                    whiteBorder={true} />
+                    {/* <MainButton className={styles.tablet_buy_btn} title={"خرید سریع"}
+                    whiteBorder={true}/> */}
+
+                    <MainButton className={styles.tablet_buy_btn} title={"خرید"}
+                    whiteBorder={false}/>
 
                 </div>
             </>

@@ -1,15 +1,32 @@
 import React, { Component } from "react";
+import myServer from "../../../utils/myServer";
 import styles from "./VideoCard.module.css";
 
 /**
  * 
  * @typedef Props
- * @property {String} className
- * @property {String} thumbnail
+ * @property {string} className
+ * @property {string} thumbnail
+ * @property {string} playBtnClassName
  * 
  * @extends {Component<Props>}
  */
 export default class VideoCard extends Component {
+
+    state={
+        controls:false,
+        is_playing:false,
+    }
+
+    onPlay=()=>{
+        if(!this.state.is_playing){
+            this.video.play();
+            this.setState({
+                controls:true,
+                is_playing:true,
+            })
+        }
+    }
     
     render(){
         
@@ -17,9 +34,21 @@ export default class VideoCard extends Component {
 
         return(
             <div className={styles.con+" "+this.props.className+" "+addClass}
-            style={{backgroundImage:`url(${this.props.thumbnail})`}}>
+            // style={{backgroundImage:`url(${this.props.thumbnail})`}}
+            >
 
-                <img className={styles.play_btn+" amp_btn"} src={"/svg/video_play_big.svg"}/>
+                <video className={styles.video} 
+                ref={r=>this.video=r}
+                src={myServer.MediaFiles.publicVideo(this.props.uploadKey)}
+                controls={this.state.controls}/>
+
+                {
+                    !this.state.is_playing?
+                    <img className={styles.play_btn+" "+this.props.playBtnClassName+" amp_btn"} 
+                    src={"/svg/video_play_big.svg"}
+                    onClick={this.onPlay}/>:null
+                }
+                
                 
             </div>
         )

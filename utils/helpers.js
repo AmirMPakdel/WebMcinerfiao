@@ -138,3 +138,10 @@ export function findInJsonArray(jsonArray, value, keyName="id"){
 
     return obj;
 }
+
+export function minutes2Hours(min){
+
+    min = Number(min);
+    let h = min / 60;
+    return Number(h.toFixed(1))
+}

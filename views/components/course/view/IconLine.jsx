@@ -22,7 +22,7 @@ export default class IconLine extends Component {
         }
 
         return(
-            <div className={styles.iclne+" "+add_class}>
+            <div className={styles.iclne+" bdyt "+add_class}>
 
                 <img className={styles.iclne_img+" "+icon_class} src={this.props.icon}/>
 
