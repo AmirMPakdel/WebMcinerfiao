@@ -40,6 +40,10 @@ export default class EditCourseModel{
                     console.log(data.data.requirements);
                 }
 
+                if(!data.data.validation_status_message){
+                    data.data.validation_status_message = [];
+                }
+
                 data.data.content_hierarchy = apiContentHierarchy2MyHierarchy(data.data);
 
                 cb(null, data);

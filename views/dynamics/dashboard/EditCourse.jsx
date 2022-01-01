@@ -21,6 +21,7 @@ import EditCourseRequirements from "../../components/editCourse/EditCourseRequir
 import EditCourseGroups from "../../components/editCourse/EditCourseGroups";
 import EditCourseTags from "../../components/editCourse/EditCourseTags";
 import EditCourseContents from "../../components/editCourse/EditCourseContents";
+import PublishRequest from "../../components/editCourse/PublishRequest";
 
 export default class EditCourse extends Component {
 
@@ -53,6 +54,10 @@ export default class EditCourse extends Component {
             },
 
             new_values:{
+
+                validation_status:"",
+                validation_status_message:[],
+
                 title:"",
                 logo:"",
                 cover:"",
@@ -106,7 +111,9 @@ export default class EditCourse extends Component {
                 <Loading style={{minHeight:"80vh"}}/>:
                 <>
 
-                    <div style={{marginTop:"2rem"}}/>
+                    <div style={{marginTop:"1rem"}}/>
+
+                    <PublishRequest parent={this}/>
 
                     <EditCourseContents parent={this}/>
                     
@@ -133,8 +140,6 @@ export default class EditCourse extends Component {
                     <EditCourseSubjects parent={this}/>
 
                     <EditCourseRequirements parent={this}/>
-
-                    
 
                     {/* <EditCourseGroups parent={this}/> */}
 

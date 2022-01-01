@@ -113,7 +113,6 @@ export default class AddContentController{
                 }catch(e){
                     console.log(e);
                 }
-                
             }
         });
     }
