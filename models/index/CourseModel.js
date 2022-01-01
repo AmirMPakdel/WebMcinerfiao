@@ -1,13 +1,13 @@
 import myServer from "../../utils/myServer";
 
-export default class MyCoursesModel{
+export default class CourseModel{
     
     /**
     * 
     * @param {object} params
     * @param {import("../jsdoc/RequestCallback").RequestCallback} cb 
     */
-    getCourses(params, cb){
+    getCourse(params, cb){
     
         if(env.MOCKING_SERVER){
             setTimeout(()=>{
@@ -15,12 +15,8 @@ export default class MyCoursesModel{
             }, 2000, cb);
             return;
         }
-
-        let url_params = params.chunk_count+"/"+params.page_count;
-        params.chunk_count = undefined;
-        params.page_count = undefined;
     
-        myServer.Post(myServer.urls.MY_COURSES_FETCH+url_params, params, {}, (err, data)=>{
+        myServer.Post(myServer.urls.COURSE_FETCH, params, {}, (err, data)=>{
     
             if(!err){
             

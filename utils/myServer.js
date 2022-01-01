@@ -40,6 +40,9 @@ const urls = {
     COURSE_FETCH: domain+prefixes.UTA+"/course/load",
     COURSE_EDIT: domain+prefixes.UTA+"/course/edit/",
     COURSE_PUBLISH_REQUEST: domain+prefixes.MA+"/user/course/validation/check",
+
+    //MyCourses
+    MY_COURSES_FETCH: domain+prefixes.UTA+"/courses/fetch/",
 }
 
 /**

@@ -1,15 +1,12 @@
 .crs_info_con{
     display: flex;
     margin-top: 1rem;
-    font-size: 0.9rem;
     width: calc(86% - 14rem);
-    color: #7a7a7a;
     padding-top: 1rem;
     padding-bottom: 1rem;
     padding-right: 4rem;
     padding-left: 2.5rem;
     border-radius: 1rem 0 0 1rem;
-    background-color: #F9F9F9;
     box-shadow: 0 0.5rem 1rem 0.1rem rgb(0, 0, 0, 0.15);
     min-height: 10rem;
     overflow: hidden;
@@ -35,6 +32,11 @@
     overflow: hidden;
     transition: linear 500ms;
     pointer-events: none;
+}
+
+.text{
+    white-space: pre-wrap;
+    padding: 1rem 0;
 }
 
 @media(max-width:1024px){
