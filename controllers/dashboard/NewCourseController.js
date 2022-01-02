@@ -1,4 +1,4 @@
-import NewCourseModel from "../../models/dashboard/newCourseModel";
+import NewCourseModel from "../../models/dashboard/NewCourseModel";
 import NewCourse from "../../views/dynamics/dashboard/NewCourse";
 
 export default class NewCourseController{
