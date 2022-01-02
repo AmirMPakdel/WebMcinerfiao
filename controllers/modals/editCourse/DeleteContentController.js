@@ -27,6 +27,13 @@ export default class DeleteContentController{
             content_id: content.id,
         }
 
+        //when deleting the new created content, content.type is not defined
+        if(!content.type){
+            content = findContentById(content.id, this.view.props.parent.props.parent.state.new_values);
+        }
+
+        console.log("delete content", content);
+
         this.model.delete(params, content.type, (err, data)=>{
 
             if(data.result_code === env.SC.SUCCESS){
@@ -53,7 +60,7 @@ export default class DeleteContentController{
 
                         v1.children = v1.children.filter((v2,i2)=>{
 
-                            if(v2 === params.content_id){
+                            if(v2.id === params.content_id){
                                 return false;
                             }
                             return true;
@@ -92,4 +99,19 @@ export default class DeleteContentController{
         })
     }
     
+}
+
+function findContentById(c_id, nw){
+
+    let content = {};
+
+    nw.contents.forEach((v)=>{
+
+        if(v.id == c_id){
+
+            content = v;
+        }
+    })
+
+    return content;
 }

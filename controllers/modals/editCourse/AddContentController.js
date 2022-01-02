@@ -151,6 +151,8 @@ export default class AddContentController{
 
                 EditCourse.state.old_values.contents = EditCourse.state.new_values.contents.map(e=>e);
 
+                console.log(EditCourse.state.old_values.contents);
+
                 EditCourse.state.old_values.content_hierarchy.children = EditCourse.state.new_values.content_hierarchy.children.map(e=>e);
 
                 //set EditContent status to idle
