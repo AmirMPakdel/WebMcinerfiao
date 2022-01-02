@@ -4,18 +4,7 @@ import EditCourseContentsController from "../../../controllers/components/editCo
 import EditableTitle from "../editable/EditableTitle";
 import EditCourse from "../../dynamics/dashboard/EditCourse";
 import MainButton from "../global/MainButton";
-import Nestable from "react-nestable";
-import TextInput from "../global/TextInput";
-import {sortableContainer, sortableElement} from 'react-sortable-hoc';
-
 import { Container, Draggable } from "react-smooth-dnd";
-import TestCards from "./TestCards";
-
-const SortableItem = sortableElement(({value}) => <li>{value}</li>);
-
-const SortableContainer = sortableContainer(({children}) => {
-  return <div>{children}</div>;
-});
 
 /**
 * Props of EditCourseContents Component

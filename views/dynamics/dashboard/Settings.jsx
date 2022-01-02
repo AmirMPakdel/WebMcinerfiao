@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import chest from "../../../utils/chest";
-import EducatorsCrudModal from "../../components/modal/Educators/EducatorsCrudModal";
+import EducatorsCrudModal from "../../components/modal/educators/EducatorsCrudModal";
 import EducatorDashboardLayout from "../../layouts/EducatorDashboardLayout";
 import WrapperT1 from "../../layouts/WrapperT1";
 import styles from "./Settings.module.css";
