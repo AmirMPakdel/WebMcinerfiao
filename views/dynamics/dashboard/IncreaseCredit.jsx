@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Select from "../../components/global/Select";
 import MainButton from "../../components/global/MainButton";
 import EducatorDashboardLayout from "../../layouts/EducatorDashboardLayout";
-import price from "../../utils/price";
+import price from "../../../utils/price";
 import styles from "./IncreaseCredit.module.css";
 import WrapperT1 from "../../layouts/WrapperT1";
 const persianNToText = require('number-to-persian-text');

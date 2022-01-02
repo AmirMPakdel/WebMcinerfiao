@@ -1,4 +1,5 @@
 import EditCourseBackgroundModel from "../../../models/components/editCourse/EditCourseBackgroundModel";
+import chest from "../../../utils/chest";
 import { getCookie } from "../../../utils/cookie";
 import { fileType2Ext, getUrlPart } from "../../../utils/helpers";
 import EditCourseBackground from "../../../views/components/editCourse/EditCourseBackground";
@@ -111,6 +112,8 @@ export default class EditCourseBackgroundController{
     save(param4){
 
         this.model.save(param4, (err, data)=>{
+
+            chest.openNotification("تصویر پس زمینه دوره با موفقیت ویرایش شد.", "success");
 
             let status = this.view.props.parent.state.status;
             status.cover = "idle";

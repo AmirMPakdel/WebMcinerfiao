@@ -113,6 +113,8 @@ export default class EditCourseLogoController{
         
         this.model.save(param4, (err, data)=>{
 
+            chest.openNotification("لوگوی دوره با موفقیت ویرایش شد.", "success");
+
             let status = this.view.props.parent.state.status;
             status.logo = "idle";
             this.view.props.parent.setState({status});

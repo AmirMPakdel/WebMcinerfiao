@@ -8,6 +8,10 @@ const ErrorHandler = {
 
     errorCheck:(data)=>{
 
+        if(data.result_code === env.SC.REPETITIVE_PHONE_NUMBER){
+            return;
+        }
+
         if(data.result_code !== env.SC.SUCCESS && data.result_code !== env.CSC.SUCCESS){
 
             Object.keys(env.SC).forEach(e=>{

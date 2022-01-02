@@ -94,6 +94,10 @@ export default class AuthController{
 
                     this.view.setState({loading:false});
 
+                    setCookie(env.TOKEN_KEY, data.data.token, 365);
+
+                    setCookie(env.TENANT_KEY, data.data.username, 365);
+
                     window.location.href = env.PATHS.USER_DASHBOARD;
 
                 }else{

@@ -108,6 +108,8 @@ export default class EditCourseEducatorsController{
 
             if(data.result_code === env.SC.SUCCESS){
 
+                chest.openNotification("مدرسین دوره با موفقیت ویرایش شد.", "success");
+
                 ps.status.educators = "idle";
                 ps.old_values.educators = ps.new_values.educators;
 
