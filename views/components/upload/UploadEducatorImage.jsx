@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import UploadEducatorImageController from "../../../controllers/components/UploadEducatorImageController";
 import styles from "./UploadEducatorImage.module.css";
+import myServer from "../../../utils/myServer";
 
 /**
 * Props of UploadEducatorImage Component
@@ -45,6 +46,7 @@ export default class UploadEducatorImage extends Component {
 
                 <input style={{display:"none"}}
                 type={"file"}
+                accept=".jpg"
                 ref={r=>this.input=r}/>
 
                 <div className={styles.img_con+" btc1 amp_btn"}>
@@ -52,7 +54,13 @@ export default class UploadEducatorImage extends Component {
                     {
                         this.state.image_src?
                         <img className={styles.img} src={this.state.image_src}/>:
-                        <div className={styles.add_img+" ftc2"}>+</div>
+                        <>
+                            {
+                                this.props.uploadKey?
+                                <img className={styles.img} src={myServer.MediaFiles.publicImage(this.props.uploadKey)}/>:
+                                <div className={styles.add_img+" ftc2"}>+</div>
+                            }
+                        </>    
                     }
 
                 </div>

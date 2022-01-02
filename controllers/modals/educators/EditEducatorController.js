@@ -21,9 +21,10 @@ export default class EditEducatorController{
 
             this.lock = true;
 
-            this.view.setState({btn_loading:true})
+            this.view.setState({btn_loading:true});
 
             let vs = this.view.state;
+
             let params = {
                 educator_id: vs.educator.id,
                 first_name : vs.first_name,
@@ -31,41 +32,23 @@ export default class EditEducatorController{
                 bio : vs.bio,
             }
 
-            params.file_state = "ufs_no_change";
+            if(this.view.UploadEducatorImage.state.file){
 
-            if(vs.upload_key){
-                params.upload_key = vs.upload_key;
+                params.file_state = "ufs_replace";
+
+                this.view.UploadEducatorImage.upload((new_upload_key)=>{
+
+                    params.upload_key = new_upload_key;
+
+                    this.save(params);
+                })
+
+            }else{
+                params.file_state = "ufs_no_change";
+
+                this.save(params);
             }
 
-            this.model.editEducator(params, (err, data)=>{
-
-                this.view.setState({btn_loading:false});
-
-                if(data.result_code === env.SC.SUCCESS){
-
-                    chest.openNotification("دبیر با موفقیت ویرایش شد.", "success");
-
-                    if(chest.EducatorsCrudModal.controller && 
-                        chest.EducatorsCrudModal.controller.loadEducators){
-    
-                        chest.EducatorsCrudModal.controller.loadEducators();
-                    }
-
-                    this.view.onCancel();
-
-                }else if(data.result_code === env.SC.INVALID_UPLOAD_KEY){
-
-                    //TODO:handle this error
-                    chest.openNotification("DEV::INVALID_UPLOAD_KEY", "error");
-
-                }else if(data.result_code === env.SC.CONVERTOR_SERVER_ISSUE_MOVING_FILE){
-
-                    //TODO:handle this error
-                    chest.openNotification("DEV::CONVERTOR_SERVER_ISSUE_MOVING_FILE", "error");
-                }
-
-                this.lock = false;
-            })
         }
     }
 
@@ -95,6 +78,40 @@ export default class EditEducatorController{
         this.view.setState(newState);
 
         return can;
+    }
+
+
+    save=(params)=>{
+
+        this.model.editEducator(params, (err, data)=>{
+
+            this.view.setState({btn_loading:false});
+
+            if(data.result_code === env.SC.SUCCESS){
+
+                chest.openNotification("دبیر با موفقیت ویرایش شد.", "success");
+
+                if(chest.EducatorsCrudModal.controller && 
+                    chest.EducatorsCrudModal.controller.loadEducators){
+
+                    chest.EducatorsCrudModal.controller.loadEducators();
+                }
+
+                this.view.onCancel();
+
+            }else if(data.result_code === env.SC.INVALID_UPLOAD_KEY){
+
+                //TODO:handle this error
+                chest.openNotification("DEV::INVALID_UPLOAD_KEY", "error");
+
+            }else if(data.result_code === env.SC.CONVERTOR_SERVER_ISSUE_MOVING_FILE){
+
+                //TODO:handle this error
+                chest.openNotification("DEV::CONVERTOR_SERVER_ISSUE_MOVING_FILE", "error");
+            }
+
+            this.lock = false;
+        })
     }
     
 }

@@ -58,6 +58,10 @@ export default class UploadEducatorImageController{
             upload_type:"ut_educator_image",
         }
 
+        if(this.view.props.uploadKey){
+            params.old_upload_key = this.view.props.uploadKey;
+        }
+
         this.model.getUploadKey(params, (err, data)=>{
 
             if(data.result_code === env.SC.SUCCESS){

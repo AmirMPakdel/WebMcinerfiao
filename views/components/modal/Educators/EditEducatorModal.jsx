@@ -8,6 +8,7 @@ import TextArea from "../../global/TextArea";
 import TextInput from "../../global/TextInput";
 import EducatorsCrudModal from "./EducatorsCrudModal";
 import styles from "./EditEducatorModal.module.css";
+import UploadEducatorImage from "../../upload/UploadEducatorImage";
 
 /**
 * Props of EditEducatorModal Component
@@ -27,7 +28,7 @@ export default class EditEducatorModal extends Component {
 
             btn_loading:false,
 
-            upload_key:null,
+            image:props.data.image,
             first_name:props.data.first_name,
             last_name:props.data.last_name,
             bio:props.data.bio,
@@ -79,7 +80,7 @@ export default class EditEducatorModal extends Component {
 
                     <div className={styles.form_body}>
 
-                        <FileUpload onFile={this.onImage}>
+                        {/* <FileUpload onFile={this.onImage}>
 
                             <div className={styles.img_con+" btc1 amp_btn"}>
                                 
@@ -91,7 +92,11 @@ export default class EditEducatorModal extends Component {
 
                             </div>
 
-                        </FileUpload>
+                        </FileUpload> */}
+
+                        <UploadEducatorImage
+                        uploadKey={this.state.image}
+                        ref={r=>this.UploadEducatorImage=r}/>
 
                         <TextInput className={styles.form_input}
                         style={{marginTop:"2.5rem"}}

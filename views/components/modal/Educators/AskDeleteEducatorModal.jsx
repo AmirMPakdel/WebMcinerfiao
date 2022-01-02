@@ -54,7 +54,7 @@ export default class AskDeleteEducatorModal extends Component {
 
                 {
                     this.state.loading?
-                    <Loading scale={0.8}/>:null
+                    <Loading style={{minHeight:"12rem"}} scale={0.8}/>:null
                 }
                 {
                     !this.state.loading?

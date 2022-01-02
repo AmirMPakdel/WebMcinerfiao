@@ -30,9 +30,11 @@ export default class ModalLayout extends Component {
     }
 
     setModal = (layer, jsx, cb)=>{
-        this.state["layer"+layer+"_destroy"] = false;
-        this.state["layer"+layer] = jsx;
-        this.setState(this.state, cb);
+        this.closeAndDelete(layer, ()=>{
+            this.state["layer"+layer+"_destroy"] = false;
+            this.state["layer"+layer] = jsx;
+            this.setState(this.state, cb);
+        });
     }
 
     visibleToggle = (layer, visible, cb)=>{
@@ -41,9 +43,14 @@ export default class ModalLayout extends Component {
     }
 
     closeAndDelete = (layer, cb)=>{
-        this.state["layer"+layer+"_destroy"] = true;
-        this.state["layer"+layer+"_visible"] = false;
-        this.setState(this.state, cb)
+        if(this.state["layer"+layer]){
+            this.state["layer"+layer] = null;
+            this.state["layer"+layer+"_destroy"] = true;
+            this.state["layer"+layer+"_visible"] = false;
+            this.setState(this.state, cb)
+        }else{
+            cb();
+        }
     }
     
     render(){
